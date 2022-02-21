@@ -14,7 +14,7 @@ namespace MVC3Layer.Controllers
             return View(new BusinessObject.PartBO()
             {
                 PartNo = "John",
-                PartDescription = "Doe"
+              //  PartDescription = "Doe"
               
             });
         }
