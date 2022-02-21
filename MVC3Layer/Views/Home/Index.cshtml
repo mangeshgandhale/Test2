@@ -1,0 +1,86 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+ 
+<link rel="stylesheet" href="~/Content/kendo/kendo.common.min.css" />
+
+<link rel="stylesheet" href="~/Content/kendo/kendo.default.min.css" />
+<link rel="stylesheet" href="~/Content/kendo/kendo.default.mobile.min.css" />
+
+<script src="~/Scripts/jquery.min.js"></script>
+<script src="~/Scripts/kendo/kendo.all.min.js"></script>
+
+<script src="~/Scripts/kendo/kendo.aspnetmvc.min.js"></script>
+
+<div class="row">
+    <div class="col-12">
+        <div id="grid"></div>
+    </div>
+</div>
+<ul class="options">
+    <li>
+        @(Html.Kendo().DropDownList()
+                                .Name("selector")
+                                .DataTextField("Text")
+                                .DataValueField("Value")
+                                .BindTo(new[] {
+                                    new { Text = "Target 1", Value = 1 },
+                                    new { Text = "Target 2", Value = 2 }
+                                    })
+                               // .Events(events => events.Change("change"))
+        )
+    </li>
+</ul>
+<script>
+
+
+    $(document).ready(function () {
+        $(".textButton").kendoButton();
+        $("#grid").kendoGrid({
+            dataSource: {
+                type: "odata",
+                transport: {
+                    read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"
+                },
+                schema: {
+                    model: {
+                        fields: {
+                            OrderID: { type: "number" },
+                            Freight: { type: "number" },
+                            ShipName: { type: "string" },
+                            OrderDate: { type: "date" },
+                            ShipCity: { type: "string" }
+                        }
+                    }
+                },
+                pageSize: 20
+            },
+            height: 100,
+
+            filterable: false,
+            sortable: false,
+            pageable: false,
+            columns: [{
+                field: "OrderID",
+                filterable: false
+            },
+                "Freight",
+            {
+                field: "OrderDate",
+                title: "Order Date",
+
+                format: "{0:MM/dd/yyyy}"
+            }, {
+                field: "ShipName",
+                title: "Ship Name"
+            }, {
+                field: "ShipCity",
+                title: "Ship City"
+            }
+            ]
+        });
+    });
+</script>
