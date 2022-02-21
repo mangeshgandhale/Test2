@@ -30,13 +30,13 @@
     <script src="~/Scripts/kendo/kendo.aspnetmvc.min.js"></script>
     <Script type="text/javascript">
         $(document).ready(function() {
-    $("#ddlPartType").kendoDropDownList({
-            optionLabel: "Select Part Type...",
-        dataTextField: "PartTypeDescription",
-        dataValueField: "PartTypeID"
-    });
+            $("#ddlPartType").kendoDropDownList({
+                optionLabel: "Select Part Type...",
+                dataTextField: "PartTypeDescription",
+                dataValueField: "PartTypeID"
+            });
 
-    @*var ddlPartTypeData = @Html.Raw(Json.Encode(Model.DDLPartTypes));
+            @*var ddlPartTypeData = @Html.Raw(Json.Encode(Model.DDLPartTypes));
         if (ddlPartTypeData != null)
         {
             var PartTypeDDL = $("#ddlPartType").data("kendoDropDownList");
@@ -45,156 +45,156 @@
 
 
 
-        var gridDS = @Html.Raw(Json.Encode(Model.PartTypeGridData));
+            var gridDS = @Html.Raw(Json.Encode(Model.PartTypeGridData));
 
-        var dataSource = new kendo.data.DataSource({
-        schema: {
-        model: {
-        id: "PartTypeID",
-        fields: {
-        PartTypeID: { type: "number" },
-        PartTypeDescription: {
-        type: "string",
-        validation: {
-        required: { message: "Part Type cannot be Blank !!!"},
-        checkLength: function (input) {
-        input.attr("data-checkLength-msg", "Part Type cannot be longer than 500 characters!!!");
-        if (input.attr("data-bind") == "value:PartTypeDescription") {
-        return input.val().length <= 500;
-        }
-        return true;
-        },
-        duplicationCheck: function (input) {
-        if (input.attr("data-bind") == "value:PartTypeDescription") {
-        var row = input.closest("tr");
-        var grid = row.closest("[data-role=grid]").data("kendoGrid");
-        var dataItem = grid.dataItem(row);
-        var duplicationFlag = validatePartTypeDesc(dataItem.PartTypeID, input.val());
-        debugger;
-        switch (duplicationFlag) {
-        case "Blank":
-        input.attr("data-duplicationCheck-msg", "Unknown Error Occurred!!!");
-        return false;
-        break;
-        case "NotFound":
-        //Do Nothing
-        break;
-        case "Duplicate":
-        input.attr("data-duplicationCheck-msg", "Duplicate Part Types are not allowed!!!");
-        return false;
-        break;
-        case "Error":
-        input.attr("data-duplicationCheck-msg", "Unknown Error Occurred!!!");
-        return false;
-        break;
-        }
-        }
-        return true;
-        }
-        }
-        },
-        Active: { type: "boolean" },
-        ModifiedDate: { type: "date", editable: false}
-        }
-        }
-        },
-        transport: {
-        read: function(options) { options.success(gridDS); },
-        update: function(options) { options.success(); },
-        create: function(options) {
-        gridDS.push(options.data);
-        options.success(options.data);
-        },
-        destroy: function(options) {
-        gridDS.splice(options.data.RowID - 1, 1);
-        options.success(options.data);
-        }
-        },
-        requestEnd: function (e) {
-        if (e.type == "create" || e.type == "update" || e.type == "delete") {
-        this.read();
-        }
-        else if (e.type == "read") {
-        }
-        },
-        error: function (obj) {
-        alert("Status: " + obj.status + "; Error Message: " + obj.errorThrown);
-        }
-        });
+            var dataSource = new kendo.data.DataSource({
+                schema: {
+                    model: {
+                        id: "PartTypeID",
+                        fields: {
+                            PartTypeID: { type: "number" },
+                            PartTypeDescription: {
+                                type: "string",
+                                validation: {
+                                    required: { message: "Part Type cannot be Blank !!!"},
+                                    checkLength: function (input) {
+                                        input.attr("data-checkLength-msg", "Part Type cannot be longer than 500 characters!!!");
+                                        if (input.attr("data-bind") == "value:PartTypeDescription") {
+                                            return input.val().length <= 500;
+                                        }
+                                        return true;
+                                    },
+                                    duplicationCheck: function (input) {
+                                        if (input.attr("data-bind") == "value:PartTypeDescription") {
+                                            var row = input.closest("tr");
+                                            var grid = row.closest("[data-role=grid]").data("kendoGrid");
+                                            var dataItem = grid.dataItem(row);
+                                            var duplicationFlag = validatePartTypeDesc(dataItem.PartTypeID, input.val());
+                                            debugger;
+                                            switch (duplicationFlag) {
+                                                case "Blank":
+                                                    input.attr("data-duplicationCheck-msg", "Unknown Error Occurred!!!");
+                                                    return false;
+                                                    break;
+                                                case "NotFound":
+                                                    //Do Nothing
+                                                    break;
+                                                case "Duplicate":
+                                                    input.attr("data-duplicationCheck-msg", "Duplicate Part Types are not allowed!!!");
+                                                    return false;
+                                                    break;
+                                                case "Error":
+                                                    input.attr("data-duplicationCheck-msg", "Unknown Error Occurred!!!");
+                                                    return false;
+                                                    break;
+                                            }
+                                        }
+                                        return true;
+                                    }
+                                }
+                            },
+                            Active: { type: "boolean" },
+                            ModifiedDate: { type: "date", editable: false}
+                        }
+                    }
+                },
+                transport: {
+                    read: function(options) { options.success(gridDS); },
+                    update: function(options) { options.success(); },
+                    create: function(options) {
+                        gridDS.push(options.data);
+                        options.success(options.data);
+                    },
+                    destroy: function(options) {
+                        gridDS.splice(options.data.RowID - 1, 1);
+                        options.success(options.data);
+                    }
+                },
+                requestEnd: function (e) {
+                    if (e.type == "create" || e.type == "update" || e.type == "delete") {
+                        this.read();
+                    }
+                    else if (e.type == "read") {
+                    }
+                },
+                error: function (obj) {
+                    alert("Status: " + obj.status + "; Error Message: " + obj.errorThrown);
+                }
+            });
 
-        $("#TestKendoGrid").kendoGrid({
-        dataSource: dataSource,
-        toolbar: [{ name: "create", text: "New Type" }],
-        columns: [
-        {
-        field: "PartTypeID",
-        hidden: false,
-        width: 20
-        },
-        {
-        field: "PartTypeDescription",
-        title: "Part Type Description",
-        headerAttributes: { "class": "table-header-cell", style: "font-size: 12px;" },
-        attributes: { style: "font-size: 12px;" },
-        width: 200
-        },
+            $("#TestKendoGrid").kendoGrid({
+                dataSource: dataSource,
+                toolbar: [{ name: "create", text: "New Type" }],
+                columns: [
+                {
+                    field: "PartTypeID",
+                    hidden: false,
+                    width: 20
+                },
+                {
+                    field: "PartTypeDescription",
+                    title: "Part Type Description",
+                    headerAttributes: { "class": "table-header-cell", style: "font-size: 12px;" },
+                    attributes: { style: "font-size: 12px;" },
+                    width: 200
+                },
 
-        {
-        command: [
-        {
-        className: "btn-grid",
-        name: "edit",
-        text: "Edit"
-        },
-        {
-        className: "btn-grid",
-        name: "destroy",
-        text: "Delete"
-        }
-        ],
-        title: "&nbsp;",
-        width: 100
-        }
-        ],
-        editable: {
-        mode: "inline",
-        confirmation: "Are you sure you want to Delete the Part Type?",
-        cancelDelete: "No",
-        confirmDelete: "Yes"
-        },
-        height: 450,
-        groupable: false,
-        sortable: true,
-        pageable: false,
-        scrollable: true
-        });
+                {
+                    command: [
+                    {
+                        className: "btn-grid",
+                        name: "edit",
+                        text: "Edit"
+                    },
+                    {
+                        className: "btn-grid",
+                        name: "destroy",
+                        text: "Delete"
+                    }
+                    ],
+                    title: "&nbsp;",
+                    width: 100
+                }
+                ],
+                editable: {
+                    mode: "inline",
+                    confirmation: "Are you sure you want to Delete the Part Type?",
+                    cancelDelete: "No",
+                    confirmDelete: "Yes"
+                },
+                height: 450,
+                groupable: false,
+                sortable: true,
+                pageable: false,
+                scrollable: true
+            });
 
         })
 
         function validatePartTypeDesc(gridPartTypeID, gridPartTypeDesc) {
-        var isValid = "Blank";
-        $.ajax({
-            url: "@Url.Action("ValidatePartTypeDesc", "PartType")",
-            data: { cPartTypeID: gridPartTypeID, cPartTypeDesc: gridPartTypeDesc },
-            type: "post",
-            success: function (data) {
-                switch (data)
-                {
-                    case "Unique":
-                        isValid = "NotFound";
-                        break;
-                    case "Duplicate":
-                        isValid = "Duplicate";
-                        break;
-                    case "Exception":
-                        isValid = "Error";
-                        break;
-                }
-            },
-            async: false
-        });
-        return isValid;
-    }
+            var isValid = "Blank";
+            $.ajax({
+                url: "@Url.Action("ValidatePartTypeDesc", "PartType")",
+                data: { cPartTypeID: gridPartTypeID, cPartTypeDesc: gridPartTypeDesc },
+                type: "post",
+                success: function (data) {
+                    switch (data)
+                    {
+                        case "Unique":
+                            isValid = "NotFound";
+                            break;
+                        case "Duplicate":
+                            isValid = "Duplicate";
+                            break;
+                        case "Exception":
+                            isValid = "Error";
+                            break;
+                    }
+                },
+                async: false
+            });
+            return isValid;
+        }
 
         $("form").submit(function (event) {
             event.preventDefault();
@@ -235,9 +235,3 @@
     </Script>
 
 </body>
-
-
-
-
-
-
