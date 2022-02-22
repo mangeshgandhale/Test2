@@ -36,9 +36,9 @@
 
         <div class="container">
 
-            <table>
+            <table class="table">
                 <tr>
-                    <td>
+                    <td style="width:20%;vertical-align:top">
 
                         <div>
                             <div class="col-md-12">
@@ -71,7 +71,7 @@
 
                         </div>
                     </td>
-                    <td>
+                    <td style="width: 40%; vertical-align: top">
                         <div class="form-group">
                             <label for="exampleFormControlFile1">PartNo</label>
                             @(Html.Kendo().TextBoxFor(model => model.PartNo)
@@ -207,6 +207,13 @@
                         <input type="submit" value="Save" />
 
                     </td>
+                    <td style="width: 40%; vertical-align: top">
+
+                        Compatibility
+                        <div id="Compatibilitygrid" style="width: 60%;height:300px"></div>
+
+
+                    </td>
                 </tr>
             </table>
         </div>
@@ -242,6 +249,97 @@
                     $("#displayPhoto").attr("src", "/images/profile_default.png");
                 }
             }
+
+
+
+            /* Compatibilitygrid */
+
+
+            
+             
+            var CompatibilitygridDS = @Html.Raw(Json.Encode(ViewBag.lstCompatibilityPart));
+
+            var dataSource = new kendo.data.DataSource({
+                schema: {
+                    model: {
+                        id: "PartID",
+                        fields: {
+                            PartID: { type: "number" },
+                            ProductCategoryDescription: { type: "string" },
+                            VendorName: { type: "string" },
+                            ModelNo: { type: "string" },
+                            Active: { type: "boolean" }
+                             
+                        }
+                    }
+                },
+                transport: {
+                    read: function (options) { options.success(CompatibilitygridDS); },
+                    update: function(options) { options.success(); },
+                    create: function(options) {
+                        CompatibilitygridDS.push(options.data);
+                        options.success(options.data);
+                    },
+                    destroy: function(options) {
+                        CompatibilitygridDS.splice(options.data.RowID - 1, 1);
+                        options.success(options.data);
+                    }
+                },
+                requestEnd: function (e) {
+                    if (e.type == "create" || e.type == "update" || e.type == "delete") {
+                        this.read();
+                    }
+                    else if (e.type == "read") {
+                    }
+                },
+                error: function (obj) {
+                    alert("Status: " + obj.status + "; Error Message: " + obj.errorThrown);
+                }
+            });
+
+            $("#Compatibilitygrid").kendoGrid({
+                dataSource: dataSource,
+               
+                columns: [
+                {
+                    field: "PartID",
+                    hidden: false,
+                    width: 20
+                },
+                {
+                    field: "ProductCategoryDescription",
+                    title: "Product Category Description",
+                    headerAttributes: { "class": "table-header-cell", style: "font-size: 12px;" },
+                    attributes: { style: "font-size: 12px;" },
+                    
+                },
+                {
+                    field: "VendorName",
+                    title: "VendorName",
+                    headerAttributes: { "class": "table-header-cell", style: "font-size: 12px;" },
+                    attributes: { style: "font-size: 12px;" },
+                    
+                },
+                {
+                    field: "ModelNo",
+                    title: "ModelNo",
+                        headerAttributes: { "class": "table-header-cell", style: "font-size: 12px;" },
+                        attributes: { style: "font-size: 12px;" },
+
+                },
+                ],
+                editable: {
+                    mode: "inline",
+                    confirmation: "Are you sure you want to Delete the Part Type?",
+                    cancelDelete: "No",
+                    confirmDelete: "Yes"
+                },
+                height: 450,
+                groupable: false,
+                sortable: true,
+                pageable: false,
+                scrollable: true
+            });
 
 
         </script>

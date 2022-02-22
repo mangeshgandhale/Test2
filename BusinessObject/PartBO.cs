@@ -33,8 +33,27 @@ namespace BusinessObject
         public bool Publish { get; set; }
 
         public Int32 CreatedBy { get; set; }
-         
+
+        public List<CompatibilityTrans> CompatibilityTrans { get; set; }
 
 
+    }
+    public class CompatibilityTrans
+
+    {
+        public Int32 chk { get; set; }
+        public Int32 PartLinkID { get; set; }
+        public Int32 PartID { get; set; }
+        public string VendorName { get; set; }
+        public string ModelNo { get; set; }
+        public Int32 ModelManufacturerId { get; set; }
+        public bool Active { get; set; }
+        public string FirstName { get; set; }
+        public Int32 ModelID { get; set; }
+        public Int32 VendorID { get; set; }
+        public Int32 CreatedBy { get; set; }
+        public DateTime CreatedDate { get; set; }
+        public string ProductCategoryDescription { get; set; }
+        
     }
 }

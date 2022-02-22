@@ -18,17 +18,15 @@ namespace MVC3Layer.Controllers
         // GET: Part
         public ActionResult PartAdd()
         {
-            //return View(new BusinessObject.PartBO()
-            //{
-            //    PartNo = "John",
-            //  //  PartDescription = "Doe"
-
-            //});
+            List<CompatibilityTrans> _CompatibilityTrans = new List<CompatibilityTrans>();
             List<PartTypeBO> _PartTypeBO = new List<PartTypeBO>();
             PartTypeBL _PartTypeBL = new PartTypeBL();
             _PartTypeBO = _PartTypeBL.GetAllPartType();
             ViewBag.lstPartType = _PartTypeBO;
             ViewBag.Photo = System.IO.File.Exists(photoPath) ? "/images/profile_photo.png" : "/images/profile_default.png";
+
+            PartBL _PartBL = new PartBL();
+            ViewBag.lstCompatibilityPart = _PartBL.CompatibilityPart();
             return View();
         }
 

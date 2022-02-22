@@ -12,7 +12,15 @@ namespace BusinessLogic
     {
           PartDB obj= new PartDB();
 
+        public List<CompatibilityTrans> CompatibilityPart()
+        {
+           // PartDB _PartTypeDB = new PartTypeDB();
+            List<CompatibilityTrans> _CompatibilityTrans = new List<CompatibilityTrans>();
+            somaEntities _EFEntities = new somaEntities();
+            _CompatibilityTrans = obj.CompatibilityPart(_EFEntities);
+            return _CompatibilityTrans;
 
+        }
         //public PartTypeBO PopulateViewData()
         //{
         //    PartTypeBO viewData = new PartTypeBO();
@@ -45,8 +53,8 @@ namespace BusinessLogic
         //    }
         //}
 
-        
-    public string CreatePart(PartBO _PartBO)
+
+        public string CreatePart(PartBO _PartBO)
         {
             // log4net.GlobalContext.Properties("HSProRepairUserName") = TestGlobal.UserName
 

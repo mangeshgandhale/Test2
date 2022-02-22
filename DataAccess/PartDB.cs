@@ -22,7 +22,42 @@ namespace DataAccess
         //{
         //    return _context.M_PartType.ToList();
         //}
-          
+        public List<CompatibilityTrans> CompatibilityPart(somaEntities pDBOps)
+        {
+            List<CompatibilityTrans> _CompatibilityTrans = new List<CompatibilityTrans>();
+
+            try
+            {
+
+
+
+
+                DataTable dt = new DataTable();
+
+                SqlParameterCollection pcol = new SqlCommand().Parameters;
+                Data.Adapter.AddParam(pcol, "@PartID", 0);
+                Data.Adapter.AddParam(pcol, "@UserID", 14);
+                dt = Data.Adapter.ExecuteDataTable("uspviewModelManufacturer", CommandType.StoredProcedure, Data.Adapter.param(pcol));
+
+                if (dt.Rows.Count > 0)
+                {
+
+                    _CompatibilityTrans = MVC3Layer.common.CommonFunction.ToListof<CompatibilityTrans>(dt);
+
+                }
+
+
+
+                return _CompatibilityTrans;
+
+            }
+            catch (Exception ex)
+            {
+                //  log.Error("AN exception occured while reading Part Types!!!");
+                return null;
+            }
+        }
+
         public void CreatePart(PartBO _PartBO, somaEntities pDBOps)
         {
             using (somaEntities db = new somaEntities())

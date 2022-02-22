@@ -124,6 +124,7 @@ namespace DataAccess
                 return null;
             }
         }
+     
         public string CreateNewPart(List<PartTypeBO> vPartTypes, somaEntities pDBOps)
         {
             // log4net.GlobalContext.Properties("HSProRepairUserName") = TestGlobal.UserName
