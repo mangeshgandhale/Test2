@@ -57,12 +57,26 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Adapter.cs" />
+    <Compile Include="CommonMasterDB.cs" />
+    <Compile Include="M_Model.cs">
+      <DependentUpon>SOMAEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="M_ModelManufacturer.cs">
+      <DependentUpon>SOMAEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="M_PartType.cs">
+      <DependentUpon>SOMAEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="M_ProductCategory.cs">
+      <DependentUpon>SOMAEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="M_SubType.cs">
       <DependentUpon>SOMAEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="M_User.cs">
       <DependentUpon>SOMAEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="PartDB.cs" />
     <Compile Include="PartTypeDB.cs" />
     <Compile Include="Properties\CommonFunction.cs" />
     <Compile Include="SOMAEntities.Context.cs">
@@ -79,6 +93,9 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>SOMAEntities.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="T_Part.cs">
+      <DependentUpon>SOMAEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="UserDb.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

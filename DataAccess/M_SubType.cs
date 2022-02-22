@@ -12,23 +12,25 @@ namespace DataAccess
     using System;
     using System.Collections.Generic;
     
-    public partial class M_PartType
+    public partial class M_SubType
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public M_PartType()
+        public M_SubType()
         {
-            this.M_SubType = new HashSet<M_SubType>();
+            this.T_Part = new HashSet<T_Part>();
         }
     
+        public int SubTypeID { get; set; }
+        public string SubTypeDescription { get; set; }
         public int PartTypeID { get; set; }
-        public string PartTypeDescription { get; set; }
         public bool Active { get; set; }
         public int CreatedBy { get; set; }
         public System.DateTime CreatedDate { get; set; }
         public Nullable<int> ModifiedBy { get; set; }
         public Nullable<System.DateTime> ModifiedDate { get; set; }
     
+        public virtual M_PartType M_PartType { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<M_SubType> M_SubType { get; set; }
+        public virtual ICollection<T_Part> T_Part { get; set; }
     }
 }

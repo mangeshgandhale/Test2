@@ -12,16 +12,16 @@ namespace DataAccess
     using System;
     using System.Collections.Generic;
     
-    public partial class M_PartType
+    public partial class M_ProductCategory
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public M_PartType()
+        public M_ProductCategory()
         {
-            this.M_SubType = new HashSet<M_SubType>();
+            this.M_Model = new HashSet<M_Model>();
         }
     
-        public int PartTypeID { get; set; }
-        public string PartTypeDescription { get; set; }
+        public int ProductCategoryID { get; set; }
+        public string ProductCategoryDescription { get; set; }
         public bool Active { get; set; }
         public int CreatedBy { get; set; }
         public System.DateTime CreatedDate { get; set; }
@@ -29,6 +29,6 @@ namespace DataAccess
         public Nullable<System.DateTime> ModifiedDate { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<M_SubType> M_SubType { get; set; }
+        public virtual ICollection<M_Model> M_Model { get; set; }
     }
 }

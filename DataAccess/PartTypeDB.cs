@@ -80,30 +80,32 @@ namespace DataAccess
             GC.SuppressFinalize(this);
         }
 
+        
 
-
-        public List<PartTypeBO> GetAllPartTypes(somaEntities pDBOps)
+        public List<PartTypeBO> GetAllPartType(somaEntities pDBOps)
         {
             List<PartTypeBO> dbPartTypes = new List<PartTypeBO>();
 
             try
             {
-                //dbPartTypes = (from partType in pDBOps.M_PartType
-                //               orderby partType.PartTypeID
-                //               select new PartTypeBO()
-                //               {
-                //                   PartTypeID = partType.PartTypeID,
-                //                   PartTypeDescription = partType.PartTypeDescription,
-                //                   Active = partType.Active,
+                dbPartTypes = (from partType in pDBOps.M_PartType
+                               orderby partType.PartTypeID
+                               select new PartTypeBO()
+                               {
+                                   PartTypeID = partType.PartTypeID,
+                                   PartTypeDescription = partType.PartTypeDescription,
+                                   Active = partType.Active,                                   
+                               }).Where(p =>p.Active== true).ToList();
 
-                //               }).ToList();
-               
-                    DataTable dt = new DataTable();
+
+                /*  ADO   operation
+
+                DataTable dt = new DataTable();
                 SqlParameterCollection pcol = new SqlCommand().Parameters;
                 Data.Adapter.AddParam(pcol, "@PartTypeID",0);
                 dt = Data.Adapter.ExecuteDataTable("uspviewPartType", CommandType.StoredProcedure, Data.Adapter.param(pcol));
 
-              //  dt = Adapter.ExecuteDataTable("select * from M_PartType", CommandType.Text);
+            
                 if (dt.Rows.Count > 0)
                 {
                      
@@ -111,10 +113,10 @@ namespace DataAccess
 
                 }
 
-               // if (dbPartTypes != null && dbPartTypes.Count > 0)
-                    return dbPartTypes;
-               // else
-                //    return null;
+                */
+
+                return dbPartTypes;
+              
             }
             catch (Exception ex)
             {

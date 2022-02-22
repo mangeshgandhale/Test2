@@ -26,7 +26,7 @@ namespace BusinessLogic
             {
                 viewData = new PartTypeBO();
 
-                dbPartTypes = _PartTypeDB.GetAllPartTypes(_EFEntities);
+                dbPartTypes = _PartTypeDB.GetAllPartType(_EFEntities);
                 if (dbPartTypes != null && dbPartTypes.Count > 0)
                 {
                     viewData.DDLPartTypes = dbPartTypes;
@@ -98,15 +98,15 @@ namespace BusinessLogic
             }
         }
 
-        //public List<PartTypeBO> GetAll()
-        //{
-        //    List<PartTypeBO> _obj = new List<PartTypeBO>();
-        //    //   return obj.GetAllPartList();
-        //    return _obj;
-        //}
-        //public void Insert(PartTypeBO _PartTypeBO)
-        //{
-        //    this.obj.Insert(_PartTypeBO);
-        //}
+        public List<PartTypeBO> GetAllPartType()
+        {
+            PartTypeDB  _PartTypeDB = new  PartTypeDB ();
+            List<PartTypeBO> _PartTypeBO = new List<PartTypeBO>();
+            somaEntities _EFEntities = new somaEntities();
+             _PartTypeBO = _PartTypeDB.GetAllPartType(_EFEntities);
+             return _PartTypeBO;
+           
+        }
+        
     }
 }

@@ -11,12 +11,14 @@ namespace BusinessObject
     {
         public Int32 PartID { get; set; }
         public Int32 SubTypeID { get; set; }
+        public Int32 ReplacementPartID { get; set; }
+        
         public string PartNo { get; set; }
         public string PartDescription { get; set; }
 
         public string PartDetailDescription { get; set; }
 
-        public Int32 GrossWeight { get; set; }
+        public decimal GrossWeight { get; set; }
 
         public Int32 Dim_L { get; set; }
 
@@ -26,8 +28,13 @@ namespace BusinessObject
         public string OnlineMsg { get; set; }
         public string Note { get; set; }
 
+        public Int32 StatusId { get; set; }
+        public bool Returnable { get; set; }
+        public bool Publish { get; set; }
 
-        
+        public Int32 CreatedBy { get; set; }
+         
+
 
     }
 }

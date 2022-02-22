@@ -8,21 +8,27 @@
 <link rel="stylesheet" href="~/Content/kendo/kendo.common.min.css" />
 <link rel="stylesheet" href="~/Content/kendo/kendo.default.min.css" />
 <link rel="stylesheet" href="~/Content/kendo/kendo.default.mobile.min.css" />
- <style type="text/css">
-     .container {
-         width: 80%;
-         height: auto;
-         background-color: #f8f9f8;
-         margin-right: auto;
-         margin-left: auto;
-         color: #039;
-     }
-      body {
-  font-family: Verdana, Geneva, sans-serif;
-  font-size: 14px;
-  }
- </style>
- 
+<script src="~/Scripts/jquery.min.js"></script>
+<script src="~/Scripts/kendo/kendo.all.min.js"></script>
+<script src="~/Scripts/kendo/kendo.aspnetmvc.min.js"></script>
+
+
+<style type="text/css">
+    .container {
+        width: 80%;
+        height: auto;
+        background-color: #f8f9f8;
+        margin-right: auto;
+        margin-left: auto;
+        color: #039;
+    }
+
+    body {
+        font-family: Verdana, Geneva, sans-serif;
+        font-size: 14px;
+    }
+</style>
+
 <body>
     @using (Html.BeginForm("PartAdd", "Part", FormMethod.Post))
     {
@@ -30,27 +36,158 @@
 
         <div class="container">
 
-            <table >
+            <table>
                 <tr>
                     <td>
                         <div class="form-group">
                             <label for="exampleFormControlFile1">PartNo</label>
                             @(Html.Kendo().TextBoxFor(model => model.PartNo)
              .Name("PartNo")
-             .HtmlAttributes(new { placeholder = "Part Type Description", required = "required", validationmessage = "Enter Part Type Description" })
+             .HtmlAttributes(new { placeholder = "Part No", required = "required", validationmessage = "Enter Part No" })
+                            )
+                        </div>
+
+                        <div class="form-group">
+
+                            <label for="exampleFormControlFile1">Type</label>
+                            @(Html.Kendo().DropDownList().Name("ddlPartTypeID")
+                            .HtmlAttributes(new { style = "width:100%" })
+                            .OptionLabel("Select Type")
+                           
+                            .BindTo(new SelectList((List<BusinessObject.PartTypeBO>)ViewBag.lstPartType, "PartTypeID", "PartTypeDescription"))
+
+                            )
+                            
+                        </div>
+
+                        <div class="form-group">
+
+                            <label for="exampleFormControlFile1">Sub Type</label>
+
+
+                            @Html.Kendo().DropDownList().Name("ddlSubType").OptionLabel("--Select--").DataTextField("SubTypeDescription").DataValueField("SubTypeID").DataSource(source =>
+                        {
+                            source.Read(read =>
+                            {
+                                read.Action("GetAllSubPartType", "Part").Data("FilterSubType");
+
+                            }).ServerFiltering(true);
+                        }).Enable(false).AutoBind(false).CascadeFrom("ddlPartTypeID")
+
+
+
+                            
+
+
+
+                            @(Html.Kendo().DropDownList()
+                              .Name("ddlSubType")
+                              .HtmlAttributes(new { style = "width:100%" })
+                              .OptionLabel("Select Sub Type")
+                              .DataTextField("SubTypeDescription")
+                              .DataValueField("SubTypeID")
+                                  .DataSource(source =>
+                                  {
+                                      source.Read(read =>
+                                      {
+                                          read.Action("GetAllSubPartType", "ddlType")
+                                              .Data("FilterSubType");
+                                      })
+                                      .ServerFiltering(true);
+                                  })
+                                  .Enable(false)
+                                  .AutoBind(false)
+                                  .CascadeFrom("ddlType")
                             )
                         </div>
                         <div class="form-group">
                             <label for="exampleFormControlFile1">Part Desc</label>
                             @(Html.Kendo().TextBoxFor(model => model.PartDescription)
-             .Name("PartNo")
+             .Name("PartDescription")
              .HtmlAttributes(new { placeholder = "Part Type Description", required = "required", validationmessage = "Enter Part Type Description" })
+                            )
+                        </div>
+
+                        <div class="form-group">
+                            <label for="exampleFormControlFile1">Part Detail Desc</label>
+                            @(Html.Kendo().TextBoxFor(model => model.PartDetailDescription)
+             .Name("PartDetailDescription")
+             .HtmlAttributes(new { placeholder = "Part Detail Description", required = "required", validationmessage = "Enter Part Detail Description" })
+                            )
+                        </div>
+
+                        <div class="form-group">
+                            <label for="exampleFormControlFile1">Height</label>
+                            @(Html.Kendo().NumericTextBoxFor(model => model.Dim_H)
+
+             .Name("Dim_H")
+             .HtmlAttributes(new { placeholder = "Height", required = "required", validationmessage = "Enter Height" })
+                            )
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleFormControlFile1">Weight</label>
+                            @(Html.Kendo().NumericTextBoxFor(model => model.Dim_W)
+             .Name("Dim_W")
+             .HtmlAttributes(new { placeholder = "Weight", required = "required", validationmessage = "Enter Weight" })
+                            )
+                        </div>
+
+                        <div class="form-group">
+                            <label for="exampleFormControlFile1">Lenght</label>
+                            @(Html.Kendo().NumericTextBoxFor(model => model.Dim_L)
+             .Name("Dim_L")
+             .HtmlAttributes(new { placeholder = "Lenght", required = "required", validationmessage = "Enter Lenght" })
+                            )
+                        </div>
+
+                        <div class="form-group">
+                            <label for="exampleFormControlFile1">Gross Weight</label>
+                            @(Html.Kendo().TextAreaFor(model => model.GrossWeight)
+             .Name("GrossWeight")
+             .HtmlAttributes(new { placeholder = "Gross Weight", required = "required", validationmessage = "Enter Gross Weight" })
+                            )
+                        </div>
+
+
+                        <div class="form-group">
+                            <label for="exampleFormControlFile1">Online Message</label>
+                            @(Html.Kendo().TextBoxFor(model => model.OnlineMsg)
+             .Name("OnlineMsg")
+             .HtmlAttributes(new { placeholder = "Online Message", validationmessage = "Enter Online Message" })
+                            )
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleFormControlFile1">Note</label>
+                            @(Html.Kendo().TextBoxFor(model => model.Note)
+             .Name("Note")
+             .HtmlAttributes(new { placeholder = "Note", validationmessage = "Enter Note" })
+                            )
+                        </div>
+
+                        <div class="form-group">
+                            <label for="exampleFormControlFile1">Publish</label>
+                            @(Html.Kendo().CheckBoxFor(model => model.Publish)
+             .Name("Publish")
+             .HtmlAttributes(new { placeholder = "Publish", validationmessage = "Enter Publish" })
                             )
                         </div>
                         <input type="submit" value="Save" />
 
-                        </td></tr></table>
+                    </td>
+                </tr>
+            </table>
         </div>
+
+        <script>
+
+            function FilterSubType() {
+                return {
+                    PartTypeID: $("#ddlPartTypeID").val()
+                };
+            }
+
+           
+        </script>
     }
 
 </body>

@@ -7,6 +7,16 @@
       <Diagram DiagramId="99e17b5e5f2145c4b864c435d6758b42" Name="Diagram1">
         <EntityTypeShape EntityType="somaModel.M_PartType" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="somaModel.M_User" Width="1.5" PointX="3.375" PointY="0.75" />
+        <EntityTypeShape EntityType="somaModel.T_Part" Width="1.5" PointX="0.75" PointY="4.75" />
+        <AssociationConnector Association="somaModel.FK_T_Part_T_Part" />
+        <EntityTypeShape EntityType="somaModel.M_Model" Width="1.5" PointX="7.625" PointY="1" />
+        <EntityTypeShape EntityType="somaModel.M_ModelManufacturer" Width="1.5" PointX="9.875" PointY="1.125" />
+        <EntityTypeShape EntityType="somaModel.M_ProductCategory" Width="1.5" PointX="5.375" PointY="1.25" />
+        <EntityTypeShape EntityType="somaModel.M_SubType" Width="1.5" PointX="3" PointY="5.75" />
+        <AssociationConnector Association="somaModel.FK_M_Model_M_ProductCategory" />
+        <AssociationConnector Association="somaModel.FK_M_ModelManufacturer_M_Model" />
+        <AssociationConnector Association="somaModel.FK_M_SubType_M_PartType" />
+        <AssociationConnector Association="somaModel.FK_T_Part_M_SubType" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

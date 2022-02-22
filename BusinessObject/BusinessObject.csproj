@@ -45,6 +45,7 @@
   <ItemGroup>
     <Compile Include="PartBO.cs" />
     <Compile Include="PartTypeBO.cs" />
+    <Compile Include="SubTypeBO.cs" />
     <Compile Include="UserBO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

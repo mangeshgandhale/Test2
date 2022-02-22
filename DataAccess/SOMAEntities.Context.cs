@@ -27,5 +27,10 @@ namespace DataAccess
     
         public virtual DbSet<M_PartType> M_PartType { get; set; }
         public virtual DbSet<M_User> M_User { get; set; }
+        public virtual DbSet<T_Part> T_Part { get; set; }
+        public virtual DbSet<M_Model> M_Model { get; set; }
+        public virtual DbSet<M_ModelManufacturer> M_ModelManufacturer { get; set; }
+        public virtual DbSet<M_ProductCategory> M_ProductCategory { get; set; }
+        public virtual DbSet<M_SubType> M_SubType { get; set; }
     }
 }
