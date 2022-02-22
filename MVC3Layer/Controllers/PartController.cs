@@ -5,10 +5,16 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using BusinessObject;
+using System.IO;
+using System.Web.Hosting;
+
 namespace MVC3Layer.Controllers
 {
     public class PartController : Controller
     {
+
+
+        string photoPath = Path.Combine(HostingEnvironment.MapPath("~/Images"), "profile_photo.png");
         // GET: Part
         public ActionResult PartAdd()
         {
@@ -22,7 +28,7 @@ namespace MVC3Layer.Controllers
             PartTypeBL _PartTypeBL = new PartTypeBL();
             _PartTypeBO = _PartTypeBL.GetAllPartType();
             ViewBag.lstPartType = _PartTypeBO;
-
+            ViewBag.Photo = System.IO.File.Exists(photoPath) ? "/images/profile_photo.png" : "/images/profile_default.png";
             return View();
         }
 
@@ -55,6 +61,15 @@ namespace MVC3Layer.Controllers
             //}
         }
 
+
+        public ActionResult Savephoto(HttpPostedFileBase Photo)
+        {
+            if (Photo != null)
+            {
+                Photo.SaveAs(photoPath);
+            }
+            return PartAdd();
+        }
         public JsonResult TypeGetData()
         {
             List<PartTypeBO> _PartTypeBO = new List<PartTypeBO>();

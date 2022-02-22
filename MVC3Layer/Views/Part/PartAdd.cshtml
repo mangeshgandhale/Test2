@@ -39,6 +39,39 @@
             <table>
                 <tr>
                     <td>
+
+                        <div>
+                            <div class="col-md-12">
+                                <div class="card">
+                                    <div class="card-body" style="text-align:center;">
+                                        <img src=@ViewBag.Photo id="displayPhoto" class="imageDisplay img-thumbnail" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                @(Html.Kendo().Upload()
+                                .Name("Photo")
+                                .HtmlAttributes(new { aria_label = "files", @style = "width:300px;" })
+                                .Validation(validation =>
+                                {
+                                    validation.AllowedExtensions(new string[] { ".jpg", ".jpeg", ".png", ".bmp", ".gif" });
+                                    validation.MaxFileSize(500000);
+                                })
+                                .Messages(m => m.Select("Select Image"))
+                                .Multiple(false)
+                                 .Events(events => events
+                                 .Select("onSelect")
+                                 .Remove("onRemove")
+                                 )
+                    )
+                            </div>
+                            <div class="col-md-12" style="margin-top:5px;">
+                                <button type="submit" class="btn btn-success w-100">Save</button>
+                            </div>
+
+                        </div>
+                    </td>
+                    <td>
                         <div class="form-group">
                             <label for="exampleFormControlFile1">PartNo</label>
                             @(Html.Kendo().TextBoxFor(model => model.PartNo)
@@ -186,7 +219,31 @@
                 };
             }
 
-           
+           /* image preview*/
+
+
+            function onRemove(e) {
+                $("#displayPhoto").attr("src", "/images/profile_default.png");
+            }
+
+            function onSelect(e) {
+                var file = e.files[0].rawFile;
+                var ext = e.files[0].extension.toLowerCase();
+
+                if (ext == ".jpg" || ext == ".jpeg" || ext == ".png" || ext == ".bmp" || ext == ".gif") {
+                    var reader = new FileReader();
+                    reader.onloadend = function () {
+                        $("#displayPhoto").attr("src", this.result); //img id where the photo is to be displayed
+                    };
+
+                    reader.readAsDataURL(file); //Read the selected photo and display in UI
+                }
+                else { //If file extension does not belong to photo display a default image
+                    $("#displayPhoto").attr("src", "/images/profile_default.png");
+                }
+            }
+
+
         </script>
     }
 
