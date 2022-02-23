@@ -15,7 +15,7 @@
 
 <style type="text/css">
     .container {
-        width: 80%;
+        width: 100%;
         height: auto;
         background-color: #f8f9f8;
         margin-right: auto;
@@ -25,32 +25,35 @@
 
     body {
         font-family: Verdana, Geneva, sans-serif;
-        font-size: 14px;
-        font-size: 14px;
+        font-size: 12px;
+        font-size: 12px;
     }
 </style>
 
 <body>
-    @using (Html.BeginForm("PartAdd", "Part", FormMethod.Post))
-    {
 
+    <div>
+        @using (Html.BeginForm("PartAdd", "Part", FormMethod.Post))
+        {
+           
+            @Html.AntiForgeryToken()
+           
+                <div class="container">
 
-        <div class="container">
+                    <table class="table">
+                        <tr>
+                            <td style="width:20%;vertical-align:top">
 
-            <table class="table">
-                <tr>
-                    <td style="width:20%;vertical-align:top">
-
-                        <div>
-                            <div class="col-md-12">
-                                <div class="card">
-                                    <div class="card-body" style="text-align:center;">
-                                        <img src=@ViewBag.Photo id="displayPhoto" class="imageDisplay img-thumbnail" />
+                                <div>
+                                    <div class="col-md-12">
+                                        <div class="card">
+                                            <div class="card-body" style="text-align:center;">
+                                                <img src=@ViewBag.Photo id="displayPhoto" class="imageDisplay img-thumbnail" />
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
-                            <div class="col-md-12">
-                                @(Html.Kendo().Upload()
+                                    <div class="col-md-12">
+                                        @(Html.Kendo().Upload()
                                 .Name("Photo")
                                 .HtmlAttributes(new { aria_label = "files", @style = "width:300px;" })
                                 .Validation(validation =>
@@ -65,56 +68,56 @@
                                  .Remove("onRemove")
                                  )
                     )
-                            </div>
-                            <div class="col-md-12" style="margin-top:5px;">
-                                <button type="submit" class="btn btn-success w-100">Save</button>
-                            </div>
+                                    </div>
+                                    <div class="col-md-12" style="margin-top:5px;">
+                                        <button type="submit" class="btn btn-success w-100">Save</button>
+                                    </div>
 
-                        </div>
-                    </td>
-                    <td style="width: 40%; vertical-align: top">
-                        <div class="form-group">
-                            <label for="exampleFormControlFile1">PartNo</label>
-                            @(Html.Kendo().TextBoxFor(model => model.PartNo)
+                                </div>
+                            </td>
+                            <td style="width: 40%; vertical-align: top">
+                                <div class="form-group">
+                                    <label for="exampleFormControlFile1">PartNo</label>
+                                    @(Html.Kendo().TextBoxFor(model => model.PartNo)
              .Name("PartNo")
              .HtmlAttributes(new { placeholder = "Part No", required = "required", validationmessage = "Enter Part No" })
                             )
-                        </div>
+                                </div>
 
-                        <div class="form-group">
+                                <div class="form-group">
 
-                            <label for="exampleFormControlFile1">Type</label>
-                            @(Html.Kendo().DropDownList().Name("ddlPartTypeID")
+                                    <label for="exampleFormControlFile1">Type</label>
+                                    @(Html.Kendo().DropDownList().Name("ddlPartTypeID")
                             .HtmlAttributes(new { style = "width:100%" })
                             .OptionLabel("Select Type")
-                           
+
                             .BindTo(new SelectList((List<BusinessObject.PartTypeBO>)ViewBag.lstPartType, "PartTypeID", "PartTypeDescription"))
 
                             )
-                            
-                        </div>
 
-                        <div class="form-group">
+                                </div>
 
-                            <label for="exampleFormControlFile1">Sub Type</label>
+                                <div class="form-group">
 
-
-                            @Html.Kendo().DropDownList().Name("ddlSubType").OptionLabel("--Select--").DataTextField("SubTypeDescription").DataValueField("SubTypeID").DataSource(source =>
-                        {
-                            source.Read(read =>
-                            {
-                                read.Action("GetAllSubPartType", "Part").Data("FilterSubType");
-
-                            }).ServerFiltering(true);
-                        }).Enable(false).AutoBind(false).CascadeFrom("ddlPartTypeID")
+                                    <label for="exampleFormControlFile1">Sub Type</label>
 
 
+                                    @Html.Kendo().DropDownList().Name("ddlSubType").OptionLabel("--Select--").DataTextField("SubTypeDescription").DataValueField("SubTypeID").DataSource(source =>
+                                {
+                                    source.Read(read =>
+                                    {
+                                        read.Action("GetAllSubPartType", "Part").Data("FilterSubType");
 
-                            
+                                    }).ServerFiltering(true);
+                                }).Enable(false).AutoBind(false).CascadeFrom("ddlPartTypeID")
 
 
 
-                            @(Html.Kendo().DropDownList()
+
+
+
+
+                                    @(Html.Kendo().DropDownList()
                               .Name("ddlSubType")
                               .HtmlAttributes(new { style = "width:100%" })
                               .OptionLabel("Select Sub Type")
@@ -133,105 +136,106 @@
                                   .AutoBind(false)
                                   .CascadeFrom("ddlType")
                             )
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleFormControlFile1">Part Desc</label>
-                            @(Html.Kendo().TextBoxFor(model => model.PartDescription)
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleFormControlFile1">Part Desc</label>
+                                    @(Html.Kendo().TextBoxFor(model => model.PartDescription)
              .Name("PartDescription")
              .HtmlAttributes(new { placeholder = "Part Type Description", required = "required", validationmessage = "Enter Part Type Description" })
                             )
-                        </div>
+                                </div>
 
-                        <div class="form-group">
-                            <label for="exampleFormControlFile1">Part Detail Desc</label>
-                            @(Html.Kendo().TextBoxFor(model => model.PartDetailDescription)
+                                <div class="form-group">
+                                    <label for="exampleFormControlFile1">Part Detail Desc</label>
+                                    @(Html.Kendo().TextBoxFor(model => model.PartDetailDescription)
              .Name("PartDetailDescription")
              .HtmlAttributes(new { placeholder = "Part Detail Description", required = "required", validationmessage = "Enter Part Detail Description" })
                             )
-                        </div>
+                                </div>
 
-                        <div class="form-group">
-                            <label for="exampleFormControlFile1">Height</label>
-                            @(Html.Kendo().NumericTextBoxFor(model => model.Dim_H)
+                                <div class="form-group">
+                                    <label for="exampleFormControlFile1">Height</label>
+                                    @(Html.Kendo().NumericTextBoxFor(model => model.Dim_H)
 
              .Name("Dim_H")
              .HtmlAttributes(new { placeholder = "Height", required = "required", validationmessage = "Enter Height" })
                             )
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleFormControlFile1">Weight</label>
-                            @(Html.Kendo().NumericTextBoxFor(model => model.Dim_W)
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleFormControlFile1">Weight</label>
+                                    @(Html.Kendo().NumericTextBoxFor(model => model.Dim_W)
              .Name("Dim_W")
              .HtmlAttributes(new { placeholder = "Weight", required = "required", validationmessage = "Enter Weight" })
                             )
-                        </div>
+                                </div>
 
-                        <div class="form-group">
-                            <label for="exampleFormControlFile1">Lenght</label>
-                            @(Html.Kendo().NumericTextBoxFor(model => model.Dim_L)
+                                <div class="form-group">
+                                    <label for="exampleFormControlFile1">Lenght</label>
+                                    @(Html.Kendo().NumericTextBoxFor(model => model.Dim_L)
              .Name("Dim_L")
              .HtmlAttributes(new { placeholder = "Lenght", required = "required", validationmessage = "Enter Lenght" })
                             )
-                        </div>
+                                </div>
 
-                        <div class="form-group">
-                            <label for="exampleFormControlFile1">Gross Weight</label>
-                            @(Html.Kendo().TextAreaFor(model => model.GrossWeight)
+                                <div class="form-group">
+                                    <label for="exampleFormControlFile1">Gross Weight</label>
+                                    @(Html.Kendo().TextAreaFor(model => model.GrossWeight)
              .Name("GrossWeight")
              .HtmlAttributes(new { placeholder = "Gross Weight", required = "required", validationmessage = "Enter Gross Weight" })
                             )
-                        </div>
+                                </div>
 
 
-                        <div class="form-group">
-                            <label for="exampleFormControlFile1">Online Message</label>
-                            @(Html.Kendo().TextBoxFor(model => model.OnlineMsg)
+                                <div class="form-group">
+                                    <label for="exampleFormControlFile1">Online Message</label>
+                                    @(Html.Kendo().TextBoxFor(model => model.OnlineMsg)
              .Name("OnlineMsg")
              .HtmlAttributes(new { placeholder = "Online Message", validationmessage = "Enter Online Message" })
                             )
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleFormControlFile1">Note</label>
-                            @(Html.Kendo().TextBoxFor(model => model.Note)
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleFormControlFile1">Note</label>
+                                    @(Html.Kendo().TextBoxFor(model => model.Note)
              .Name("Note")
              .HtmlAttributes(new { placeholder = "Note", validationmessage = "Enter Note" })
                             )
-                        </div>
+                                </div>
 
-                        <div class="form-group">
-                            <label for="exampleFormControlFile1">Publish</label>
-                            @(Html.Kendo().CheckBoxFor(model => model.Publish)
+                                <div class="form-group">
+                                    <label for="exampleFormControlFile1">Publish</label>
+                                    @(Html.Kendo().CheckBoxFor(model => model.Publish)
              .Name("Publish")
              .HtmlAttributes(new { placeholder = "Publish", validationmessage = "Enter Publish" })
                             )
-                        </div>
+                                </div>
 
 
-                        Condition Price
-                        <div id="ConditionPricegrid" style="width: 100%;height:300px"></div>
-                        @*@(Html.Kendo().Button()
-                        .Name("primaryTextButton")
-                        .ThemeColor(ThemeColor.Primary)
-                        .Content("Primary Button"))*@
-                        <input type="submit" value="Save"   CssClass="btn btn-primary btn-sm"/>
+                                Condition Price
+                                <div id="ConditionPricegrid" style="width: 100%;height:300px"></div>
+                                @*@(Html.Kendo().Button()
+                                .Name("primaryTextButton")
+                                .ThemeColor(ThemeColor.Primary)
+                                .Content("Primary Button"))*@
+                                <input type="submit" value="Save" CssClass="btn btn-primary btn-sm" />
 
-                    </td>
-                    <td style="width: 40%; vertical-align: top">
+                            </td>
+                            <td style="width: 40%; vertical-align: top">
 
-                        Compatibility
-                        <div id="Compatibilitygrid" style="width: 80%;height:300px"></div>
+                                Compatibility
+                                <div id="Compatibilitygrid" style="width: 80%;height:300px"></div>
 
-                        Supplier
-                        <div id="SupplierTransgrid" style="width: 80%;height:300px"></div>
+                                Supplier
+                                <div id="SupplierTransgrid" style="width: 80%;height:300px"></div>
 
-                      
+                                gridC
+                                <div id="gridc" style="width: 80%;height:300px"></div>
 
-                    </td>
-                </tr>
-            </table>
-        </div>
-
-        <script>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            
+            <script>
 
             function FilterSubType() {
                 return {
@@ -266,8 +270,10 @@
 
 
             /* Compatibilitygrid start */
- 
-            var CompatibilitygridDS = @Html.Raw(Json.Encode(ViewBag.lstCompatibilityPart));
+
+            var CompatibilitygridDS = @Html.Raw(Json.Encode((IEnumerable<BusinessObject.CompatibilityTrans>)ViewBag.lstCompatibilityPart));
+
+
 
             var dataSource = new kendo.data.DataSource({
                 schema: {
@@ -279,7 +285,7 @@
                             VendorName: { type: "string" },
                             ModelNo: { type: "string" },
                             Active: { type: "boolean" }
-                             
+
                         }
                     }
                 },
@@ -309,26 +315,29 @@
 
             $("#Compatibilitygrid").kendoGrid({
                 dataSource: dataSource,
-               
+
                 columns: [
                 {
-                    field: "PartID",
-                    hidden: false,
-                    width: 20
+                        field: "Active",
+                        title: "Status",
+                        headerAttributes: { "class": "table-header-cell", style: "font-size: 12px;" },
+                        attributes: { style: "font-size: 12px;" },
+                        template: '<input type="checkbox" #= Active ? "checked=checked" : "" # class="SelFlagChkBox" ></input>',
+                        width: 30
                 },
                 {
                     field: "ProductCategoryDescription",
                     title: "Product Category Description",
                     headerAttributes: { "class": "table-header-cell", style: "font-size: 12px;" },
                     attributes: { style: "font-size: 12px;" },
-                    
+
                 },
                 {
                     field: "VendorName",
                     title: "VendorName",
                     headerAttributes: { "class": "table-header-cell", style: "font-size: 12px;" },
                     attributes: { style: "font-size: 12px;" },
-                    
+
                 },
                 {
                     field: "ModelNo",
@@ -351,12 +360,18 @@
                 scrollable: true
             });
 
+
+
+
+
+
+
             /* Compatibilitygrid END */
 
 
 
-            /* SupplierTransgrid start */            
-             
+            /* SupplierTransgrid start */
+
             var SupplierTransgridDS = @Html.Raw(Json.Encode(ViewBag.lstSupplierTrans));
 
             var dataSource = new kendo.data.DataSource({
@@ -365,9 +380,9 @@
                         id: "PartID",
                         fields: {
                             PartID: { type: "number" },
-                            SuppierName: { type: "string" } 
-                            
-                             
+                            SuppierName: { type: "string" }
+
+
                         }
                     }
                 },
@@ -397,7 +412,7 @@
 
             $("#SupplierTransgrid").kendoGrid({
                 dataSource: dataSource,
-               
+
                 columns: [
                 {
                     field: "PartID",
@@ -409,7 +424,7 @@
                     title: "Suppier Name",
                     headerAttributes: { "class": "table-header-cell", style: "font-size: 12px;" },
                     attributes: { style: "font-size: 12px;" },
-                    
+
                 } ,
                 ],
                 editable: {
@@ -429,7 +444,7 @@
 
 
             /* ConditionPriceTrans start */
- 
+
             var ConditionPriceTransgridDS = @Html.Raw(Json.Encode(ViewBag.lstConditionPriceTrans));
 
             var dataSource = new kendo.data.DataSource({
@@ -438,8 +453,14 @@
                         id: "PartID",
                         fields: {
                             PartID: { type: "number" },
-                            ConditionDescription: { type: "string" },
-                          
+                            ConditionDescription: { type: "string",editable:false},
+                            Stockable: { type: "boolean" },
+                            Retunable: { type: "boolean" },
+                            Price: { type: "number" },
+                            PriceQty: { type: "number" },
+                            Location: { type: "string" },
+                            lastupdatedDate: { type: "date" }
+
                         }
                     }
                 },
@@ -469,27 +490,114 @@
 
             $("#ConditionPricegrid").kendoGrid({
                 dataSource: dataSource,
-               
+
                 columns: [
-                {
-                    field: "PartID",
-                    hidden: false,
-                    width: 20
-                },
-                {
+
+
+                   {
                     field: "ConditionDescription",
-                    title: "Condition Description",
+                    title: "Desc",
                     headerAttributes: { "class": "table-header-cell", style: "font-size: 12px;" },
-                    attributes: { style: "font-size: 12px;" },
+                        attributes: { style: "text-align: left; white-space: nowrap; text-overflow: ellipsis;", title: "#= ConditionDescription #" },
+                        width: 50
+                    },
+                    {
+                        field: "Stockable",
+                        title: "Stockable",
+
+                        attributes: { style: "font-size: 12px;" },
+                        headerAttributes: { "class": "table-header-cell", style: "font-size: 12px;" },
+
+                        template: '<input type="checkbox" #= Stockable ? "checked=checked" : "" # ></input>',
+                        width: 30
+                    },
+
+                    {
+                        field: "Retunable",
+                        title: "Retunable",
+                        headerAttributes: { "class": "table-header-cell", style: "font-size: 12px;" },
+                        attributes: { style: "font-size: 12px;" },
+                        template: '<input type="checkbox" #= Retunable ? "checked=checked" : "" #  ></input>',
+                        width: 30
+
+                    },
                     
-                } ,
+                    {
+                        field: "PriceQty",
+                        title: "PriceQty",
+                        headerAttributes: { "class": "table-header-cell", style: "font-size: 12px;" },
+                        attributes: { style: "font-size: 12px;" },
+                        /* template: '<input type="textbox" ></input>'*/
+                        editor: function (container) {
+                              var input = $('<input id="PriceQty" name="PriceQty" class="k-input numbers">');
+                            input.appendTo(container);
+                            input.kendoNumericTextBox({
+                                format: "{0:n0}",
+                                decimals: 0,
+                                min: 0,
+                                max: 100,
+                                spinners: false
+                            });
+
+                        },
+                         width: 50
+                    },
+                    {
+                        field: "Price",
+                        title: "Price",
+                        headerAttributes: { "class": "table-header-cell", style: "font-size: 12px;" },
+                        attributes: { style: "font-size: 12px; text-align:right" },
+                        /* template: '<input type="textbox" ></input>'*/
+                        format: "{0:c2}",
+                        editor: function (container) {
+                            var input = $('<input id="PriceQty" name="Price" class="k-input numbers" style="text-align:right;">');
+                            input.appendTo(container);
+                            input.kendoNumericTextBox({
+                                format: "{0:c2}",
+                                 
+                                min: 0,
+                               
+                                spinners: false
+                            });
+
+                        },
+                        width: 50
+                    },
+                    
+                    {
+                        field: "Location",
+                        title: "Location",
+                        headerAttributes: { "class": "table-header-cell", style: "font-size: 12px;" },
+                        attributes: { style: "font-size: 12px;" },
+                        width: 20
+                    },
+                    {
+                        field: "lastupdatedDate",
+                        title: "lastupdatedDate",
+                        headerAttributes: { "class": "table-header-cell", style: "font-size: 12px;" },
+                        attributes: { style: "font-size: 12px;" },
+                        template: function (dataItem) {
+                            if (dataItem.lastupdatedDate != null) {
+                                return kendo.toString(kendo.parseDate(dataItem.lastupdatedDate, 'yyyy-MM-dd'), 'MM/dd/yyyy');
+                            }
+                            else {
+                                return "";
+                            }
+                        },
+
+                        width: 50
+
+                    },
+
+
                 ],
-                editable: {
-                    mode: "inline",
-                    confirmation: "Are you sure you want to Delete the Part Type?",
-                    cancelDelete: "No",
-                    confirmDelete: "Yes"
-                },
+                editable:true,
+                //editable: {
+                //    mode: "inline",
+                //    confirmation: "Are you sure you want to Delete the Part Type?",
+                //    cancelDelete: "No",
+                //    confirmDelete: "Yes"
+                //},
                 height: 450,
                 groupable: false,
                 sortable: true,
@@ -501,7 +609,42 @@
 
 
 
-        </script>
-    }
+            </script>
+        }
+    </div>
 
-</body>
+
+    <script type="text/javascript">
+
+        $("form").submit(function (event) {
+            event.preventDefault();
+
+
+
+            var input;
+            var partTypeGrid = $("#ConditionPricegrid").data("kendoGrid");
+            var gridData = partTypeGrid.dataSource.view();
+            if (gridData.length > 0) {
+                for (var i = 0; i < gridData.length; i++) {
+                    input = $("<input>", { type: 'hidden', name: 'ConditionPriceData(' + i + ').PriceQty', value: gridData[i].PriceQty })
+                    $(this).append($(input));
+                    input = $("<input>", { type: 'hidden', name: 'ConditionPriceData(' + i + ').Stockable', value: gridData[i].Stockable })
+                    $(this).append($(input));
+                     
+                }
+            }
+        
+
+        $.post(this.action, $(this).serialize(), function (response) {
+
+            if (response.saveStatus == "Success") {
+                ////Navigate to Main Page
+                //closeEstimateForm();
+            }
+            else {
+                //kendo.alert(response.estimateMessage);
+            }
+        }, 'json');
+        })
+    </script>
+ </body>

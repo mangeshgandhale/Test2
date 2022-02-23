@@ -7,6 +7,7 @@ using System.Web.Mvc;
 using BusinessObject;
 using System.IO;
 using System.Web.Hosting;
+using Kendo.Mvc.UI;
 
 namespace MVC3Layer.Controllers
 {
@@ -16,6 +17,21 @@ namespace MVC3Layer.Controllers
 
         string photoPath = Path.Combine(HostingEnvironment.MapPath("~/Images"), "profile_photo.png");
         // GET: Part
+
+        public ActionResult Remote_Binding_Orders_Read([DataSourceRequest] DataSourceRequest request)
+        {
+            PartBL _PartBL = new PartBL();
+            List<CompatibilityTrans> _CompatibilityTrans = new List<CompatibilityTrans>();
+            _CompatibilityTrans = _PartBL.CompatibilityPart(0);
+
+            DataSourceResult result = new DataSourceResult();
+            result.Data = _CompatibilityTrans;
+            result.Total = _CompatibilityTrans.Count;
+
+            return Json(result, "application/json", JsonRequestBehavior.AllowGet);
+
+        }
+
         public ActionResult PartAdd()
         {
             List<CompatibilityTrans> _CompatibilityTrans = new List<CompatibilityTrans>();
@@ -27,20 +43,24 @@ namespace MVC3Layer.Controllers
 
             PartBL _PartBL = new PartBL();
             ViewBag.lstCompatibilityPart = _PartBL.CompatibilityPart(0);
+
+             _CompatibilityTrans = _PartBL.CompatibilityPart(0);
             ViewBag.lstRelatedPartTrans = _PartBL.RelatedPartTrans(0);
-            ViewBag.lstSupplierTrans = _PartBL.SupplierTrans(0);
+            ViewBag.lstSupplierTrans = _PartBL.SupplierTrans(64);
             ViewBag.lstConditionPriceTrans = _PartBL.ConditionPriceTrans(0);
             return View();
         }
 
         [HttpPost]
-        public ActionResult PartAdd(BusinessObject.PartBO _PartBO)
+        [ValidateAntiForgeryToken]
+        public ActionResult PartAdd(FormCollection collection)
+        //public ActionResult PartAdd(BusinessObject.PartBO _PartBO)
         {
             PartBL PartBL = new PartBL();
-
+            BusinessObject.PartBO _PartBO= new PartBO();
             try
             {
-                PartBL.CreatePart(_PartBO);
+               // PartBL.CreatePart(_PartBO);
                 return Json("");
             }
             catch (Exception ex)

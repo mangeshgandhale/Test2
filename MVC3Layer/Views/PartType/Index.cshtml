@@ -198,9 +198,6 @@
 
         $("form").submit(function (event) {
             event.preventDefault();
-
-
-
             var input;
             var partTypeGrid = $("#TestKendoGrid").data("kendoGrid");
             var gridData = partTypeGrid.dataSource.view();
@@ -214,8 +211,7 @@
                     // $(this).append($(input));
                 }
             }
-        })
-
+      
         $.post(this.action, $(this).serialize(), function (response) {
 
             if (response.saveStatus == "Success") {
@@ -228,7 +224,7 @@
         }, 'json');
         //})
 
-
+        })
 
 
 

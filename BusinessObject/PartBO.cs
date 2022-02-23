@@ -35,7 +35,9 @@ namespace BusinessObject
         public Int32 CreatedBy { get; set; }
 
         public List<CompatibilityTrans> CompatibilityTrans { get; set; }
-
+        public List<RelatedPartTrans> RelatedPartTrans { get; set; }
+        public List<SupplierTrans> SupplierTrans { get; set; }
+        public List<ConditionPriceTrans> ConditionPriceTrans { get; set; } 
 
     }
     public class CompatibilityTrans
@@ -105,11 +107,11 @@ namespace BusinessObject
         public DateTime ValidFrom { get; set; }
         public DateTime ValidTo { get; set; }
         public string Abbrevation { get; set; }
-        public string Stockable { get; set; }
-        public string Retunable { get; set; }
+        public Boolean Stockable { get; set; }
+        public Boolean Retunable { get; set; }
         public Int32 PositionID { get; set; }
         public string Location { get; set; }
-        public string lastupdatedDate { get; set; }
+        public DateTime lastupdatedDate { get; set; }
 
     }
 }

@@ -136,7 +136,7 @@ namespace DataAccess
             using (somaEntities db = new somaEntities())
             {
                 var _objTPart = new T_Part()
-                { PartID = 0,
+                {   PartID = 0,
                     SubTypeID= _PartBO.SubTypeID,
                     ReplacementPartID = _PartBO.ReplacementPartID,
                     PartNo = _PartBO.PartNo,
@@ -160,8 +160,8 @@ namespace DataAccess
                 db.T_Part.Add(_objTPart);
 
                 db.SaveChanges();
-               
-
+                int newPartID = _objTPart.PartID;
+                 
             }
 
  
