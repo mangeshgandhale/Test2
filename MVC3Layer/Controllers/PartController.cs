@@ -26,7 +26,10 @@ namespace MVC3Layer.Controllers
             ViewBag.Photo = System.IO.File.Exists(photoPath) ? "/images/profile_photo.png" : "/images/profile_default.png";
 
             PartBL _PartBL = new PartBL();
-            ViewBag.lstCompatibilityPart = _PartBL.CompatibilityPart();
+            ViewBag.lstCompatibilityPart = _PartBL.CompatibilityPart(0);
+            ViewBag.lstRelatedPartTrans = _PartBL.RelatedPartTrans(0);
+            ViewBag.lstSupplierTrans = _PartBL.SupplierTrans(0);
+            ViewBag.lstConditionPriceTrans = _PartBL.ConditionPriceTrans(0);
             return View();
         }
 

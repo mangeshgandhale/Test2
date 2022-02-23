@@ -22,7 +22,7 @@ namespace DataAccess
         //{
         //    return _context.M_PartType.ToList();
         //}
-        public List<CompatibilityTrans> CompatibilityPart(somaEntities pDBOps)
+        public List<CompatibilityTrans> CompatibilityPart(Int32 PartID, somaEntities pDBOps)
         {
             List<CompatibilityTrans> _CompatibilityTrans = new List<CompatibilityTrans>();
 
@@ -35,7 +35,7 @@ namespace DataAccess
                 DataTable dt = new DataTable();
 
                 SqlParameterCollection pcol = new SqlCommand().Parameters;
-                Data.Adapter.AddParam(pcol, "@PartID", 0);
+                Data.Adapter.AddParam(pcol, "@PartID", PartID);
                 Data.Adapter.AddParam(pcol, "@UserID", 14);
                 dt = Data.Adapter.ExecuteDataTable("uspviewModelManufacturer", CommandType.StoredProcedure, Data.Adapter.param(pcol));
 
@@ -57,6 +57,79 @@ namespace DataAccess
                 return null;
             }
         }
+
+        public List<RelatedPartTrans> RelatedPartTrans(Int32 PartID, somaEntities pDBOps)
+        {
+            List<RelatedPartTrans> _RelatedPartTrans = new List<RelatedPartTrans>();
+            try
+            {
+                DataTable dt = new DataTable();
+                SqlParameterCollection pcol = new SqlCommand().Parameters;
+                Data.Adapter.AddParam(pcol, "@PartID", PartID);
+                dt = Data.Adapter.ExecuteDataTable("uspviewRelatedParts", CommandType.StoredProcedure, Data.Adapter.param(pcol));
+                if (dt.Rows.Count > 0)
+                {
+                    _RelatedPartTrans = MVC3Layer.common.CommonFunction.ToListof<RelatedPartTrans>(dt);
+                }
+                return _RelatedPartTrans;
+            }
+            catch (Exception ex)
+            {
+                //  log.Error("AN exception occured while reading Part Types!!!");
+                return null;
+            }
+        }
+        public List<SupplierTrans> SupplierTrans(Int32 PartID, somaEntities pDBOps)
+        {
+            List<SupplierTrans> _SupplierTrans = new List<SupplierTrans>();
+            try
+            {
+                DataTable dt = new DataTable();
+
+                SqlParameterCollection pcol = new SqlCommand().Parameters;
+                Data.Adapter.AddParam(pcol, "@PartID", PartID);
+                Data.Adapter.AddParam(pcol, "@SupplierNameSearch", "");
+                Data.Adapter.AddParam(pcol, "@VendorID", 0);
+                dt = Data.Adapter.ExecuteDataTable("uspviewSupplierTrans", CommandType.StoredProcedure, Data.Adapter.param(pcol));
+                if (dt.Rows.Count > 0)
+                {
+                    _SupplierTrans = MVC3Layer.common.CommonFunction.ToListof<SupplierTrans>(dt);
+                }
+                return _SupplierTrans;
+            }
+            catch (Exception ex)
+            {
+                //  log.Error("AN exception occured while reading Part Types!!!");
+                return null;
+            }
+        }
+
+        public List<ConditionPriceTrans> ConditionPriceTrans(Int32 PartID, somaEntities pDBOps)
+        {
+            List<ConditionPriceTrans> _ConditionPriceTrans = new List<ConditionPriceTrans>();
+            try
+            {
+                DataTable dt = new DataTable();
+
+                SqlParameterCollection pcol = new SqlCommand().Parameters;
+                Data.Adapter.AddParam(pcol, "@PARTID", PartID);
+                Data.Adapter.AddParam(pcol, "@CONDITIONID", 0);
+                Data.Adapter.AddParam(pcol, "@PARTCONFIRDIONPRICEID", 0);
+                dt = Data.Adapter.ExecuteDataTable("uspPartConditionPriceTransView", CommandType.StoredProcedure, Data.Adapter.param(pcol));
+                if (dt.Rows.Count > 0)
+                {
+                    _ConditionPriceTrans = MVC3Layer.common.CommonFunction.ToListof<ConditionPriceTrans>(dt);
+                }
+                return _ConditionPriceTrans;
+            }
+            catch (Exception ex)
+            {
+                //  log.Error("AN exception occured while reading Part Types!!!");
+                return null;
+            }
+        }
+
+
 
         public void CreatePart(PartBO _PartBO, somaEntities pDBOps)
         {

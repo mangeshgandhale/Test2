@@ -204,14 +204,26 @@
              .HtmlAttributes(new { placeholder = "Publish", validationmessage = "Enter Publish" })
                             )
                         </div>
-                        <input type="submit" value="Save" />
+
+
+                        Condition Price
+                        <div id="ConditionPricegrid" style="width: 100%;height:300px"></div>
+                        @*@(Html.Kendo().Button()
+                        .Name("primaryTextButton")
+                        .ThemeColor(ThemeColor.Primary)
+                        .Content("Primary Button"))*@
+                        <input type="submit" value="Save"   CssClass="btn btn-primary btn-sm"/>
 
                     </td>
                     <td style="width: 40%; vertical-align: top">
 
                         Compatibility
-                        <div id="Compatibilitygrid" style="width: 60%;height:300px"></div>
+                        <div id="Compatibilitygrid" style="width: 80%;height:300px"></div>
 
+                        Supplier
+                        <div id="SupplierTransgrid" style="width: 80%;height:300px"></div>
+
+                      
 
                     </td>
                 </tr>
@@ -252,11 +264,8 @@
 
 
 
-            /* Compatibilitygrid */
-
-
-            
-             
+            /* Compatibilitygrid start */
+ 
             var CompatibilitygridDS = @Html.Raw(Json.Encode(ViewBag.lstCompatibilityPart));
 
             var dataSource = new kendo.data.DataSource({
@@ -340,6 +349,155 @@
                 pageable: false,
                 scrollable: true
             });
+
+            /* Compatibilitygrid END */
+
+
+
+            /* SupplierTransgrid start */            
+             
+            var SupplierTransgridDS = @Html.Raw(Json.Encode(ViewBag.lstSupplierTrans));
+
+            var dataSource = new kendo.data.DataSource({
+                schema: {
+                    model: {
+                        id: "PartID",
+                        fields: {
+                            PartID: { type: "number" },
+                            SuppierName: { type: "string" } 
+                            
+                             
+                        }
+                    }
+                },
+                transport: {
+                    read: function (options) { options.success(SupplierTransgridDS); },
+                    update: function(options) { options.success(); },
+                    create: function(options) {
+                        SupplierTransgridDS.push(options.data);
+                        options.success(options.data);
+                    },
+                    destroy: function(options) {
+                        SupplierTransgridDS.splice(options.data.RowID - 1, 1);
+                        options.success(options.data);
+                    }
+                },
+                requestEnd: function (e) {
+                    if (e.type == "create" || e.type == "update" || e.type == "delete") {
+                        this.read();
+                    }
+                    else if (e.type == "read") {
+                    }
+                },
+                error: function (obj) {
+                    alert("Status: " + obj.status + "; Error Message: " + obj.errorThrown);
+                }
+            });
+
+            $("#SupplierTransgrid").kendoGrid({
+                dataSource: dataSource,
+               
+                columns: [
+                {
+                    field: "PartID",
+                    hidden: false,
+                    width: 20
+                },
+                {
+                    field: "SuppierName",
+                    title: "Suppier Name",
+                    headerAttributes: { "class": "table-header-cell", style: "font-size: 12px;" },
+                    attributes: { style: "font-size: 12px;" },
+                    
+                } ,
+                ],
+                editable: {
+                    mode: "inline",
+                    confirmation: "Are you sure you want to Delete the Part Type?",
+                    cancelDelete: "No",
+                    confirmDelete: "Yes"
+                },
+                height: 450,
+                groupable: false,
+                sortable: true,
+                pageable: false,
+                scrollable: true
+            });
+
+            /* SupplierTransgrid END */
+
+
+            /* ConditionPriceTrans start */
+ 
+            var ConditionPriceTransgridDS = @Html.Raw(Json.Encode(ViewBag.lstConditionPriceTrans));
+
+            var dataSource = new kendo.data.DataSource({
+                schema: {
+                    model: {
+                        id: "PartID",
+                        fields: {
+                            PartID: { type: "number" },
+                            ConditionDescription: { type: "string" },
+                          
+                        }
+                    }
+                },
+                transport: {
+                    read: function (options) { options.success(ConditionPriceTransgridDS); },
+                    update: function(options) { options.success(); },
+                    create: function(options) {
+                        ConditionPriceTransgridDS.push(options.data);
+                        options.success(options.data);
+                    },
+                    destroy: function(options) {
+                        ConditionPriceTransgridDS.splice(options.data.RowID - 1, 1);
+                        options.success(options.data);
+                    }
+                },
+                requestEnd: function (e) {
+                    if (e.type == "create" || e.type == "update" || e.type == "delete") {
+                        this.read();
+                    }
+                    else if (e.type == "read") {
+                    }
+                },
+                error: function (obj) {
+                    alert("Status: " + obj.status + "; Error Message: " + obj.errorThrown);
+                }
+            });
+
+            $("#ConditionPricegrid").kendoGrid({
+                dataSource: dataSource,
+               
+                columns: [
+                {
+                    field: "PartID",
+                    hidden: false,
+                    width: 20
+                },
+                {
+                    field: "ConditionDescription",
+                    title: "Condition Description",
+                    headerAttributes: { "class": "table-header-cell", style: "font-size: 12px;" },
+                    attributes: { style: "font-size: 12px;" },
+                    
+                } ,
+                ],
+                editable: {
+                    mode: "inline",
+                    confirmation: "Are you sure you want to Delete the Part Type?",
+                    cancelDelete: "No",
+                    confirmDelete: "Yes"
+                },
+                height: 450,
+                groupable: false,
+                sortable: true,
+                pageable: false,
+                scrollable: true
+            });
+
+            /* ConditionPriceTrans END */
+
 
 
         </script>

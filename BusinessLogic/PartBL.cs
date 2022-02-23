@@ -12,48 +12,43 @@ namespace BusinessLogic
     {
           PartDB obj= new PartDB();
 
-        public List<CompatibilityTrans> CompatibilityPart()
+        public List<CompatibilityTrans> CompatibilityPart(Int32 PartID)
         {
            // PartDB _PartTypeDB = new PartTypeDB();
             List<CompatibilityTrans> _CompatibilityTrans = new List<CompatibilityTrans>();
             somaEntities _EFEntities = new somaEntities();
-            _CompatibilityTrans = obj.CompatibilityPart(_EFEntities);
+            _CompatibilityTrans = obj.CompatibilityPart(PartID,_EFEntities);
             return _CompatibilityTrans;
 
         }
-        //public PartTypeBO PopulateViewData()
-        //{
-        //    PartTypeBO viewData = new PartTypeBO();
+        public List<RelatedPartTrans> RelatedPartTrans(Int32 PartID)
+        {
+            // PartDB _PartTypeDB = new PartTypeDB();
+            List<RelatedPartTrans> _RelatedPartTrans = new List<RelatedPartTrans>();
+            somaEntities _EFEntities = new somaEntities();
+            _RelatedPartTrans = obj.RelatedPartTrans(PartID,_EFEntities);
+            return _RelatedPartTrans;
 
-        //    PartTypeDB _PartTypeDB = new PartTypeDB();
-        //    somaEntities _EFEntities = new somaEntities();
+        }
+        public List<SupplierTrans> SupplierTrans(Int32 PartID)
+        {
+            // PartDB _PartTypeDB = new PartTypeDB();
+            List<SupplierTrans> _SupplierTrans = new List<SupplierTrans>();
+            somaEntities _EFEntities = new somaEntities();
+            _SupplierTrans = obj.SupplierTrans(PartID, _EFEntities);
+            return _SupplierTrans;
 
-        //    List<PartTypeBO> dbPartTypes;
+        }
 
-        //    try
-        //    {
-        //        viewData = new PartTypeBO();
+        public List<ConditionPriceTrans> ConditionPriceTrans(Int32 PartID)
+        {
+            // PartDB _PartTypeDB = new PartTypeDB();
+            List<ConditionPriceTrans> _ConditionPriceTrans = new List<ConditionPriceTrans>();
+            somaEntities _EFEntities = new somaEntities();
+            _ConditionPriceTrans = obj.ConditionPriceTrans(PartID, _EFEntities);
+            return _ConditionPriceTrans;
 
-        //        dbPartTypes = _PartTypeDB.GetAllPartTypes(_EFEntities);
-        //        if (dbPartTypes != null && dbPartTypes.Count > 0)
-        //        {
-        //            viewData.DDLPartTypes = dbPartTypes;
-        //            viewData.PartTypeGridData = dbPartTypes;
-        //        }
-
-        //        return viewData;
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        return null/* TODO Change to default(_) if this is not a reference type */;
-        //    }
-        //    finally
-        //    {
-        //     //   PartTypeDB.Dispose();
-        //    }
-        //}
-
-
+        }
         public string CreatePart(PartBO _PartBO)
         {
             // log4net.GlobalContext.Properties("HSProRepairUserName") = TestGlobal.UserName
@@ -106,6 +101,37 @@ namespace BusinessLogic
             }
         }
 
-      
+        //public PartTypeBO PopulateViewData()
+        //{
+        //    PartTypeBO viewData = new PartTypeBO();
+
+        //    PartTypeDB _PartTypeDB = new PartTypeDB();
+        //    somaEntities _EFEntities = new somaEntities();
+
+        //    List<PartTypeBO> dbPartTypes;
+
+        //    try
+        //    {
+        //        viewData = new PartTypeBO();
+
+        //        dbPartTypes = _PartTypeDB.GetAllPartTypes(_EFEntities);
+        //        if (dbPartTypes != null && dbPartTypes.Count > 0)
+        //        {
+        //            viewData.DDLPartTypes = dbPartTypes;
+        //            viewData.PartTypeGridData = dbPartTypes;
+        //        }
+
+        //        return viewData;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return null/* TODO Change to default(_) if this is not a reference type */;
+        //    }
+        //    finally
+        //    {
+        //     //   PartTypeDB.Dispose();
+        //    }
+        //}
+
     }
 }
