@@ -40,7 +40,7 @@ namespace BusinessObject
     }
     public class CompatibilityTrans
 
-    {
+    { 
         public Int32 chk { get; set; }
         public Int32 PartLinkID { get; set; }
         public Int32 PartID { get; set; }
