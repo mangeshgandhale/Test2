@@ -774,9 +774,10 @@
                         {
                                    field: "SafetyStock",
                                    title: "SafetyStock",
-                                   headerAttributes: { "class": "table-header-cell", style: "font-size: 12px;" },
-                                   attributes: { style: "text-align: left; white-space: nowrap; text-overflow: ellipsis;", title: "#= SafetyStock #" },
-                                   width: 50
+                            headerAttributes: { "class": "table-header-cell", style: "font-size: 12px;" },
+                            attributes: { style: "font-size: 12px;" },
+                            template: '<input type="checkbox" #= Stockable ? "checked=checked" : "" # class="SelFlagChkBox" ></input>',
+                            width: 30
                                },
                         {
                                    field: "MinBuy",
