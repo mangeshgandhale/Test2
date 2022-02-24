@@ -112,65 +112,65 @@ namespace MVC3Layer.Controllers
                         indexLength = closeBracketPosition - openBracketPosition - 1;
 
                         collItemIndex = Convert.ToInt32(collection.GetKey(li).Substring((openBracketPosition + 1), indexLength));
-                        //if (collItemIndex == itemIndex)
-                        //{
-                        //    if (collection.GetKey(li) == "PartTypeGridData(" + collItemIndex + ").PartTypeID")
-                        //    {
-                        //        string PartTypeIDIndex  ="PartTypeGridData(" + collItemIndex + ").PartTypeID";
-                        //        if (string.IsNullOrEmpty(collection[PartTypeIDIndex].ToString) == false)
-                        //            _PartTypeBO.PartTypeID = collection("PartTypeGridData(" + collItemIndex + ").PartTypeID").ToString;
-                        //        else
-                        //        {
-                        //            _PartTypeBO.PartTypeID = -1;
-                        //            ViewDataErrorLog.AppendLine("PartTypeGridData: Invalid PartTypeID");
-                        //        }
-                        //        continue;
-                        //    }
+                        if (collItemIndex == itemIndex)
+                        {
+                            if (collection.GetKey(li) == "PartTypeGridData(" + collItemIndex + ").PartTypeID")
+                            {
+                                string PartTypeIDIndex = "PartTypeGridData(" + collItemIndex + ").PartTypeID";
+                                if (string.IsNullOrEmpty(collection[PartTypeIDIndex].ToString()) == false)
+                                    _PartTypeBO.PartTypeID =Convert.ToInt32( collection["PartTypeGridData(" + collItemIndex + ").PartTypeID"].ToString());
+                                else
+                                {
+                                    _PartTypeBO.PartTypeID = -1;
+                                    ViewDataErrorLog.AppendLine("PartTypeGridData: Invalid PartTypeID");
+                                }
+                                continue;
+                            }
 
-                        //    if (collection.GetKey(li) == "PartTypeGridData(" + collItemIndex + ").PartTypeDescription")
-                        //    {
-                        //        if (string.IsNullOrEmpty(collection("PartTypeGridData(" + collItemIndex + ").PartTypeDescription").ToString) == false)
-                        //            _PartTypeBO.PartTypeDescription = collection("PartTypeGridData(" + collItemIndex + ").PartTypeDescription").ToString;
-                        //        else
-                        //        {
-                        //            _PartTypeBO.PartTypeDescription = "";
-                        //            ViewDataErrorLog.AppendLine("PartTypeGridData: Invalid PartTypeDescription");
-                        //        }
-                        //        continue;
-                        //    }
+                            if (collection.GetKey(li) == "PartTypeGridData(" + collItemIndex + ").PartTypeDescription")
+                            {
+                                if (string.IsNullOrEmpty(collection["PartTypeGridData(" + collItemIndex + ").PartTypeDescription"].ToString()) == false)
+                                    _PartTypeBO.PartTypeDescription = collection["PartTypeGridData(" + collItemIndex + ").PartTypeDescription"].ToString();
+                                else
+                                {
+                                    _PartTypeBO.PartTypeDescription = "";
+                                    ViewDataErrorLog.AppendLine("PartTypeGridData: Invalid PartTypeDescription");
+                                }
+                                continue;
+                            }
 
-                        //    if (collection.GetKey(li) == "PartTypeGridData(" + collItemIndex + ").Active")
-                        //    {
-                        //        if (string.IsNullOrEmpty(collection("PartTypeGridData(" + collItemIndex + ").Active").ToString) == false)
-                        //        {
-                        //            if (collection("PartTypeGridData(" + collItemIndex + ").Active").ToString == "true")
-                        //                _PartTypeBO.Active = true;
-                        //            else
-                        //                _PartTypeBO.Active = false;
-                        //        }
-                        //        else
-                        //            ViewDataErrorLog.AppendLine("PartTypeGridData: Invalid Active");
-                        //        viewPartTypes.Add(_PartTypeBO);
-                        //        continue;
-                        //    }
-                        //}
-                        //else
-                        //{
-                        //    viewPartType = new PartTypeBO();
-                        //    itemIndex = itemIndex + 1;
+                            if (collection.GetKey(li) == "PartTypeGridData(" + collItemIndex + ").Active")
+                            {
+                                if (string.IsNullOrEmpty(collection["PartTypeGridData(" + collItemIndex + ").Active"].ToString()) == false)
+                                {
+                                    if (collection["PartTypeGridData(" + collItemIndex + ").Active"].ToString() == "true")
+                                        _PartTypeBO.Active = true;
+                                    else
+                                        _PartTypeBO.Active = false;
+                                }
+                                else
+                                    ViewDataErrorLog.AppendLine("PartTypeGridData: Invalid Active");
+                                viewPartTypes.Add(_PartTypeBO);
+                                continue;
+                            }
+                        }
+                        else
+                        {
+                          //  viewPartType = new PartTypeBO();
+                            itemIndex = itemIndex + 1;
 
-                        //    if (collection.GetKey(li) == "PartTypeGridData(" + collItemIndex + ").PartTypeID")
-                        //    {
-                        //        if (string.IsNullOrEmpty(collection("PartTypeGridData(" + collItemIndex + ").PartTypeID").ToString) == false)
-                        //            _PartTypeBO.PartTypeID = collection("PartTypeGridData(" + collItemIndex + ").PartTypeID").ToString;
-                        //        else
-                        //        {
-                        //            _PartTypeBO.PartTypeID = -1;
-                        //            ViewDataErrorLog.AppendLine("PartTypeGridData: Invalid PartTypeID");
-                        //        }
-                        //        continue;
-                        //    }
-                        //}
+                            if (collection.GetKey(li) == "PartTypeGridData(" + collItemIndex + ").PartTypeID")
+                            {
+                                if (string.IsNullOrEmpty(collection["PartTypeGridData(" + collItemIndex + ").PartTypeID"].ToString()) == false)
+                                    _PartTypeBO.PartTypeID =Convert.ToInt32( collection["PartTypeGridData(" + collItemIndex + ").PartTypeID"].ToString());
+                                else
+                                {
+                                    _PartTypeBO.PartTypeID = -1;
+                                    ViewDataErrorLog.AppendLine("PartTypeGridData: Invalid PartTypeID");
+                                }
+                                continue;
+                            }
+                        }
                     }
                 }
 

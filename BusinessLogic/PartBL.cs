@@ -49,7 +49,7 @@ namespace BusinessLogic
             return _ConditionPriceTrans;
 
         }
-        public string CreatePart(PartBO _PartBO)
+        public Int32 CreatePart(PartBO _PartBO)
         {
             // log4net.GlobalContext.Properties("HSProRepairUserName") = TestGlobal.UserName
 
@@ -57,29 +57,36 @@ namespace BusinessLogic
              somaEntities _EFEntities = new somaEntities();
             PartDB _PartDB = new PartDB();
 
-            string CreateStatus;
+       //     string CreateStatus;
 
             try
             {
-                //foreach (var obj in vPartTypes)
-                //{
-                //    obj.PartTypeDescription ="test1" ;
-                //    obj.CreatedBy = 1;
-                //  //  obj.CreatedDate = DateTime.Now();
-                //}
+               
 
-                   _PartDB.CreatePart(_PartBO, _EFEntities);
-                return "";
+                _PartBO.PartID = _PartDB.CreatePart(_PartBO, _EFEntities);
+                return _PartBO.PartID;
             }
             catch (Exception ex)
             {
-                return "Exception";
+                return 0;
             }
             finally
             {
                 //_PartTypeDBOps.Dispose();
             }
         }
+
+        public void AddConditonPriceTrans(Int32 PartID, List<ConditionPriceTrans> _ConditionPriceTrans)
+        {
+            
+           // List<ConditionPriceTrans> _ConditionPriceTrans = new List<ConditionPriceTrans>();
+            somaEntities _EFEntities = new somaEntities();
+            obj.AddConditonPriceTrans(PartID, _ConditionPriceTrans);
+         
+        }
+        
+
+
         public string ValidatePartTypeDesc(int pPartTypeID, string pPartTypeDesc)
         {
             PartTypeDB _PartTypeDBOps = new PartTypeDB();

@@ -129,10 +129,40 @@ namespace DataAccess
             }
         }
 
-
-
-        public void CreatePart(PartBO _PartBO, somaEntities pDBOps)
+        
+         public void AddConditonPriceTrans(Int32 PartID, List<ConditionPriceTrans> _ConditionPriceTrans)
         {
+            
+            try
+            {
+                foreach (var _var in _ConditionPriceTrans.ToList())
+                {
+                    SqlParameterCollection pcol = new SqlCommand().Parameters;
+                    Data.Adapter.AddParam(pcol, "@PartConditionPriceID", _var.PartConditionPriceID);
+                    Data.Adapter.AddParam(pcol, "@PartID", PartID);
+                    Data.Adapter.AddParam(pcol, "@ConditionID", _var.ConditionID);
+                    Data.Adapter.AddParam(pcol, "@Price", _var.Price);
+                    Data.Adapter.AddParam(pcol, "@PriceQty", _var.PriceQty);
+                    Data.Adapter.AddParam(pcol, "@ValidFrom",   DateTime.Now);
+                    Data.Adapter.AddParam(pcol, "@ValidTo", DateTime.Now);
+                    Data.Adapter.AddParam(pcol, "@UserID", 1);
+                    Data.Adapter.ExecutenNonQuery("uspInsertUpdatePartConditionPriceTrans", CommandType.StoredProcedure, Data.Adapter.param(pcol));
+
+                }
+
+
+            }
+            catch (Exception ex)
+            {
+                //  log.Error("AN exception occured while reading Part Types!!!");
+                
+            }
+
+
+        }
+        public Int32 CreatePart(PartBO _PartBO, somaEntities pDBOps)
+        {
+            int newPartID = 0;
             using (somaEntities db = new somaEntities())
             {
                 var _objTPart = new T_Part()
@@ -160,11 +190,11 @@ namespace DataAccess
                 db.T_Part.Add(_objTPart);
 
                 db.SaveChanges();
-                int newPartID = _objTPart.PartID;
+                newPartID = _objTPart.PartID;
                  
             }
+            return newPartID;
 
- 
         }
 
 
