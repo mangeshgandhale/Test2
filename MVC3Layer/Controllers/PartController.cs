@@ -49,6 +49,7 @@ namespace MVC3Layer.Controllers
             ViewBag.lstRelatedPartTrans = _PartBL.RelatedPartTrans(0);
             ViewBag.lstSupplierTrans = _PartBL.SupplierTrans(64);
             ViewBag.lstConditionPriceTrans = _PartBL.ConditionPriceTrans(0);
+            ViewBag.lstlogisticksTrans = _PartBL.LogistickTrans(0);
             return View();
         }
 

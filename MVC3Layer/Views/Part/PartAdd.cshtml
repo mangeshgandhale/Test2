@@ -212,6 +212,16 @@
 
                             Condition Price
                             <div id="ConditionPricegrid" style="width: 100%;height:300px"></div>
+
+
+                            Related Parts
+                            <div id="RelatedPartTransgrid" style="width: 100%;height:300px"></div>
+
+                            Logistick Parts
+                            <div id="LogistickTransgrid" style="width: 100%;height:300px"></div>
+
+
+
                             @*@(Html.Kendo().Button()
                                 .Name("primaryTextButton")
                                 .ThemeColor(ThemeColor.Primary)
@@ -235,7 +245,7 @@
                 </table>
             </div>
 
-                <script>
+            <script>
 
                     function FilterSubType() {
                         return {
@@ -459,7 +469,7 @@
                                     Stockable: { type: "boolean" },
                                     Retunable: { type: "boolean" },
                                     PriceQty: { type: "number" },
-                                    Price: { type: "number" },                                   
+                                    Price: { type: "number" },
                                     Location: { type: "string" },
                                     lastupdatedDate: { type: "date" }
 
@@ -542,7 +552,7 @@
                                 title: "PriceQty",
                                 headerAttributes: { "class": "table-header-cell", style: "font-size: 12px;" },
                                 attributes: { style: "font-size: 12px;" },
-                          
+
                                 editor: function (container) {
                                     var input = $('<input id="PriceQty" name="PriceQty" class="k-input numbers">');
                                     input.appendTo(container);
@@ -562,7 +572,7 @@
                                 title: "Price",
                                 headerAttributes: { "class": "table-header-cell", style: "font-size: 12px;" },
                                 attributes: { style: "font-size: 12px; text-align:right" },
-                       
+
                                 format: "{0:c2}",
                                 editor: function (container) {
                                     var input = $('<input id="PriceQty" name="Price" class="k-input numbers" style="text-align:right;">');
@@ -623,8 +633,193 @@
                     /* ConditionPriceTrans END */
 
 
+                     /* Related part trans start */
 
-                </script>
+                    var RelatedPartTransgridDS = @Html.Raw(Json.Encode(ViewBag.lstRelatedPartTrans));
+
+                    var dataSource = new kendo.data.DataSource({
+                        schema: {
+                            model: {
+                                id: "PartID",
+                                fields: {
+                                    PartNo: { type: "string" },
+                                    PartDescription: { type: "string" },
+                                    PartTypeDescription: { type: "string" },
+                                    SubTypeDescription: { type: "string"}
+                                }
+                            }
+                        },
+                        transport: {
+                            read: function (options) { options.success(RelatedPartTransgridDS); },
+                            update: function(options) { options.success(); },
+                            create: function(options) {
+                                RelatedPartTransgridDS.push(options.data);
+                                options.success(options.data);
+                            },
+                            destroy: function(options) {
+                                RelatedPartTransgridDS.splice(options.data.RowID - 1, 1);
+                                options.success(options.data);
+                            }
+                        },
+                        requestEnd: function (e) {
+                            if (e.type == "create" || e.type == "update" || e.type == "delete") {
+                                this.read();
+                            }
+                            else if (e.type == "read") {
+                            }
+                        },
+                        error: function (obj) {
+                            alert("Status: " + obj.status + "; Error Message: " + obj.errorThrown);
+                        }
+                    });
+                $("#RelatedPartTransgrid").kendoGrid({
+                        dataSource: dataSource,
+                        columns: [
+                               {
+                                field: "PartNo",
+                                title: "PartNo",
+                                headerAttributes: { "class": "table-header-cell", style: "font-size: 12px;" },
+                                attributes: { style: "text-align: left; white-space: nowrap; text-overflow: ellipsis;", title: "#= PartNo #" },
+                                width: 50
+                             },
+                               {
+                                   field: "PartDescription",
+                                   title: "PartDescription",
+                                   headerAttributes: { "class": "table-header-cell", style: "font-size: 12px;" },
+                                   attributes: { style: "text-align: left; white-space: nowrap; text-overflow: ellipsis;", title: "#= PartDescription #" },
+                                   width: 50
+                               },
+                               {
+                                   field: "PartTypeDescription",
+                                   title: "PartTypeDescription",
+                                   headerAttributes: { "class": "table-header-cell", style: "font-size: 12px;" },
+                                   attributes: { style: "text-align: left; white-space: nowrap; text-overflow: ellipsis;", title: "#= PartTypeDescription #" },
+                                   width: 50
+                               },
+
+                        ],
+                        editable:false,
+                        height: 450,
+                        groupable: false,
+                        sortable: true,
+                        pageable: false,
+                        scrollable: true
+                    });
+
+                /* Related part trans END */
+
+
+
+
+
+
+                  /* Logisticks trans start */
+
+
+                    var LogistickTransgridDS = @Html.Raw(Json.Encode(ViewBag.lstlogisticksTrans));
+
+                    var dataSource = new kendo.data.DataSource({
+                        schema: {
+                            model: {
+                                id: "PartID",
+                                fields: {
+                                    chk: { type: "boolean" },
+                                    PartLogisticsID: { type: "number" },
+                                    PartID: { type: "number" },
+                                    ConditionID: { type: "number" },
+                                    ConditionDescription: { type: "string" },
+                                    SafetyStock: { type: "string" },
+                                    MinBuy: { type: "string" },
+                                    Location2: { type: "string" },
+                                    Stockable: { type: "boolean" },
+                                    Retunable: { type: "boolean" }
+                                }
+                            }
+                        },
+                        transport: {
+                            read: function (options) { options.success(LogistickTransgridDS); },
+                            update: function(options) { options.success(); },
+                            create: function(options) {
+                                LogistickTransgridDS.push(options.data);
+                                options.success(options.data);
+                            },
+                            destroy: function(options) {
+                                LogistickTransgridDS.splice(options.data.RowID - 1, 1);
+                                options.success(options.data);
+                            }
+                        },
+                        requestEnd: function (e) {
+                            if (e.type == "create" || e.type == "update" || e.type == "delete") {
+                                this.read();
+                            }
+                            else if (e.type == "read") {
+                            }
+                        },
+                        error: function (obj) {
+                            alert("Status: " + obj.status + "; Error Message: " + obj.errorThrown);
+                        }
+                    });
+                $("#LogistickTransgrid").kendoGrid({
+                        dataSource: dataSource,
+                    columns: [
+
+                         
+                        {
+                                   field: "ConditionDescription",
+                                   title: "ConditionDescription",
+                                headerAttributes: { "class": "table-header-cell", style: "font-size: 12px;" },
+                                   attributes: { style: "text-align: left; white-space: nowrap; text-overflow: ellipsis;", title: "#= ConditionDescription #" },
+                                width: 50
+                             },
+                        {
+                                   field: "SafetyStock",
+                                   title: "SafetyStock",
+                                   headerAttributes: { "class": "table-header-cell", style: "font-size: 12px;" },
+                                   attributes: { style: "text-align: left; white-space: nowrap; text-overflow: ellipsis;", title: "#= SafetyStock #" },
+                                   width: 50
+                               },
+                        {
+                                   field: "MinBuy",
+                                   title: "MinBuy",
+                                   headerAttributes: { "class": "table-header-cell", style: "font-size: 12px;" },
+                            attributes: { style: "text-align: left; white-space: nowrap; text-overflow: ellipsis;", title: "#= MinBuy #" },
+                                   width: 50
+                        },
+                        {
+                            field: "Location2",
+                            title: "Location2",
+                            headerAttributes: { "class": "table-header-cell", style: "font-size: 12px;" },
+                            attributes: { style: "text-align: left; white-space: nowrap; text-overflow: ellipsis;", title: "#= Location2 #" },
+                            width: 50
+                        },
+                        {
+                            field: "Stockable",
+                            title: "Stockable",
+                            headerAttributes: { "class": "table-header-cell", style: "font-size: 12px;" },
+                            attributes: { style: "font-size: 12px;" },
+                            template: '<input type="checkbox" #= Stockable ? "checked=checked" : "" # class="SelFlagChkBox" ></input>',
+                            width: 30
+                        },
+                        {
+                            field: "Retunable",
+                            title: "Retunable",                             
+                            headerAttributes: { "class": "table-header-cell", style: "font-size: 12px;" },
+                            attributes: { style: "font-size: 12px;" },
+                            template: '<input type="checkbox" #= Retunable ? "checked=checked" : "" # class="SelFlagChkBox" ></input>',
+                            width: 30
+
+                        }, 
+                        ],
+                        editable:false,
+                        height: 450,
+                        groupable: false,
+                        sortable: true,
+                        pageable: false,
+                        scrollable: true
+                    });
+
+                    /* Logisticks END */
+            </script>
         }
     </div>
 

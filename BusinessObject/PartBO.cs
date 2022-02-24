@@ -68,8 +68,7 @@ namespace BusinessObject
         public string PartDescription { get; set; }
         public string PartTypeDescription { get; set; }
         public string SubTypeDescription { get; set; }
-
-            
+         
     }
 
     public class SupplierTrans
@@ -114,4 +113,23 @@ namespace BusinessObject
         public DateTime lastupdatedDate { get; set; }
 
     }
+
+
+    public class LogistickTrans
+
+    {
+        public bool chk { get; set; }
+        public Int32 PartLogisticsID { get; set; }
+        public Int32 PartID { get; set; }
+        public Int32 ConditionID { get; set; }
+        public String ConditionDescription { get; set; }
+        public bool SafetyStock { get; set; }
+        public Int32 MinBuy { get; set; }
+        public String Location1 { get; set; }
+        public String Location2 { get; set; }
+        public bool Stockable { get; set; }
+        public bool Retunable { get; set; }
+    }
+                      
+
 }

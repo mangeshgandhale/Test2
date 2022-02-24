@@ -49,6 +49,16 @@ namespace BusinessLogic
             return _ConditionPriceTrans;
 
         }
+
+        public List<LogistickTrans> LogistickTrans(Int32 PartID)
+        {
+            // PartDB _PartTypeDB = new PartTypeDB();
+            List<LogistickTrans> _LogistickTrans = new List<LogistickTrans>();
+            somaEntities _EFEntities = new somaEntities();
+            _LogistickTrans = obj.LogistickTrans(PartID, _EFEntities);
+            return _LogistickTrans;
+
+        }
         public Int32 CreatePart(PartBO _PartBO)
         {
             // log4net.GlobalContext.Properties("HSProRepairUserName") = TestGlobal.UserName

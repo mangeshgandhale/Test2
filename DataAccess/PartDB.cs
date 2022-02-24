@@ -128,6 +128,29 @@ namespace DataAccess
                 return null;
             }
         }
+        public List<LogistickTrans> LogistickTrans(Int32 PartID, somaEntities pDBOps)
+        {
+            List<LogistickTrans> _LogistickTrans = new List<LogistickTrans>();
+            try
+            {
+                DataTable dt = new DataTable();
+
+                SqlParameterCollection pcol = new SqlCommand().Parameters;
+                Data.Adapter.AddParam(pcol, "@PartID", PartID);
+         
+                dt = Data.Adapter.ExecuteDataTable("uspviewPartLogistick", CommandType.StoredProcedure, Data.Adapter.param(pcol));
+                if (dt.Rows.Count > 0)
+                {
+                    _LogistickTrans = MVC3Layer.common.CommonFunction.ToListof<LogistickTrans>(dt);
+                }
+                return _LogistickTrans;
+            }
+            catch (Exception ex)
+            {
+                //  log.Error("AN exception occured while reading Part Types!!!");
+                return null;
+            }
+        }
 
         
          public void AddConditonPriceTrans(Int32 PartID, List<ConditionPriceTrans> _ConditionPriceTrans)
