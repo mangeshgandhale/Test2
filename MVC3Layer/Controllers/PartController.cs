@@ -141,12 +141,16 @@ namespace MVC3Layer.Controllers
                             string PriceQty = "ConditionPriceData(" + collItemIndex + ").PriceQty";
 
                             if (string.IsNullOrEmpty(collection[PriceQty].ToString()) == false)
-                                _ConditionPriceTrans.PriceQty = Convert.ToInt32(collection["ConditionPriceData(" + collItemIndex + ").Price"].ToString());
+                                _ConditionPriceTrans.PriceQty = Convert.ToInt32(collection["ConditionPriceData(" + collItemIndex + ").PriceQty"].ToString());
                             else
                             {
                                 _ConditionPriceTrans.PriceQty = -1;
                                 ViewDataErrorLog.AppendLine("ConditionPriceData: Invalid Stockable");
                             }
+
+
+                            _viewConditionPriceTrans.Add(_ConditionPriceTrans);
+
                             continue;
 
                         }
@@ -162,8 +166,6 @@ namespace MVC3Layer.Controllers
                                 ViewDataErrorLog.AppendLine("ConditionPriceData: Invalid Stockable");
                             }
 
-                            _viewConditionPriceTrans.Add(_ConditionPriceTrans);
-
                             continue;
 
                         }
@@ -173,6 +175,9 @@ namespace MVC3Layer.Controllers
                     }
                     else
                     {
+
+                        _ConditionPriceTrans = new ConditionPriceTrans();
+
                         itemIndex = itemIndex + 1;
 
                         if (collection.GetKey(li) == "ConditionPriceData(" + collItemIndex + ").PartID")
