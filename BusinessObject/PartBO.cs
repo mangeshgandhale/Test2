@@ -78,7 +78,7 @@ namespace BusinessObject
         public bool chk { get; set; }
         public Int32 PartSuppierID { get; set; }
         public Int32 PartID { get; set; }
-        public string SuppierName { get; set; }
+        public string SupplierName { get; set; }
         public string VendorPartNo { get; set; }
         public string VendorPartDescription { get; set; }
         public decimal Vendorprice { get; set; }
