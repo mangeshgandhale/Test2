@@ -110,7 +110,7 @@ namespace BusinessObject
         public Boolean Retunable { get; set; }
         public Int32 PositionID { get; set; }
         public string Location { get; set; }
-        public DateTime lastupdatedDate { get; set; }
+        public DateTime? lastupdatedDate { get; set; }
 
     }
 

@@ -12,6 +12,7 @@
 <script src="~/Scripts/kendo/kendo.all.min.js"></script>
 <script src="~/Scripts/kendo/kendo.aspnetmvc.min.js"></script>
 
+<script src="~/Scripts/commonUtil/commonUtil.js"></script>
 
 <style type="text/css">
     .container {
@@ -22,14 +23,26 @@
         margin-left: auto;
         color: #039;
     }
-    .form-group{display:flex; align-items:center; margin-bottom:10px;}
-    .form-group label{width:200px}
-    .form-group100 label  {width: 100px}
-        body {
-            font-family: Verdana, Geneva, sans-serif;
-            font-size: 12px;
-            font-size: 12px;
+
+    .form-group {
+        display: flex;
+        align-items: center;
+        margin-bottom: 10px;
+    }
+
+        .form-group label {
+            width: 200px
         }
+
+    .form-group100 label {
+        width: 100px
+    }
+
+    body {
+        font-family: Verdana, Geneva, sans-serif;
+        font-size: 12px;
+        font-size: 12px;
+    }
 </style>
 
 <body>
@@ -90,17 +103,17 @@
                                 <label for="exampleFormControlFile1">Alternate P/N</label>
                                 @(Html.Kendo().TextBox()
                                  .Name("txtalternetpartNo")
-                                 
+
                                  .HtmlAttributes(new { placeholder = "Alternet Part No", required = "required", @class = "AlternetDefaultValue", validationmessage = "Enter Alternet Part No" })
                                 )
 
-                            <div class="form-group d-flex align-items-center">
-                                <br /><input type="button" value="Add" class="btn-success" onclick="AddAlternetPartNo()" />
-                                <br /><div id="divAlternetPartNo"></div>
-                             </div>
+                                <div class="form-group d-flex align-items-center">
+                                    <br /><input type="button" value="Add" class="btn-success" onclick="AddAlternetPartNo()" />
+                                    <br /><div id="divAlternetPartNo"></div>
+                                </div>
                             </div>
 
-                           
+
 
 
 
@@ -207,28 +220,28 @@
 
 
                             Condition Price
-                            <div id="ConditionPricegrid" style="width: 100%;height:300px"></div>
+                            <div id="ConditionPriceGrid" style="width: 100%;height:300px"></div>
 
 
                             Related Parts
-                            <div id="RelatedPartTransgrid" style="width: 100%;height:300px"></div>
+                            <div id="RelatedPartTransGrid" style="width: 100%;height:300px"></div>
 
                             Logistick Parts
-                            <div id="LogistickTransgrid" style="width: 100%;height:300px"></div>
+                            <div id="LogistickTransGrid" style="width: 100%;height:300px"></div>
 
 
 
                             @*@(Html.Kendo().Button()
-        .Name("primaryTextButton")
-        .ThemeColor(ThemeColor.Primary)
-        .Content("Primary Button"))*@
+                                .Name("primaryTextButton")
+                                .ThemeColor(ThemeColor.Primary)
+                                .Content("Primary Button"))*@
                             <input type="submit" value="Save" CssClass="btn btn-primary btn-sm" />
 
                         </td>
                         <td style="width: 40%; vertical-align: top">
 
                             Compatibility
-                            <div id="Compatibilitygrid" style="width: 80%;height:300px"></div>
+                            <div id="CompabilityTransGrid" style="width: 80%;height:300px"></div>
 
                             Supplier
 
@@ -242,18 +255,18 @@
                             </div>
                             <div class="form-group d-flex align-items-center">
                                 <label for="Supplier" class="form-group100">Supplier</label>
-                                
+
                                 @(Html.Kendo().DropDownList().Name("ddlSupplier")
                             .HtmlAttributes(new { style = "width:50%" })
                             .OptionLabel("Select Supplier")
                             .BindTo(new SelectList((List<BusinessObject.VendorBO>)ViewBag.lstSupplier, "VendorID", "VendorName"))
                                 )
                             </div>
-                            <div id="SupplierTransgrid" style="width: 80%;height:300px"></div>
+                            <div id="SupplierTransGrid" style="width: 80%;height:300px"></div>
 
 
 
-                             
+
 
 
                             @*<div id="gridc" style="width: 80%;height:300px"></div>*@
@@ -272,9 +285,11 @@
                     }
 
                     /* image preview*/
+               
 
 
-                    function onRemove(e) {
+                function onRemove(e) {
+                       
                         $("#displayPhoto").attr("src", "/images/profile_default.png");
                     }
 
@@ -341,7 +356,7 @@
                         }
                     });
 
-                    $("#Compatibilitygrid").kendoGrid({
+                $("#CompabilityTransGrid").kendoGrid({
                         dataSource: dataSource,
 
                         columns: [
@@ -407,7 +422,7 @@
                             model: {
                                 id: "PartID",
                                 fields: {
-                                    
+
                                     SupplierName: { type: "string" }
 
 
@@ -438,11 +453,11 @@
                         }
                     });
 
-                    $("#SupplierTransgrid").kendoGrid({
+                $("#SupplierTransGrid").kendoGrid({
                         dataSource: dataSource,
 
                         columns: [
-                         
+
                         {
                             field: "SupplierName",
                             title: "Supplier Name",
@@ -477,16 +492,16 @@
                             model: {
                                 id: "PartID",
                                 fields: {
-                                    PartConditionPriceID: { type: "number" },
-                                    PartID: { type: "number" },
-                                    ConditionID: { type: "number" },
+                                    PartConditionPriceID: { type: "number", editable: false},
+                                    PartID: { type: "number", editable: false},
+                                    ConditionID: { type: "number", editable: false},
                                     ConditionDescription: { type: "string",editable:false},
-                                    Stockable: { type: "boolean" },
-                                    Retunable: { type: "boolean" },
+                                    Stockable: { type: "boolean", editable: false},
+                                    Retunable: { type: "boolean", editable: false},
                                     PriceQty: { type: "number" },
                                     Price: { type: "number" },
-                                    Location: { type: "string" },
-                                    lastupdatedDate: { type: "date" }
+                                    Location: { type: "string", editable: false},
+                                    lastupdatedDate: { type: "date", editable: false}
 
                                 }
                             }
@@ -515,7 +530,7 @@
                         }
                     });
 
-                    $("#ConditionPricegrid").kendoGrid({
+                $("#ConditionPriceGrid").kendoGrid({
                         dataSource: dataSource,
 
                         columns: [
@@ -616,7 +631,8 @@
                                 title: "lastupdatedDate",
                                 headerAttributes: { "class": "table-header-cell", style: "font-size: 12px;" },
                                 attributes: { style: "font-size: 12px;" },
-                                template: function (dataItem) {
+                                   template: function (dataItem) {
+                                      // debugger;
                                     if (dataItem.lastupdatedDate != null) {
                                         return kendo.toString(kendo.parseDate(dataItem.lastupdatedDate, 'yyyy-MM-dd'), 'MM/dd/yyyy');
                                     }
@@ -628,6 +644,8 @@
                                 width: 50
 
                             },
+
+                            
 
 
                         ],
@@ -687,7 +705,7 @@
                             alert("Status: " + obj.status + "; Error Message: " + obj.errorThrown);
                         }
                     });
-                $("#RelatedPartTransgrid").kendoGrid({
+                $("#RelatedPartTransGrid").kendoGrid({
                         dataSource: dataSource,
                         columns: [
                                {
@@ -722,11 +740,6 @@
                     });
 
                 /* Related part trans END */
-
-
-
-
-
 
                   /* Logisticks trans start */
 
@@ -774,11 +787,11 @@
                             alert("Status: " + obj.status + "; Error Message: " + obj.errorThrown);
                         }
                     });
-                $("#LogistickTransgrid").kendoGrid({
+                $("#LogistickTransGrid").kendoGrid({
                         dataSource: dataSource,
                     columns: [
 
-                         
+
                         {
                                    field: "ConditionDescription",
                                    title: "ConditionDescription",
@@ -818,13 +831,13 @@
                         },
                         {
                             field: "Retunable",
-                            title: "Retunable",                             
+                            title: "Retunable",
                             headerAttributes: { "class": "table-header-cell", style: "font-size: 12px;" },
                             attributes: { style: "font-size: 12px;" },
                             template: '<input type="checkbox" #= Retunable ? "checked=checked" : "" # class="SelFlagChkBox" ></input>',
                             width: 30
 
-                        }, 
+                        },
                         ],
                         editable:false,
                         height: 450,
@@ -847,29 +860,50 @@
 
 
 
-            var input;
-            var partTypeGrid = $("#ConditionPricegrid").data("kendoGrid");
-            var gridData = partTypeGrid.dataSource.view();
-            if (gridData.length > 0) {
-                for (var i = 0; i < gridData.length; i++) {
-                    input = $("<input>", { type: 'hidden', name: 'ConditionPriceData(' + i + ').PartConditionPriceID', value: gridData[i].PartConditionPriceID })
-                    $(this).append($(input));
+            //var input;
+            //var partTypeGrid = $("#ConditionPricegrid").data("kendoGrid");
+            //var gridData = partTypeGrid.dataSource.view();
+            //if (gridData.length > 0) {
+            //    for (var i = 0; i < gridData.length; i++) {
+            //        input = $("<input>", { type: 'hidden', name: 'ConditionPriceData(' + i + ').PartConditionPriceID', value: gridData[i].PartConditionPriceID })
+            //        $(this).append($(input));
 
-                    input = $("<input>", { type: 'hidden', name: 'ConditionPriceData(' + i + ').PartID', value: gridData[i].PartID })
-                    $(this).append($(input));
+            //        input = $("<input>", { type: 'hidden', name: 'ConditionPriceData(' + i + ').PartID', value: gridData[i].PartID })
+            //        $(this).append($(input));
 
-                    input = $("<input>", { type: 'hidden', name: 'ConditionPriceData(' + i + ').ConditionID', value: gridData[i].ConditionID })
-                    $(this).append($(input));
+            //        input = $("<input>", { type: 'hidden', name: 'ConditionPriceData(' + i + ').ConditionID', value: gridData[i].ConditionID })
+            //        $(this).append($(input));
 
-                    input = $("<input>", { type: 'hidden', name: 'ConditionPriceData(' + i + ').Price', value: gridData[i].Price })
-                    $(this).append($(input));
+            //        input = $("<input>", { type: 'hidden', name: 'ConditionPriceData(' + i + ').Price', value: gridData[i].Price })
+            //        $(this).append($(input));
 
-                    input = $("<input>", { type: 'hidden', name: 'ConditionPriceData(' + i + ').PriceQty', value: gridData[i].PriceQty })
-                    $(this).append($(input));
+            //        input = $("<input>", { type: 'hidden', name: 'ConditionPriceData(' + i + ').PriceQty', value: gridData[i].PriceQty })
+            //        $(this).append($(input));
 
 
-                }
-            }
+            //    }
+            //}
+
+            var _ConditionPriceGrid = $("#ConditionPriceGrid").data("kendoGrid");
+            var _ConditionPriceGridKeyValues = buildSubmitValuesforGrid(_ConditionPriceGrid, "ConditionPriceTransData");
+            $(this).append(_ConditionPriceGridKeyValues);
+
+
+            var _RelatedPartTransGrid = $("#RelatedPartTransGrid").data("kendoGrid");
+            var _RelatedPartTransGridKeyValues = buildSubmitValuesforGrid(_RelatedPartTransGrid, "RelatedPartTransData");
+            $(this).append(_RelatedPartTransGridKeyValues);
+
+            var _LogistickTransGrid = $("#LogistickTransGrid").data("kendoGrid");
+            var _LogistickTransGridKeyValues = buildSubmitValuesforGrid(_LogistickTransGrid, "LogistickTransData");
+            $(this).append(_LogistickTransGridKeyValues);
+
+            var _CompabilityTransGrid = $("#CompabilityTransGrid").data("kendoGrid");
+            var _CompabilityTransGridKeyValues = buildSubmitValuesforGrid(_CompabilityTransGrid, "CompabilityTransData");
+            $(this).append(_CompabilityTransGridKeyValues);
+
+            var _SupplierTransGrid = $("#SupplierTransGrid").data("kendoGrid");
+            var  _SupplierTransGridKeyValues = buildSubmitValuesforGrid(_SupplierTransGrid, "SupplierTransData");
+            $(this).append(_SupplierTransGridKeyValues);
 
 
             $.post(this.action, $(this).serialize(), function (response) {
@@ -886,7 +920,7 @@
 
 
 
-        /// Alternet Part 
+        /// Alternet Part
 
         $('.AlternetDefaultValue').each(function () {
             var VarAlternetPartNo = this.value;
@@ -902,9 +936,9 @@
             });
         });
         function AddAlternetPartNo() {
-            $('#divAlternetPartNo').append($('#txtalternetpartNo').val()+',' );
-           
-             
+            $('#divAlternetPartNo').append($('#txtalternetpartNo').val() + ',');
+
+
         }
 
 
@@ -912,4 +946,3 @@
 </body>
 
 
- 

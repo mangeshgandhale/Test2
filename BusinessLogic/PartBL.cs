@@ -12,12 +12,12 @@ namespace BusinessLogic
     {
           PartDB obj= new PartDB();
 
-        public List<CompatibilityTrans> CompatibilityPart(Int32 PartID)
+        public List<CompatibilityTrans> CompatibilityTransPart(Int32 PartID)
         {
            // PartDB _PartTypeDB = new PartTypeDB();
             List<CompatibilityTrans> _CompatibilityTrans = new List<CompatibilityTrans>();
             somaEntities _EFEntities = new somaEntities();
-            _CompatibilityTrans = obj.CompatibilityPart(PartID,_EFEntities);
+            _CompatibilityTrans = obj.CompatibilityTransPart(PartID,_EFEntities);
             return _CompatibilityTrans;
 
         }
@@ -89,12 +89,36 @@ namespace BusinessLogic
         public void AddConditonPriceTrans(Int32 PartID, List<ConditionPriceTrans> _ConditionPriceTrans)
         {
             
-           // List<ConditionPriceTrans> _ConditionPriceTrans = new List<ConditionPriceTrans>();
-            somaEntities _EFEntities = new somaEntities();
             obj.AddConditonPriceTrans(PartID, _ConditionPriceTrans);
          
         }
-        
+        public void AddRelatedPartTrans(Int32 PartID, List<RelatedPartTrans> _RelatedPartTrans)
+        {
+
+            obj.AddRelatedPartTrans(PartID, _RelatedPartTrans);
+
+        }
+
+        public void AddLogistickTrans(Int32 PartID, List<LogistickTrans> _LogistickTrans)
+        {
+
+            obj.AddLogistickTrans(PartID, _LogistickTrans);
+
+        }
+
+        public void AddCompatibilityTrans(Int32 PartID, List<CompatibilityTrans> _CompatibilityTrans)
+        {
+
+            obj.AddCompatibilityTrans(PartID, _CompatibilityTrans);
+
+        }
+
+        public void AddSupplierTrans(Int32 PartID, List<SupplierTrans> _SupplierTrans)
+        {
+
+            obj.AddSupplierTrans(PartID, _SupplierTrans);
+
+        }
 
 
         public string ValidatePartTypeDesc(int pPartTypeID, string pPartTypeDesc)

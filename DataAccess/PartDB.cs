@@ -22,7 +22,7 @@ namespace DataAccess
         //{
         //    return _context.M_PartType.ToList();
         //}
-        public List<CompatibilityTrans> CompatibilityPart(Int32 PartID, somaEntities pDBOps)
+        public List<CompatibilityTrans> CompatibilityTransPart(Int32 PartID, somaEntities pDBOps)
         {
             List<CompatibilityTrans> _CompatibilityTrans = new List<CompatibilityTrans>();
 
@@ -183,6 +183,86 @@ namespace DataAccess
 
 
         }
+
+
+
+        public void AddRelatedPartTrans(Int32 PartID, List<RelatedPartTrans> _RelatedPartTrans)
+        {
+            try
+            {
+                foreach (var _var in _RelatedPartTrans.ToList())
+                {
+                    SqlParameterCollection pcol = new SqlCommand().Parameters;
+                    Data.Adapter.AddParam(pcol, "@PartConditionPriceID", _var.PartID);
+                    Data.Adapter.AddParam(pcol, "@PartID", PartID);
+                    
+                    Data.Adapter.ExecutenNonQuery("uspInsertUpdatePartConditionPriceTrans", CommandType.StoredProcedure, Data.Adapter.param(pcol));
+                }
+            }
+            catch (Exception ex)
+            {
+                //  log.Error("AN exception occured while reading Part Types!!!");
+            }
+        }
+        public void AddLogistickTrans(Int32 PartID, List<LogistickTrans> _LogistickTrans)
+        {
+            try
+            {
+                foreach (var _var in _LogistickTrans.ToList())
+                {
+                    SqlParameterCollection pcol = new SqlCommand().Parameters;
+                    Data.Adapter.AddParam(pcol, "@PartConditionPriceID", _var.ConditionID);
+                    Data.Adapter.AddParam(pcol, "@PartID", PartID);
+                    
+                    Data.Adapter.ExecutenNonQuery("uspInsertUpdatePartConditionPriceTrans", CommandType.StoredProcedure, Data.Adapter.param(pcol));
+                }
+            }
+            catch (Exception ex)
+            {
+                //  log.Error("AN exception occured while reading Part Types!!!");
+            }
+        }
+
+        public void AddCompatibilityTrans(Int32 PartID, List<CompatibilityTrans> _CompatibilityTrans)
+        {
+            try
+            {
+                foreach (var _var in _CompatibilityTrans.ToList())
+                {
+                    SqlParameterCollection pcol = new SqlCommand().Parameters;
+                    Data.Adapter.AddParam(pcol, "@PartConditionPriceID", _var.FirstName);
+                    Data.Adapter.AddParam(pcol, "@PartID", PartID);
+                    
+                    Data.Adapter.ExecutenNonQuery("uspInsertUpdatePartConditionPriceTrans", CommandType.StoredProcedure, Data.Adapter.param(pcol));
+                }
+            }
+            catch (Exception ex)
+            {
+                //  log.Error("AN exception occured while reading Part Types!!!");
+            }
+        }
+
+
+        public void AddSupplierTrans(Int32 PartID, List<SupplierTrans> _SupplierTrans)
+        {
+            try
+            {
+                foreach (var _var in _SupplierTrans.ToList())
+                {
+                    SqlParameterCollection pcol = new SqlCommand().Parameters;
+                    Data.Adapter.AddParam(pcol, "@PartConditionPriceID", _var.VendorPartNo);
+                    Data.Adapter.AddParam(pcol, "@PartID", PartID);
+                    
+                    Data.Adapter.ExecutenNonQuery("uspInsertUpdatePartConditionPriceTrans", CommandType.StoredProcedure, Data.Adapter.param(pcol));
+                }
+            }
+            catch (Exception ex)
+            {
+                //  log.Error("AN exception occured while reading Part Types!!!");
+            }
+        }
+
+
         public Int32 CreatePart(PartBO _PartBO, somaEntities pDBOps)
         {
             int newPartID = 0;

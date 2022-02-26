@@ -28,6 +28,8 @@
     <script src="~/Scripts/jquery.min.js"></script>
     <script src="~/Scripts/kendo/kendo.all.min.js"></script>
     <script src="~/Scripts/kendo/kendo.aspnetmvc.min.js"></script>
+
+    <script src="~/Scripts/commonUtil/commonUtil.js"></script>
     <Script type="text/javascript">
         $(document).ready(function() {
             $("#ddlPartType").kendoDropDownList({
@@ -198,20 +200,26 @@
 
         $("form").submit(function (event) {
             event.preventDefault();
-            var input;
+            //var input;
+            //var partTypeGrid = $("#TestKendoGrid").data("kendoGrid");
+            //var gridData = partTypeGrid.dataSource.view();
+            //if (gridData.length > 0) {
+            //    for (var i = 0; i < gridData.length; i++) {
+            //        input = $("<input>", { type: 'hidden', name: 'PartTypeGridData(' + i + ').PartTypeID', value: gridData[i].PartTypeID })
+            //        $(this).append($(input));
+            //        input = $("<input>", { type: 'hidden', name: 'PartTypeGridData(' + i + ').PartTypeDescription', value: gridData[i].PartTypeDescription })
+            //        $(this).append($(input));
+                    
+            //    }
+            //}
+
+
             var partTypeGrid = $("#TestKendoGrid").data("kendoGrid");
-            var gridData = partTypeGrid.dataSource.view();
-            if (gridData.length > 0) {
-                for (var i = 0; i < gridData.length; i++) {
-                    input = $("<input>", { type: 'hidden', name: 'PartTypeGridData(' + i + ').PartTypeID', value: gridData[i].PartTypeID })
-                    $(this).append($(input));
-                    input = $("<input>", { type: 'hidden', name: 'PartTypeGridData(' + i + ').PartTypeDescription', value: gridData[i].PartTypeDescription })
-                    $(this).append($(input));
-                    // input = $("<input>", { type: 'hidden', name: 'PartTypeGridData(' + i + ').Active', value: gridData[i].Active })
-                    // $(this).append($(input));
-                }
-            }
-      
+            var gridKeyValues = buildSubmitValuesforGrid(partTypeGrid, "PartTypeGridData");
+            $(this).append(gridKeyValues);
+
+
+
         $.post(this.action, $(this).serialize(), function (response) {
 
             if (response.saveStatus == "Success") {

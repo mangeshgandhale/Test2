@@ -24,8 +24,10 @@ namespace MVC3Layer.Controllers
             UserBO o = new UserBO();
             o = _UserBO;
 
-            this.objBs.Insert(o);
-            return View();
+          //  this.objBs.Insert(o);
+
+
+            return RedirectToAction("PartAdd", "Part");
         }
     }
 }

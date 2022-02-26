@@ -23,7 +23,7 @@ namespace MVC3Layer.Controllers
         {
             PartBL _PartBL = new PartBL();
             List<CompatibilityTrans> _CompatibilityTrans = new List<CompatibilityTrans>();
-            _CompatibilityTrans = _PartBL.CompatibilityPart(0);
+            _CompatibilityTrans = _PartBL.CompatibilityTransPart(0);
 
             DataSourceResult result = new DataSourceResult();
             result.Data = _CompatibilityTrans;
@@ -44,9 +44,9 @@ namespace MVC3Layer.Controllers
 
             PartBL _PartBL = new PartBL();
             CommonMasterBL _CommonMasterBL = new CommonMasterBL();
-            ViewBag.lstCompatibilityPart = _PartBL.CompatibilityPart(0);
+            ViewBag.lstCompatibilityPart = _PartBL.CompatibilityTransPart(0);
 
-            _CompatibilityTrans = _PartBL.CompatibilityPart(0);
+            _CompatibilityTrans = _PartBL.CompatibilityTransPart(0);
             ViewBag.lstRelatedPartTrans = _PartBL.RelatedPartTrans(0);
             ViewBag.lstSupplierTrans = _PartBL.SupplierTrans(70);
             ViewBag.lstConditionPriceTrans = _PartBL.ConditionPriceTrans(0);
@@ -61,23 +61,10 @@ namespace MVC3Layer.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult PartAdd(FormCollection collection)
-        //public ActionResult PartAdd(BusinessObject.PartBO _PartBO)
-        {
-
-
-            ConditionPriceTrans _ConditionPriceTrans;
-            List<ConditionPriceTrans> _viewConditionPriceTrans;
-
-
+         {
+ 
             PartBL PartBL = new PartBL();
-            BusinessObject.PartBO _PartBO = new PartBO();
-            int li;
-            int openBracketPosition, closeBracketPosition, indexLength;
-            int itemIndex, collItemIndex;
-            li = 0;
-            itemIndex = 0;
-
-
+            BusinessObject.PartBO _PartBO = new PartBO();           
             _PartBO.Publish = true;// Convert.ToBoolean(collection["Publish"]);
             _PartBO.Note = Convert.ToString(collection["Note"]);
             _PartBO.OnlineMsg = Convert.ToString(collection["OnlineMsg"]);
@@ -96,118 +83,45 @@ namespace MVC3Layer.Controllers
 
 
 
-            _ConditionPriceTrans = new ConditionPriceTrans();
-            _viewConditionPriceTrans = new List<ConditionPriceTrans>();
+            //_ConditionPriceTrans = new ConditionPriceTrans();
+            //_viewConditionPriceTrans = new List<ConditionPriceTrans>();
 
 
-            for (li = 0; li <= collection.Count - 1; li++)
-            {
-                if (collection.GetKey(li).Contains("ConditionPriceData") == true)
-                {
-                    openBracketPosition = collection.GetKey(li).IndexOf("(");
-                    closeBracketPosition = collection.GetKey(li).IndexOf(")");
-                    indexLength = closeBracketPosition - openBracketPosition - 1;
-
-                    collItemIndex = Convert.ToInt32(collection.GetKey(li).Substring((openBracketPosition + 1), indexLength));
-
-                    if (collItemIndex == itemIndex)
-                    {
-
-                        if (collection.GetKey(li) == "ConditionPriceData(" + collItemIndex + ").PartConditionPriceID")
-                        {
-                            string PartConditionPriceID = "ConditionPriceData(" + collItemIndex + ").PartConditionPriceID";
-
-                            if (string.IsNullOrEmpty(collection[PartConditionPriceID].ToString()) == false)
-                                _ConditionPriceTrans.PartConditionPriceID = Convert.ToInt32(collection["ConditionPriceData(" + collItemIndex + ").PartConditionPriceID"].ToString());
-                            else
-                            {
-                                _ConditionPriceTrans.PartConditionPriceID = -1;
-                                ViewDataErrorLog.AppendLine("ConditionPriceData: Invalid PartConditionPriceID");
-                            }
-                            continue;
-                        }
-
-                        if (collection.GetKey(li) == "ConditionPriceData(" + collItemIndex + ").ConditionID")
-                        {
-                            string ConditionID = "ConditionPriceData(" + collItemIndex + ").ConditionID";
-
-                            if (string.IsNullOrEmpty(collection[ConditionID].ToString()) == false)
-                                _ConditionPriceTrans.ConditionID = Convert.ToInt32(collection["ConditionPriceData(" + collItemIndex + ").ConditionID"].ToString());
-                            else
-                            {
-                                _ConditionPriceTrans.ConditionID = -1;
-                                ViewDataErrorLog.AppendLine("ConditionPriceData: Invalid ConditionID");
-                            }
-                            continue;
-                        }
-
-                        if (collection.GetKey(li) == "ConditionPriceData(" + collItemIndex + ").PriceQty")
-                        {
-                            string PriceQty = "ConditionPriceData(" + collItemIndex + ").PriceQty";
-
-                            if (string.IsNullOrEmpty(collection[PriceQty].ToString()) == false)
-                                _ConditionPriceTrans.PriceQty = Convert.ToInt32(collection["ConditionPriceData(" + collItemIndex + ").PriceQty"].ToString());
-                            else
-                            {
-                                _ConditionPriceTrans.PriceQty = -1;
-                                ViewDataErrorLog.AppendLine("ConditionPriceData: Invalid Stockable");
-                            }
-
-
-                            _viewConditionPriceTrans.Add(_ConditionPriceTrans);
-
-                            continue;
-
-                        }
-                        if (collection.GetKey(li) == "ConditionPriceData(" + collItemIndex + ").Price")
-                        {
-                            string Price = "ConditionPriceData(" + collItemIndex + ").Price";
-
-                            if (string.IsNullOrEmpty(collection[Price].ToString()) == false)
-                                _ConditionPriceTrans.Price = Convert.ToInt32(collection["ConditionPriceData(" + collItemIndex + ").Price"].ToString());
-                            else
-                            {
-                                _ConditionPriceTrans.Price = -1;
-                                ViewDataErrorLog.AppendLine("ConditionPriceData: Invalid Stockable");
-                            }
-
-                            continue;
-
-                        }
-
-                        collItemIndex = collItemIndex + 1;
-
-                    }
-                    else
-                    {
-
-                        _ConditionPriceTrans = new ConditionPriceTrans();
-
-                        itemIndex = itemIndex + 1;
-
-                        if (collection.GetKey(li) == "ConditionPriceData(" + collItemIndex + ").PartID")
-                        {
-                            if (string.IsNullOrEmpty(collection["ConditionPriceData(" + collItemIndex + ").PartID"].ToString()) == false)
-                                _ConditionPriceTrans.PartID = Convert.ToInt32(collection["ConditionPriceData(" + collItemIndex + ").PartID"]);
-                            else
-                            {
-                                _ConditionPriceTrans.PartID = -1;
-                                ViewDataErrorLog.AppendLine("ConditionPriceData: Invalid PartID");
-                            }
-                            continue;
-                        }
-                    }
-
-                }
-            }
-
-            // _ConditionPriceTrans
+             
             try
             {
                 _PartBO.PartID = PartBL.CreatePart(_PartBO);
                 if (_PartBO.PartID > 0)
                 {
-                    PartBL.AddConditonPriceTrans(_PartBO.PartID, _viewConditionPriceTrans);
+                    StringBuilder _ViewDataErrorLog = new StringBuilder();
+                    CommonUtil _CommonUtil = new CommonUtil();
+                   
+                    var viewConditionPriceTrans = new List<ConditionPriceTrans>();                   
+                    var ConditionPriceDataKeys = collection.AllKeys.Where(k => k.StartsWith("ConditionPriceTransData")).ToDictionary(k => k, k => collection[k]).ToList();
+                    viewConditionPriceTrans = _CommonUtil.GetObjectsFromGridFormCollection<ConditionPriceTrans>("ConditionPriceTransData", ConditionPriceDataKeys, _ViewDataErrorLog);
+                    PartBL.AddConditonPriceTrans(_PartBO.PartID, viewConditionPriceTrans);
+
+                    var viewRelatedPartTrans = new List<RelatedPartTrans>();
+                    var RelatedPartTransDataKeys = collection.AllKeys.Where(k => k.StartsWith("RelatedPartTransData")).ToDictionary(k => k, k => collection[k]).ToList();
+                    viewRelatedPartTrans = _CommonUtil.GetObjectsFromGridFormCollection<RelatedPartTrans>("RelatedPartTransData", RelatedPartTransDataKeys, _ViewDataErrorLog);
+                    PartBL.AddRelatedPartTrans(_PartBO.PartID, viewRelatedPartTrans);
+
+                    var viewLogistickTrans = new List<LogistickTrans>();
+                    var LogistickTransDataKeys = collection.AllKeys.Where(k => k.StartsWith("LogistickTransData")).ToDictionary(k => k, k => collection[k]).ToList();
+                    viewLogistickTrans = _CommonUtil.GetObjectsFromGridFormCollection<LogistickTrans>("LogistickTransData", LogistickTransDataKeys, _ViewDataErrorLog);
+                    PartBL.AddLogistickTrans(_PartBO.PartID, viewLogistickTrans);
+
+
+                    var viewCompabilityTrans = new List<CompatibilityTrans>();
+                    var CompabilityTransDataKeys = collection.AllKeys.Where(k => k.StartsWith("CompabilityTransData")).ToDictionary(k => k, k => collection[k]).ToList();
+                    viewCompabilityTrans = _CommonUtil.GetObjectsFromGridFormCollection<CompatibilityTrans>("CompabilityTransData", CompabilityTransDataKeys, _ViewDataErrorLog);
+                    PartBL.AddCompatibilityTrans(_PartBO.PartID, viewCompabilityTrans);
+
+                    var viewSupplierTrans = new List<SupplierTrans>();
+                    var SupplierTransDataKeys = collection.AllKeys.Where(k => k.StartsWith("SupplierTransData")).ToDictionary(k => k, k => collection[k]).ToList();
+                    viewSupplierTrans = _CommonUtil.GetObjectsFromGridFormCollection<SupplierTrans>("SupplierTransData", SupplierTransDataKeys, _ViewDataErrorLog);
+                    PartBL.AddSupplierTrans(_PartBO.PartID, viewSupplierTrans);
+
                 }
 
 

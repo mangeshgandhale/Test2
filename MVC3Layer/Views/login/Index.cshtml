@@ -10,122 +10,242 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>Index</title>
+    <link href="~/Content/Kendo/kendo.common.min.css" rel="stylesheet" />
+    <link href="~/Content/Kendo/kendo.default.min.css" rel="stylesheet" />
+    <link href="~/Content/Kendo/kendo.default.mobile.min.css" rel="stylesheet" />
+    <link href="~/Content/HSProRepairStyles.css" rel="stylesheet" />
+
+    <script src="https://code.jquery.com/jquery-3.1.1.js"></script>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script src="~/Scripts/Kendo/kendo.all.min.js"></script>
+     
 </head>
 <body>
-    @using (Html.BeginForm()) 
-    {
-        @Html.AntiForgeryToken()
-        
-        <div class="form-horizontal">
-            <h4>UserBO</h4>
-            <hr />
-            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-            <div class="form-group">
-                @Html.LabelFor(model => model.UserID, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.UserID, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.UserID, "", new { @class = "text-danger" })
+
+    <div title="container" style="position:absolute; height:100%; width:100%;">
+        <div id="loginContainer" title="">
+            <div id="loginContainerImg">
+                <p class="mainTitle"><b>Welcome to Henry Schein - ProRepair</b></p>
+                <p class="mainTagLine"><i>Smart Integrated Operations</i></p>
+                <div id="loginblock">
+                    <div id="loginBlockRow">
+                        <p class="AuthenticateText"><b><i>User Authentication</i></b></p>
+                    </div>
+                    <div id="loginBlockRow">
+                        <div id="loginImage"></div>
+                        <div id="usercontrols">
+                            <form id="loginDetails">
+                                @using (Html.BeginForm("login", "login", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                                {
+                                    <fieldset>
+                                        <legend style="font-size: 13px; font-family: Verdana; margin-bottom: 14px; margin-left: 5px;"><b>User Login Details:</b></legend>
+                                        <ul id="fieldList">
+                                            <li>
+                                                @*<label for="Username" class="required" style="margin-left: 15px;">Username: </label>*@
+                                                @Html.LabelFor(m => m.UserName, new { @class = "required" })
+                                                @Html.TextBoxFor(m => m.UserName, new { @class = "k-textbox", @placeholder = "Enter Username here", @id = "Username", @required = true, @validationMessage = "Enter {0}" })
+
+                                            </li>
+                                            <li>
+                                                @*<label for="Password" class="required" style="margin-left: 15px;">Password: </label>*@
+                                                @Html.LabelFor(m => m.password, new { @class = "col-md-2 control-label" })
+                                                @Html.PasswordFor(m => m.password, new { @class = "k-textbox", @placeholder = "Enter Password here", @id = "Password", @required = true, @validationMessage = "Enter {0}" })
+                                                @*<input type="password" id="Password" name="Password" class="k-textbox" placeholder=""
+                                                    required validationMessage="Enter {0}" style="width: 220px; margin-left: 14px; background-color: cyan; color: blue; font-weight:bold;" />*@
+                                            </li>
+                                            <li class="confirm">
+                                                <button class="k-button k-primary" type="submit" style="width: 80px; margin-right: 5px;">Login</button>
+                                                <button class="k-button k-primary" type="reset" style="width: 80px; margin-right: 10px;">Clear</button>
+                                            </li>
+                                        </ul>
+                                    </fieldset>
+                                }
+                            </form>
+                        </div>
+                    </div>
+                    <div id="loginBlockRow">
+                        <p class="userInfoTitle"><b>Important Login Information</b></p>
+                    </div>
+                    <div id="loginBlockRow">
+                        <p class="userInfo" style="line-height: 100%;"><b>For First time users, the password is same as username. For Security reasons, you will be prompted to change your passowrd. Your password must contains alphabets, numbers and one special symbol</b></p>
+                    </div>
                 </div>
             </div>
-    
-            <div class="form-group">
-                @Html.LabelFor(model => model.FirstName, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
-                </div>
-            </div>
-    
-            <div class="form-group">
-                @Html.LabelFor(model => model.lastName, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.lastName, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.lastName, "", new { @class = "text-danger" })
-                </div>
-            </div>
-    
-            <div class="form-group">
-                @Html.LabelFor(model => model.UserName, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
-                </div>
-            </div>
-    
-            <div class="form-group">
-                @Html.LabelFor(model => model.password, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.password, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.password, "", new { @class = "text-danger" })
-                </div>
-            </div>
-    
-            <div class="form-group">
-                @Html.LabelFor(model => model.StatusID, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.StatusID, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.StatusID, "", new { @class = "text-danger" })
-                </div>
-            </div>
-    
-            <div class="form-group">
-                @Html.LabelFor(model => model.Active, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.Active, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Active, "", new { @class = "text-danger" })
-                </div>
-            </div>
-    
-            <div class="form-group">
-                @Html.LabelFor(model => model.CreatedBy, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.CreatedBy, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.CreatedBy, "", new { @class = "text-danger" })
-                </div>
-            </div>
-    
-            <div class="form-group">
-                @Html.LabelFor(model => model.CreatedDate, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.CreatedDate, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.CreatedDate, "", new { @class = "text-danger" })
-                </div>
-            </div>
-    
-            <div class="form-group">
-                @Html.LabelFor(model => model.ModifiedBy, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.ModifiedBy, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.ModifiedBy, "", new { @class = "text-danger" })
-                </div>
-            </div>
-    
-            <div class="form-group">
-                @Html.LabelFor(model => model.ModifiedDate, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.ModifiedDate, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.ModifiedDate, "", new { @class = "text-danger" })
-                </div>
-            </div>
-    
-            <div class="form-group">
-                @Html.LabelFor(model => model.UserEmail, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.UserEmail, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.UserEmail, "", new { @class = "text-danger" })
-                </div>
-            </div>
-    
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Create" class="btn btn-default" />
-                </div>
-            </div>
+            <div id="FirstLoginSetupWindow" style="border-radius: 5px;"></div>
+            <div id="ChangePasswordWindow" style="border-radius: 5px;"></div>
         </div>
-    }
-    
-    <div>
-        @Html.ActionLink("Back to List", "Index")
     </div>
+    <script type="text/javascript">
+    var formDataType;
+
+    $(document).ready(function () {
+        $("#FirstLoginSetupWindow").kendoWindow({
+            animation: {
+                open: { effects: "fade:in" },
+                close: { effects: "fade:out" }
+            },
+            width: "400px",
+            height: "280px",
+            title: "Administrator Login Setup",
+            modal: true,
+            resizable: false,
+            visible: false
+        });
+
+        $("#ChangePasswordWindow").kendoWindow({
+            animation: {
+                open: { effects: "fade:in" },
+                close: { effects: "fade:out" }
+            },
+            width: "400px",
+            height: "240px",
+            title: "Change User Password",
+            modal: true,
+            resizable: false,
+            visible: false
+        });
+
+        @*$.ajax({
+            url: "@Url.Action("CheckSystemUsers", "Home")",
+            type: "post",
+            success: function (data) {
+                if (data == "NoUsers") {
+                    launchAdminSetupWindow();
+                }
+                else if (data == "Error") {
+                    kendo.alert("Unknown Error occured!!! \n Please contact System Administrator");
+                }
+            },
+            error: function (data) { },
+            async: false
+        });*@
+    });
+
+    $("form").submit(function event(e) {
+        e.preventDefault();
+
+        //Get Username and Password from the Login Page
+        var lUsername = document.getElementById("Username").value;
+        var lPassword = document.getElementById("Password").value;
+
+        //If Username and Password are same, User is login for the first time or Initial password (after reset)
+        //Prompt for Change Password
+        if (lUsername == lPassword) {
+            launchChangePasswordWindow(lUsername);
+        }
+        else {
+            //Call to Controller Method to Validate Username & Password and move to Main Page if Credentials are valid
+            $.ajax({
+                url: "@Url.Action("Index", "login")",
+                data: { UserName: lUsername, password: lPassword },
+                type: "post",
+                success: function (data) {
+                    if (data.LoginStatus == "Success") {
+                        localStorage.setItem("UserFirstName", data.UserFirstName);
+                        localStorage.setItem("UserLoginTime", data.UserLoginTime);
+                        localStorage.setItem("UserDepartment", data.UserDepartment);
+                        localStorage.setItem("UserName", data.UserName);
+                        localStorage.setItem("UserType", data.UserType);
+
+                        if (data.UserType === "Process Co-ordinator") {
+                            //window.location.href = "/OrderDashBoard/OpsOneSalesOrder/Index";
+                        }
+                        else if (data.UserType === "Engineer") {
+                            //window.location.href = "/OpsOneUserDashBoard/OpsOneUserDashBoard/Index";
+                        }
+                        else {
+                            window.location.href = "/HSProRepairMain/HSProRepairMain/Index";
+                        }
+                    }
+                    else if (data.LoginStatus == "Username Wrong") {
+                        kendo.alert("Entered Username is either not valid or does not exists !!!");
+                    }
+                    else if (data.LoginStatus == "Password Wrong") {
+                        kendo.alert("Password is not valid. Please correct your entry !!!");
+                    }
+                    else if (data.LoginStatus == "Username NotActive") {
+                        kendo.alert("Entered Username is not more active in the System !!!");
+                    }
+                    else if (data.LoginStatus == "Username Locked") {
+                        kendo.alert("Entered Username is Locked for use. Contact System Administrator !!!");
+                    }
+                    else if (data.LoginStatus == "Error") {
+                        kendo.alert("Unknown Error occured while Validating Login Details !!!");
+                    }
+                },
+                error: function () {
+                    kendo.alert("Unexpected Error !!!");
+                },
+                async: false
+            });
+        }
+    });
+
+    function launchAdminSetupWindow() {
+        var adminWindow = $("#FirstLoginSetupWindow").data("kendoWindow");
+        adminWindow.content(kendo.template($("#templateAdminSetup").html()));
+        adminWindow.center();
+        adminWindow.open();
+    }
+
+    function saveAdminUserDetails() {
+        //Get Username and Password from the Admin Setup Window
+        var adminUsername = document.getElementById("txtUserName").value;
+        var adminPassword = document.getElementById("txtPassword").value;
+        var adminRePassword = document.getElementById("txtConfirmPassword").value;
+
+        if (adminUsername == '') {
+            kendo.alert("Please mention the Administrator User Name !!!");
+        }
+        else if (adminPassword == '') {
+            kendo.alert("Please enter the Administrator account Password !!!")
+        }
+        else if (adminRePassword == '') {
+            kendo.alert("Please re-cofirm the Password !!!")
+        }
+        else if (adminPassword != adminRePassword) {
+            kendo.alert("Passwords do not match!!!");
+        }
+        else {
+            $.ajax({
+                url: "@Url.Action("CreateAdminAccount", "Home")",
+                data: {
+                    pUsername: adminUsername,
+                    pPassword: adminPassword
+                },
+                type: "post",
+                success: function (data) {
+                    if (data == "Success") {
+                        kendo.alert("Administrator Account is setup Successfully. \n Please login using given Admin Credentials.");
+                        parent.$("#FirstLoginSetupWindow").data("kendoWindow").close();
+                    }
+                    else {
+                        kendo.alert("Unknown Error occured while setting up Admin Account !!! \n Contact System Administrator");
+                        parent.$("#FirstLoginSetupWindow").data("kendoWindow").close();
+                    }
+                },
+                error: function (data) {
+                    kendo.alert("Unknown Error occured while setting up Admin Account !!! \n Contact System Administrator");
+                    parent.$("#FirstLoginSetupWindow").data("kendoWindow").close();
+                },
+                async: false
+            });
+        }
+    }
+
+    function launchChangePasswordWindow(pUserName) {
+        var userWindow = $("#ChangePasswordWindow").data("kendoWindow");
+        userWindow.refresh({
+            url: "Home/LaunchChangePasswordWindow",
+            data: { cUserName: pUserName }
+        });
+        userWindow.center();
+        userWindow.open();
+    }
+    </script>
+
+    @*<div>
+            @Html.ActionLink("Back to List", "Index")
+        </div>*@
 </body>
 </html>
