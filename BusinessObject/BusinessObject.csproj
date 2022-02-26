@@ -44,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="PartBO.cs" />
+    <Compile Include="PartTransView.cs" />
     <Compile Include="PartTypeBO.cs" />
     <Compile Include="SubTypeBO.cs" />
     <Compile Include="UserBO.cs" />

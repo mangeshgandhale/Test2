@@ -37,7 +37,9 @@ namespace BusinessObject
         public List<CompatibilityTrans> CompatibilityTrans { get; set; }
         public List<RelatedPartTrans> RelatedPartTrans { get; set; }
         public List<SupplierTrans> SupplierTrans { get; set; }
-        public List<ConditionPriceTrans> ConditionPriceTrans { get; set; } 
+        public List<ConditionPriceTrans> ConditionPriceTrans { get; set; }
+         
+        public List<PartBO> PartGridData { get; set; }
 
     }
     public class CompatibilityTrans
@@ -68,7 +70,7 @@ namespace BusinessObject
         public string PartDescription { get; set; }
         public string PartTypeDescription { get; set; }
         public string SubTypeDescription { get; set; }
-         
+        public Int32 PartId_Related { get; set; }
     }
 
     public class SupplierTrans
@@ -114,7 +116,6 @@ namespace BusinessObject
 
     }
 
-
     public class LogistickTrans
 
     {
@@ -130,6 +131,6 @@ namespace BusinessObject
         public bool Stockable { get; set; }
         public bool Retunable { get; set; }
     }
-                      
 
+  
 }

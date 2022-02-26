@@ -119,8 +119,16 @@ namespace BusinessLogic
             obj.AddSupplierTrans(PartID, _SupplierTrans);
 
         }
+        
+             public List<PartTransView> BindPart(Int32 PartID)
+        {
+            // PartDB _PartTypeDB = new PartTypeDB();
+            List<PartTransView> _PartTransView = new List<PartTransView>();
+            //   somaEntities _EFEntities = new somaEntities();
+            _PartTransView = obj.BindPart(PartID);
+            return _PartTransView;
 
-
+        }
         public string ValidatePartTypeDesc(int pPartTypeID, string pPartTypeDesc)
         {
             PartTypeDB _PartTypeDBOps = new PartTypeDB();

@@ -36,7 +36,7 @@ namespace DataAccess
 
                 SqlParameterCollection pcol = new SqlCommand().Parameters;
                 Data.Adapter.AddParam(pcol, "@PartID", PartID);
-                Data.Adapter.AddParam(pcol, "@UserID", 14);
+                Data.Adapter.AddParam(pcol, "@UserID", System.Web.HttpContext.Current.Session["UserID"]);
                 dt = Data.Adapter.ExecuteDataTable("uspviewModelManufacturer", CommandType.StoredProcedure, Data.Adapter.param(pcol));
 
                 if (dt.Rows.Count > 0)
@@ -168,7 +168,11 @@ namespace DataAccess
                     Data.Adapter.AddParam(pcol, "@PriceQty", _var.PriceQty);
                     Data.Adapter.AddParam(pcol, "@ValidFrom",   DateTime.Now);
                     Data.Adapter.AddParam(pcol, "@ValidTo", DateTime.Now);
-                    Data.Adapter.AddParam(pcol, "@UserID", 1);
+                    Data.Adapter.AddParam(pcol, "@UserID", System.Web.HttpContext.Current.Session["UserID"]);
+                    Data.Adapter.AddParam(pcol, "@flag", "Insert");
+                    Data.Adapter.AddParam(pcol, "@PositionID", _var.PositionID);
+                    
+                        
                     Data.Adapter.ExecutenNonQuery("uspInsertUpdatePartConditionPriceTrans", CommandType.StoredProcedure, Data.Adapter.param(pcol));
 
                 }
@@ -193,10 +197,10 @@ namespace DataAccess
                 foreach (var _var in _RelatedPartTrans.ToList())
                 {
                     SqlParameterCollection pcol = new SqlCommand().Parameters;
-                    Data.Adapter.AddParam(pcol, "@PartConditionPriceID", _var.PartID);
                     Data.Adapter.AddParam(pcol, "@PartID", PartID);
-                    
-                    Data.Adapter.ExecutenNonQuery("uspInsertUpdatePartConditionPriceTrans", CommandType.StoredProcedure, Data.Adapter.param(pcol));
+                    Data.Adapter.AddParam(pcol, "@PartId_Related", _var.PartId_Related);
+                    Data.Adapter.AddParam(pcol, "@UserID", System.Web.HttpContext.Current.Session["UserID"]);
+                    Data.Adapter.ExecutenNonQuery("uspInsertUpdateRelatedPartTrans", CommandType.StoredProcedure, Data.Adapter.param(pcol));
                 }
             }
             catch (Exception ex)
@@ -211,10 +215,21 @@ namespace DataAccess
                 foreach (var _var in _LogistickTrans.ToList())
                 {
                     SqlParameterCollection pcol = new SqlCommand().Parameters;
-                    Data.Adapter.AddParam(pcol, "@PartConditionPriceID", _var.ConditionID);
                     Data.Adapter.AddParam(pcol, "@PartID", PartID);
-                    
-                    Data.Adapter.ExecutenNonQuery("uspInsertUpdatePartConditionPriceTrans", CommandType.StoredProcedure, Data.Adapter.param(pcol));
+                    Data.Adapter.AddParam(pcol, "@PartLogisticsID", _var.PartLogisticsID);
+                    Data.Adapter.AddParam(pcol, "@ConditionID", _var.ConditionID);
+                    Data.Adapter.AddParam(pcol, "@SafetyStock", _var.SafetyStock);
+                    Data.Adapter.AddParam(pcol, "@MinBuy", _var.MinBuy);
+                    Data.Adapter.AddParam(pcol, "@Location1", Common.CommonDBUtil.NullToString(_var.Location1));
+                    Data.Adapter.AddParam(pcol, "@Location2", Common.CommonDBUtil.NullToString(_var.Location2));
+                    Data.Adapter.AddParam(pcol, "@UserID", System.Web.HttpContext.Current.Session["UserID"]);
+                    Data.Adapter.AddParam(pcol, "@Stockable", _var.Stockable);
+                    Data.Adapter.AddParam(pcol, "@Retunable", _var.Retunable);
+                    Data.Adapter.AddParam(pcol, "@flag", "Insert");
+
+
+
+                    Data.Adapter.ExecutenNonQuery("uspInsertUpdatePartLogisticsTrans", CommandType.StoredProcedure, Data.Adapter.param(pcol));
                 }
             }
             catch (Exception ex)
@@ -230,10 +245,12 @@ namespace DataAccess
                 foreach (var _var in _CompatibilityTrans.ToList())
                 {
                     SqlParameterCollection pcol = new SqlCommand().Parameters;
-                    Data.Adapter.AddParam(pcol, "@PartConditionPriceID", _var.FirstName);
+                    Data.Adapter.AddParam(pcol, "@PartLinkID", _var.PartLinkID);
                     Data.Adapter.AddParam(pcol, "@PartID", PartID);
-                    
-                    Data.Adapter.ExecutenNonQuery("uspInsertUpdatePartConditionPriceTrans", CommandType.StoredProcedure, Data.Adapter.param(pcol));
+                    Data.Adapter.AddParam(pcol, "@ModelManufacturerId", _var.ModelManufacturerId);
+                    Data.Adapter.AddParam(pcol, "@UserID", System.Web.HttpContext.Current.Session["UserID"]);
+                    Data.Adapter.AddParam(pcol, "@flag", "Insert");
+                    Data.Adapter.ExecutenNonQuery("uspInsertUpdatePartLinkTrans", CommandType.StoredProcedure, Data.Adapter.param(pcol));
                 }
             }
             catch (Exception ex)
@@ -250,10 +267,19 @@ namespace DataAccess
                 foreach (var _var in _SupplierTrans.ToList())
                 {
                     SqlParameterCollection pcol = new SqlCommand().Parameters;
-                    Data.Adapter.AddParam(pcol, "@PartConditionPriceID", _var.VendorPartNo);
+                    Data.Adapter.AddParam(pcol, "@PartSuppierID", _var.PartSuppierID);
                     Data.Adapter.AddParam(pcol, "@PartID", PartID);
-                    
-                    Data.Adapter.ExecutenNonQuery("uspInsertUpdatePartConditionPriceTrans", CommandType.StoredProcedure, Data.Adapter.param(pcol));
+                    Data.Adapter.AddParam(pcol, "@VendorID", _var.VendorID);
+                    Data.Adapter.AddParam(pcol, "@VendorPartNo", Common.CommonDBUtil.NullToString(_var.VendorPartNo));
+                    Data.Adapter.AddParam(pcol, "@VendorPartDescription", Common.CommonDBUtil.NullToString(_var.VendorPartDescription));
+                    Data.Adapter.AddParam(pcol, "@Vendorprice", _var.Vendorprice);
+                    Data.Adapter.AddParam(pcol, "@Ourprice", _var.Ourprice);
+                    Data.Adapter.AddParam(pcol, "@Priority", _var.Priority);
+                    Data.Adapter.AddParam(pcol, "@Note", Common.CommonDBUtil.NullToString(_var.Note));
+                    Data.Adapter.AddParam(pcol, "@UserID", System.Web.HttpContext.Current.Session["UserID"]);
+                    Data.Adapter.AddParam(pcol, "@flag", "Insert");
+                    Data.Adapter.ExecutenNonQuery("uspInsertUpdatePartSuppierTrans", CommandType.StoredProcedure, Data.Adapter.param(pcol));
+
                 }
             }
             catch (Exception ex)
@@ -262,7 +288,28 @@ namespace DataAccess
             }
         }
 
+        public List<PartTransView> BindPart(Int32 PartID)
+        {
+            DataTable dt = new DataTable();
+            List<PartTransView> _PartTransView = new List<PartTransView>();
+            SqlParameterCollection pcol = new SqlCommand().Parameters;
+            Data.Adapter.AddParam(pcol, "@ProductCategoryID", 0);
+            Data.Adapter.AddParam(pcol, "@ModelID", 0);
+            Data.Adapter.AddParam(pcol, "@VendorID", 0);
+            Data.Adapter.AddParam(pcol, "@PartTypeID", 0);
+            Data.Adapter.AddParam(pcol, "@SubTypeID", 0);
+            Data.Adapter.AddParam(pcol, "@Search", "");
+            Data.Adapter.AddParam(pcol, "@PartID", PartID);
+            Data.Adapter.AddParam(pcol, "@flag", "view"); 
+            dt = Data.Adapter.ExecuteDataTable("uspviewParts", CommandType.StoredProcedure, Data.Adapter.param(pcol));
 
+            if (dt.Rows.Count > 0)
+            {
+                _PartTransView = MVC3Layer.common.CommonFunction.ToListof<PartTransView>(dt);
+            }
+            return _PartTransView;
+
+        }
         public Int32 CreatePart(PartBO _PartBO, somaEntities pDBOps)
         {
             int newPartID = 0;

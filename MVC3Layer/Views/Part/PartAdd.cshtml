@@ -323,6 +323,8 @@
                             model: {
                                 id: "PartID",
                                 fields: {
+                                    ModelManufacturerId: { type: "number" },
+                                    PartLinkID: { type: "number" },
                                     PartID: { type: "number" },
                                     ProductCategoryDescription: { type: "string" },
                                     VendorName: { type: "string" },
@@ -360,14 +362,27 @@
                         dataSource: dataSource,
 
                         columns: [
-                        {
-                            field: "Active",
-                            title: "Status",
-                            headerAttributes: { "class": "table-header-cell", style: "font-size: 12px;" },
-                            attributes: { style: "font-size: 12px;" },
-                            template: '<input type="checkbox" #= Active ? "checked=checked" : "" # class="SelFlagChkBox" ></input>',
-                            width: 30
-                        },
+                            
+                            {
+                                field: "PartLinkID",
+                                title: "PartLinkID",                                
+                                hidden: true
+                            },
+                            {
+                                field: "ModelManufacturerId",
+                                title: "ModelManufacturerId",                                 
+                                hidden: true
+                            },
+                            
+                            {
+                                field: "Active",
+                                title: "Status",
+                                headerAttributes: { "class": "table-header-cell", style: "font-size: 12px;" },
+                                attributes: { style: "font-size: 12px;" },
+                                template: '<input type="checkbox" #= Active ? "checked=checked" : "" # class="SelFlagChkBox" ></input>',
+                                width: 30
+                            },
+                             
                         {
                             field: "ProductCategoryDescription",
                             title: "Product Category Description",
@@ -396,7 +411,7 @@
                             cancelDelete: "No",
                             confirmDelete: "Yes"
                         },
-                        height: 450,
+                        height: 300,
                         groupable: false,
                         sortable: true,
                         pageable: false,
@@ -422,9 +437,16 @@
                             model: {
                                 id: "PartID",
                                 fields: {
-
-                                    SupplierName: { type: "string" }
-
+                                    PartSuppierID: { type: "number", editable: false},
+                                    VendorID: { type: "number", editable: false},
+                                    VendorPartNo: { type: "string", editable: false},
+                                    VendorPartDescription: { type: "string", editable: false},
+                                    Vendorprice: { type: "number" },
+                                    Ourprice: { type: "number" },
+                                    Priority: { type: "number" },
+                                    Note: { type: "string" },
+                                    SupplierName: { type: "string", editable: false},
+                                    SOURCE: { type: "string", editable: false }
 
                                 }
                             }
@@ -455,25 +477,130 @@
 
                 $("#SupplierTransGrid").kendoGrid({
                         dataSource: dataSource,
+                    
 
                         columns: [
-
-                        {
+                            {
+                               field: "VendorID",                                
+                               name: "VendorID",
+                               hidden:true
+                            },
+                            {
+                                field: "PartSuppierID",
+                                name: "PartSuppierID",
+                                hidden: true
+                            },
+                            {
                             field: "SupplierName",
                             title: "Supplier Name",
                             name: "Supplier Name",
                             headerAttributes: { "class": "table-header-cell", style: "font-size: 12px;" },
                             attributes: { style: "font-size: 12px;" },
 
-                        } ,
+                            },
+                            {
+                                field: "VendorPartNo",
+                                title: "VendorPartNo",
+                                name: "VendorPartNo",
+                                headerAttributes: { "class": "table-header-cell", style: "font-size: 12px;" },
+                                attributes: { style: "font-size: 12px;" },
+
+                            },
+                            {
+                                field: "VendorPartDescription",
+                                title: "VendorPartDescription",
+                                name: "VendorPartDescription",
+                                headerAttributes: { "class": "table-header-cell", style: "font-size: 12px;" },
+                                attributes: { style: "font-size: 12px;" },
+
+                            },
+                            {
+                                field: "Vendorprice",
+                                title: "Vendorprice",
+                                name: "Vendorprice",
+                                headerAttributes: { "class": "table-header-cell", style: "font-size: 12px;" },
+                                attributes: { style: "font-size: 12px;" },
+                                editor: function (container) {
+                                    var input = $('<input id="Vendorprice" name="Vendorprice" class="k-input numbers">');
+                                    input.appendTo(container);
+                                    input.kendoNumericTextBox({
+                                        format: "{0:n0}",
+                                        decimals: 0,
+                                        min: 0,
+                                        max: 100,
+                                        spinners: false
+                                    });
+
+                                },
+                                width: 50
+                            },
+                            {
+                                field: "Ourprice",
+                                title: "Ourprice",
+                                name: "Ourprice",
+                                headerAttributes: { "class": "table-header-cell", style: "font-size: 12px;" },
+                                attributes: { style: "font-size: 12px;" },
+                                editor: function (container) {
+                                    var input = $('<input id="Ourprice" name="Ourprice" class="k-input numbers">');
+                                    input.appendTo(container);
+                                    input.kendoNumericTextBox({
+                                        format: "{0:n0}",
+                                        decimals: 0,
+                                        min: 0,
+                                        max: 100,
+                                        spinners: false
+                                    });
+
+                                },
+                                width: 50
+                            },
+                            {
+                                field: "Priority",
+                                title: "Priority",
+                                name: "Priority",
+                                headerAttributes: { "class": "table-header-cell", style: "font-size: 12px;" },
+                                attributes: { style: "font-size: 12px;" },
+                                editor: function (container) {
+                                    var input = $('<input id="Priority" name="Priority" class="k-input numbers">');
+                                    input.appendTo(container);
+                                    input.kendoNumericTextBox({
+                                       
+                                        decimals: 0,
+                                        min: 0,
+                                        max: 100,
+                                        spinners: false
+                                    });
+
+                                },
+                                width: 50
+                            },
+                            {
+                                field: "Note",
+                                title: "Note",
+                                name: "Note",
+                                headerAttributes: { "class": "table-header-cell", style: "font-size: 12px;" },
+                                attributes: { style: "font-size: 12px;" },
+                                editor: function (container) {
+                                    var input = $('<input id="Note" name="Note" class="k-input numbers">');
+                                    input.appendTo(container);
+                                    input.kendoTextBox({
+ 
+                                    });
+
+                                },
+                                width: 50
+                            },
+                            {
+                                field: "SOURCE",
+                                title: "SOURCE",
+                                name: "SOURCE",
+                                headerAttributes: { "class": "table-header-cell", style: "font-size: 12px;" },
+                                attributes: { style: "font-size: 12px;" },
+
+                            }, 
                         ],
-                        editable: {
-                            mode: "inline",
-                            confirmation: "Are you sure you want to Delete the Part Type?",
-                            cancelDelete: "No",
-                            confirmDelete: "Yes"
-                        },
-                        height: 450,
+                       editable: true,
+                        height: 400,
                         groupable: false,
                         sortable: true,
                         pageable: false,
@@ -595,7 +722,7 @@
                                     });
 
                                 },
-                                width: 50
+                                width: 40
                             },
                                {
                                 field: "Price",
@@ -616,7 +743,7 @@
                                     });
 
                                 },
-                                width: 50
+                                width: 40
                             },
 
                                {
@@ -649,14 +776,8 @@
 
 
                         ],
-                        editable:true,
-                        //editable: {
-                        //    mode: "inline",
-                        //    confirmation: "Are you sure you want to Delete the Part Type?",
-                        //    cancelDelete: "No",
-                        //    confirmDelete: "Yes"
-                        //},
-                        height: 450,
+                        editable:true,                         
+                        height: 300,
                         groupable: false,
                         sortable: true,
                         pageable: false,
@@ -675,7 +796,7 @@
                             model: {
                                 id: "PartID",
                                 fields: {
-                                    PartNo: { type: "string" },
+                                    PartId_Related: { type: "number" },
                                     PartDescription: { type: "string" },
                                     PartTypeDescription: { type: "string" },
                                     SubTypeDescription: { type: "string"}
@@ -709,30 +830,31 @@
                         dataSource: dataSource,
                         columns: [
                                {
-                                field: "PartNo",
-                                title: "PartNo",
+                                field: "PartId_Related",
+                                title: "PartId_Related",
                                 headerAttributes: { "class": "table-header-cell", style: "font-size: 12px;" },
-                                attributes: { style: "text-align: left; white-space: nowrap; text-overflow: ellipsis;", title: "#= PartNo #" },
-                                width: 50
-                             },
+                                attributes: { style: "text-align: left; white-space: nowrap; text-overflow: ellipsis;", title: "#= PartId_Related #" },
+                                hidden: true,
+                                width: 10
+                               },
                                {
                                    field: "PartDescription",
                                    title: "PartDescription",
                                    headerAttributes: { "class": "table-header-cell", style: "font-size: 12px;" },
                                    attributes: { style: "text-align: left; white-space: nowrap; text-overflow: ellipsis;", title: "#= PartDescription #" },
-                                   width: 50
+                                   width: 40
                                },
                                {
                                    field: "PartTypeDescription",
                                    title: "PartTypeDescription",
                                    headerAttributes: { "class": "table-header-cell", style: "font-size: 12px;" },
                                    attributes: { style: "text-align: left; white-space: nowrap; text-overflow: ellipsis;", title: "#= PartTypeDescription #" },
-                                   width: 50
+                                   width: 40
                                },
 
                         ],
                         editable:false,
-                        height: 450,
+                        height: 300,
                         groupable: false,
                         sortable: true,
                         pageable: false,
@@ -751,13 +873,13 @@
                             model: {
                                 id: "PartID",
                                 fields: {
-                                    chk: { type: "boolean" },
-                                    PartLogisticsID: { type: "number" },
-                                    PartID: { type: "number" },
-                                    ConditionID: { type: "number" },
-                                    ConditionDescription: { type: "string" },
-                                    SafetyStock: { type: "string" },
+                                    chk: { type: "boolean", editable: false},
+                                    PartLogisticsID: { type: "number", editable: false },
+                                    ConditionID: { type: "number" ,editable:false},
+                                    ConditionDescription: { type: "string", editable: false },
+                                    SafetyStock: { type: "boolean" },
                                     MinBuy: { type: "string" },
+                                    Location1: { type: "string"},
                                     Location2: { type: "string" },
                                     Stockable: { type: "boolean" },
                                     Retunable: { type: "boolean" }
@@ -791,35 +913,18 @@
                         dataSource: dataSource,
                     columns: [
 
-
+                        
+                        {
+                            field: "ConditionID",
+                            title: "ConditionID",
+                           hidden:true
+                        },
                         {
                                    field: "ConditionDescription",
                                    title: "ConditionDescription",
                                 headerAttributes: { "class": "table-header-cell", style: "font-size: 12px;" },
                                    attributes: { style: "text-align: left; white-space: nowrap; text-overflow: ellipsis;", title: "#= ConditionDescription #" },
                                 width: 50
-                             },
-                        {
-                                   field: "SafetyStock",
-                                   title: "SafetyStock",
-                            headerAttributes: { "class": "table-header-cell", style: "font-size: 12px;" },
-                            attributes: { style: "font-size: 12px;" },
-                            template: '<input type="checkbox" #= Stockable ? "checked=checked" : "" # class="SelFlagChkBox" ></input>',
-                            width: 30
-                               },
-                        {
-                                   field: "MinBuy",
-                                   title: "MinBuy",
-                                   headerAttributes: { "class": "table-header-cell", style: "font-size: 12px;" },
-                            attributes: { style: "text-align: left; white-space: nowrap; text-overflow: ellipsis;", title: "#= MinBuy #" },
-                                   width: 50
-                        },
-                        {
-                            field: "Location2",
-                            title: "Location2",
-                            headerAttributes: { "class": "table-header-cell", style: "font-size: 12px;" },
-                            attributes: { style: "text-align: left; white-space: nowrap; text-overflow: ellipsis;", title: "#= Location2 #" },
-                            width: 50
                         },
                         {
                             field: "Stockable",
@@ -838,9 +943,71 @@
                             width: 30
 
                         },
+                        {
+                            field: "SafetyStock",
+                            title: "SafetyStock",
+                            headerAttributes: { "class": "table-header-cell", style: "font-size: 12px;" },
+                            attributes: { style: "font-size: 12px;" },
+                            template: '<input type="checkbox" #= Stockable ? "checked=checked" : "" # class="SelFlagChkBox" ></input>',
+                            width: 30
+                        },
+                        {
+                            field: "MinBuy",
+                            title: "MinBuy",
+                            headerAttributes: { "class": "table-header-cell", style: "font-size: 12px;" },
+                            attributes: { style: "text-align: left; white-space: nowrap; text-overflow: ellipsis;", title: "#= MinBuy #" },
+
+                            editor: function (container) {
+                                var input = $('<input id="MinBuy" name="MinBuy" class="k-input numbers">');
+                                input.appendTo(container);
+                                input.kendoNumericTextBox({
+                                    format: "{0:n0}",
+                                    number: 0,
+                                    min: 0,
+                                    max: 100,
+                                    spinners: false
+                                });
+
+                            },
+                            width: 50
+                        },
+                        {
+                            field: "Location1",
+                            title: "Location1",
+                            headerAttributes: { "class": "table-header-cell", style: "font-size: 12px;" },
+                            attributes: { style: "text-align: left; white-space: nowrap; text-overflow: ellipsis;", title: "#= Location1 #" },
+                            editor: function (container) {
+                                var input = $('<input id="Location1" name="Location1" class="k-input numbers">');
+                                input.appendTo(container);
+                                input.kendoTextBox({                                     
+                                    min: 0,
+                                    max: 100,
+                                    spinners: false
+                                });
+
+                            },
+                            width: 50 
+                        },
+                        {
+                            field: "Location2",
+                            title: "Location2",
+                            headerAttributes: { "class": "table-header-cell", style: "font-size: 12px;" },
+                            attributes: { style: "text-align: left; white-space: nowrap; text-overflow: ellipsis;", title: "#= Location2 #" },
+                            editor: function (container) {
+                                var input = $('<input id="Location2" name="Location2" class="k-input numbers">');
+                                input.appendTo(container);
+                                input.kendoTextBox({
+                                    min: 0,
+                                    max: 100,
+                                    spinners: false
+                                });
+
+                            },
+                            width: 50
+                        },
                         ],
-                        editable:false,
-                        height: 450,
+                        editable:true,
+                        height: 300,
                         groupable: false,
                         sortable: true,
                         pageable: false,

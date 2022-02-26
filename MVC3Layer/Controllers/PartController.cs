@@ -32,10 +32,17 @@ namespace MVC3Layer.Controllers
             return Json(result, "application/json", JsonRequestBehavior.AllowGet);
 
         }
-
+        public ActionResult ViewPart()
+        {
+            PartBL _PartBL = new PartBL();
+            List<PartTransView> _PartTransView = new List<PartTransView>();
+            _PartTransView = _PartBL.BindPart(0);
+            return View(_PartTransView);
+        }
         public ActionResult PartAdd()
         {
-            List<CompatibilityTrans> _CompatibilityTrans = new List<CompatibilityTrans>();
+            System.Web.HttpContext.Current.Session["UserID"] = 14;
+            //  List<CompatibilityTrans> _CompatibilityTrans = new List<CompatibilityTrans>();
             List<PartTypeBO> _PartTypeBO = new List<PartTypeBO>();
             PartTypeBL _PartTypeBL = new PartTypeBL();
             _PartTypeBO = _PartTypeBL.GetAllPartType();
@@ -44,9 +51,7 @@ namespace MVC3Layer.Controllers
 
             PartBL _PartBL = new PartBL();
             CommonMasterBL _CommonMasterBL = new CommonMasterBL();
-            ViewBag.lstCompatibilityPart = _PartBL.CompatibilityTransPart(0);
-
-            _CompatibilityTrans = _PartBL.CompatibilityTransPart(0);
+            ViewBag.lstCompatibilityPart = _PartBL.CompatibilityTransPart(0);            
             ViewBag.lstRelatedPartTrans = _PartBL.RelatedPartTrans(0);
             ViewBag.lstSupplierTrans = _PartBL.SupplierTrans(70);
             ViewBag.lstConditionPriceTrans = _PartBL.ConditionPriceTrans(0);
@@ -62,7 +67,7 @@ namespace MVC3Layer.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult PartAdd(FormCollection collection)
          {
- 
+           
             PartBL PartBL = new PartBL();
             BusinessObject.PartBO _PartBO = new PartBO();           
             _PartBO.Publish = true;// Convert.ToBoolean(collection["Publish"]);
@@ -90,6 +95,8 @@ namespace MVC3Layer.Controllers
              
             try
             {
+
+                System.Web.HttpContext.Current.Session["UserID"] = 14;
                 _PartBO.PartID = PartBL.CreatePart(_PartBO);
                 if (_PartBO.PartID > 0)
                 {
@@ -121,7 +128,8 @@ namespace MVC3Layer.Controllers
                     var SupplierTransDataKeys = collection.AllKeys.Where(k => k.StartsWith("SupplierTransData")).ToDictionary(k => k, k => collection[k]).ToList();
                     viewSupplierTrans = _CommonUtil.GetObjectsFromGridFormCollection<SupplierTrans>("SupplierTransData", SupplierTransDataKeys, _ViewDataErrorLog);
                     PartBL.AddSupplierTrans(_PartBO.PartID, viewSupplierTrans);
-
+                 
+                    ViewBag.Message = "Data Save Sucessfully !";
                 }
 
 
