@@ -12,22 +12,23 @@ namespace DataAccess
     using System;
     using System.Collections.Generic;
     
-    public partial class M_User
+    public partial class M_UserType
     {
-        public int UserID { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public M_UserType()
+        {
+            this.M_User = new HashSet<M_User>();
+        }
+    
         public int UserTypeID { get; set; }
-        public string FirstName { get; set; }
-        public string lastName { get; set; }
-        public string UserName { get; set; }
-        public string password { get; set; }
+        public string UserTypeName { get; set; }
         public int StatusID { get; set; }
-        public bool Active { get; set; }
         public int CreatedBy { get; set; }
         public System.DateTime CreatedDate { get; set; }
         public Nullable<int> ModifiedBy { get; set; }
         public Nullable<System.DateTime> ModifiedDate { get; set; }
     
-        public virtual M_Status M_Status { get; set; }
-        public virtual M_UserType M_UserType { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<M_User> M_User { get; set; }
     }
 }

@@ -17,6 +17,38 @@
         <AssociationConnector Association="somaModel.FK_M_ModelManufacturer_M_Model" />
         <AssociationConnector Association="somaModel.FK_M_SubType_M_PartType" />
         <AssociationConnector Association="somaModel.FK_T_Part_M_SubType" />
+        <EntityTypeShape EntityType="somaModel.M_PartCondition" Width="1.5" PointX="7.625" PointY="9.125" />
+        <EntityTypeShape EntityType="somaModel.M_Status" Width="1.5" PointX="0.75" PointY="5" />
+        <EntityTypeShape EntityType="somaModel.M_Type" Width="1.5" PointX="14.625" PointY="0.75" />
+        <EntityTypeShape EntityType="somaModel.M_UserType" Width="1.5" PointX="3.375" PointY="12.875" />
+        <EntityTypeShape EntityType="somaModel.M_Vendor" Width="1.5" PointX="14.875" PointY="13.5" />
+        <EntityTypeShape EntityType="somaModel.M_VendorType" Width="1.5" PointX="12.625" PointY="14.75" />
+        <EntityTypeShape EntityType="somaModel.T_AlternatePart" Width="1.5" PointX="5.25" PointY="23.5" />
+        <EntityTypeShape EntityType="somaModel.T_PartConditionPrice" Width="1.5" PointX="9.875" PointY="6.5" />
+        <EntityTypeShape EntityType="somaModel.T_PartImage" Width="1.5" PointX="5.25" PointY="16.5" />
+        <EntityTypeShape EntityType="somaModel.T_PartLink" Width="1.5" PointX="15.375" PointY="5" />
+        <EntityTypeShape EntityType="somaModel.T_PartLogistics" Width="1.5" PointX="12.875" PointY="6.875" />
+        <EntityTypeShape EntityType="somaModel.T_PartSuppier" Width="1.5" PointX="17.125" PointY="9.75" />
+        <EntityTypeShape EntityType="somaModel.T_RelatedPart" Width="1.5" PointX="5.25" PointY="20" />
+        <EntityTypeShape EntityType="somaModel.UserMenuTran" Width="1.5" PointX="9.625" PointY="12.75" />
+        <AssociationConnector Association="somaModel.FK_M_ModelManufacturer_M_Vendor" />
+        <AssociationConnector Association="somaModel.FK_T_PartLink_M_ModelManufacturer" />
+        <AssociationConnector Association="somaModel.FK_M_PartCondition_M_PartCondition" />
+        <AssociationConnector Association="somaModel.FK_T_PartConditionPrice_M_PartCondition" />
+        <AssociationConnector Association="somaModel.FK_T_PartLogistics_M_PartCondition" />
+        <AssociationConnector Association="somaModel.FK_M_User_M_Status1" />
+        <AssociationConnector Association="somaModel.FK_T_Part_M_Status" />
+        <AssociationConnector Association="somaModel.FK_M_User_M_UserType" />
+        <AssociationConnector Association="somaModel.FK_M_Vendor_M_VendorType" />
+        <AssociationConnector Association="somaModel.FK_T_PartSuppier_M_Vendor" />
+        <AssociationConnector Association="somaModel.FK_T_AlternatePart_T_Part" />
+        <AssociationConnector Association="somaModel.FK_T_PartConditionPrice_T_Part" />
+        <AssociationConnector Association="somaModel.FK_T_PartImage_T_Part" />
+        <AssociationConnector Association="somaModel.FK_T_PartLink_T_Part" />
+        <AssociationConnector Association="somaModel.FK_T_PartLogistics_T_Part" />
+        <AssociationConnector Association="somaModel.FK_T_PartSuppier_T_Part" />
+        <AssociationConnector Association="somaModel.FK_T_RelatedPart_T_Part" />
+        <EntityTypeShape EntityType="somaModel.v_PartsCompatibility" Width="1.5" PointX="0.75" PointY="12.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

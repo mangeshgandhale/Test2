@@ -42,6 +42,9 @@
       <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="log4net, Version=2.0.14.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\packages\log4net.2.0.14\lib\net45\log4net.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
@@ -66,18 +69,37 @@
     <Compile Include="M_ModelManufacturer.cs">
       <DependentUpon>SOMAEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="M_PartCondition.cs">
+      <DependentUpon>SOMAEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="M_PartType.cs">
       <DependentUpon>SOMAEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="M_ProductCategory.cs">
       <DependentUpon>SOMAEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="M_Status.cs">
+      <DependentUpon>SOMAEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="M_SubType.cs">
+      <DependentUpon>SOMAEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="M_Type.cs">
       <DependentUpon>SOMAEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="M_User.cs">
       <DependentUpon>SOMAEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="M_UserType.cs">
+      <DependentUpon>SOMAEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="M_Vendor.cs">
+      <DependentUpon>SOMAEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="M_VendorType.cs">
+      <DependentUpon>SOMAEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PartCompatibilityDB.cs" />
     <Compile Include="PartDB.cs" />
     <Compile Include="PartTypeDB.cs" />
     <Compile Include="Properties\CommonFunction.cs" />
@@ -96,11 +118,38 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>SOMAEntities.edmx</DependentUpon>
     </Compile>
+    <Compile Include="T_AlternatePart.cs">
+      <DependentUpon>SOMAEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="T_Part.cs">
+      <DependentUpon>SOMAEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T_PartConditionPrice.cs">
+      <DependentUpon>SOMAEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T_PartImage.cs">
+      <DependentUpon>SOMAEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T_PartLink.cs">
+      <DependentUpon>SOMAEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T_PartLogistics.cs">
+      <DependentUpon>SOMAEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T_PartSuppier.cs">
+      <DependentUpon>SOMAEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T_RelatedPart.cs">
       <DependentUpon>SOMAEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="UserDb.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UserMenuTran.cs">
+      <DependentUpon>SOMAEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="v_PartsCompatibility.cs">
+      <DependentUpon>SOMAEntities.tt</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

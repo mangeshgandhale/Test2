@@ -182,9 +182,11 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\loginController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\PartCompatibilityController.cs" />
     <Compile Include="Controllers\PartController.cs" />
     <Compile Include="Controllers\PartTypeController.cs" />
     <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="Controllers\UserTypeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -754,6 +756,8 @@
     <Content Include="Scripts\commonUtil\commonUtil.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
+    <Content Include="Scripts\jquery-3.6.0.js" />
+    <Content Include="Scripts\jquery-3.6.0.min.js" />
     <Content Include="Scripts\jquery.blockUI.js" />
     <Content Include="Scripts\jquery.min.map" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
@@ -1974,6 +1978,9 @@
     <Content Include="Scripts\kendo\2014.1.318\jquery.min.map" />
     <Content Include="Views\Part\PartAdd.cshtml" />
     <Content Include="Views\Part\ViewPart.cshtml" />
+    <Content Include="Views\UserType\Index.cshtml" />
+    <Content Include="Views\PartCompatibility\Index.cshtml" />
+    <Content Include="Views\Shared\_PartCompatibility.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

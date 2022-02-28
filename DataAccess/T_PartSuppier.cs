@@ -12,22 +12,24 @@ namespace DataAccess
     using System;
     using System.Collections.Generic;
     
-    public partial class M_User
+    public partial class T_PartSuppier
     {
-        public int UserID { get; set; }
-        public int UserTypeID { get; set; }
-        public string FirstName { get; set; }
-        public string lastName { get; set; }
-        public string UserName { get; set; }
-        public string password { get; set; }
-        public int StatusID { get; set; }
+        public int PartSuppierID { get; set; }
+        public Nullable<int> PartID { get; set; }
+        public Nullable<int> VendorID { get; set; }
+        public string VendorPartNo { get; set; }
+        public string VendorPartDescription { get; set; }
+        public Nullable<decimal> Vendorprice { get; set; }
+        public Nullable<decimal> Ourprice { get; set; }
+        public Nullable<int> Priority { get; set; }
+        public string Note { get; set; }
         public bool Active { get; set; }
         public int CreatedBy { get; set; }
         public System.DateTime CreatedDate { get; set; }
         public Nullable<int> ModifiedBy { get; set; }
         public Nullable<System.DateTime> ModifiedDate { get; set; }
     
-        public virtual M_Status M_Status { get; set; }
-        public virtual M_UserType M_UserType { get; set; }
+        public virtual M_Vendor M_Vendor { get; set; }
+        public virtual T_Part T_Part { get; set; }
     }
 }

@@ -1,0 +1,172 @@
+﻿
+@{
+    Layout = null;
+}
+
+<link href="~/Content/Kendo/kendo.common.min.css" rel="stylesheet" />
+<link href="~/Content/Kendo/kendo.default.min.css" rel="stylesheet" />
+<link href="~/Content/Kendo/kendo.default.mobile.min.css" rel="stylesheet" />
+
+<script src="~/Scripts/jquery-3.6.0.js"></script>
+<script src="~/Scripts/jquery-3.6.0.min.js"></script>
+<script src="~/Scripts/Kendo/kendo.all.min.js"></script>
+<script src="~/Scripts/Kendo/kendo.aspnetmvc.min.js"></script>
+
+<div id="partComppageBody">
+    <div id="treeview" style="width:50%;"></div>
+    <div id="compWindow"></div>
+    <button class="k-button k-primary" type="button" id="cmdAddComp" style="width: 300px; margin-right: 5px;" onclick="launchCompWindow()">Manage Compatibility</button>
+</div>
+
+<script type="text/javascript">
+    var compRecords = [];
+
+    $(document).ready(function () {
+        $.ajax({
+            url: "@Url.Action("GetPartCompatibilities", "PartCompatibility")",
+            data: { cPartID : 8 },
+            type: "post",
+            success: function (data) {
+                compRecords = data;
+            },
+            async: false
+        });
+
+        $("#compWindow").kendoWindow({
+            animation: {
+                open: { effects: "fade:in" },
+                close: { effects: "fade:out" }
+            },
+            width: "800",
+            height: "460",
+            title: "Manage Compatibility",
+            actions: ["Close"],
+            modal: true,
+            resizable: false,
+            visible: false,
+            draggable: false,
+            close: function (e) {
+                var treeViewDS = buildTreeViewData(compRecords);
+                var datasource = buildTreeViewDS(treeViewDS);
+                datasource.read();
+                var compTree = $("#treeview").data("kendoTreeView");
+                compTree.setDataSource(datasource);
+                compTree.expand(".k-item");
+            }
+        });
+
+        var treeViewDS = buildTreeViewData(compRecords);
+        var datasource = buildTreeViewDS(treeViewDS);
+        datasource.read();
+
+        $("#treeview").kendoTreeView({
+            dataSource: datasource,
+            dataTextField: ["Category", "MfrModels"]
+        });
+        var compTree = $("#treeview").data("kendoTreeView");
+        compTree.expand(".k-item");
+    })
+
+    function buildTreeViewData(compRecords) {
+        var catMfrRecords = [];
+        var modelsForMfr;
+        var mergedRecords = [];
+        var treeViewDS = [];
+
+        const uniqueCategories = new Set();
+        for (var i = 0; i < compRecords.length; i++) {
+            uniqueCategories.add(compRecords[i].ProductCategoryDescription);
+        }
+
+        for (let prodCat of uniqueCategories) {
+            var categoryRecords = [];
+            for (var r = 0; r < compRecords.length; r++) {
+                if (compRecords[r].ProductCategoryDescription === prodCat) { categoryRecords.push(compRecords[r]); }
+            }
+
+            const uniqueMfrInCategory = new Set();
+            for (var m = 0; m < categoryRecords.length; m++) { uniqueMfrInCategory.add(categoryRecords[m].VendorName) }
+
+            var treeViewRecordForCategory = [];
+            for (let mfr of uniqueMfrInCategory) {
+                for (var r = 0; r < categoryRecords.length; r++) {
+                    if (categoryRecords[r].VendorName === mfr) { catMfrRecords.push(categoryRecords[r]); }
+                }
+
+                modelsForMfr = mfr + ": "
+                for (mfr = 0; mfr < catMfrRecords.length; mfr++) { modelsForMfr = modelsForMfr + catMfrRecords[mfr].ModelNo + ";" }
+
+                treeViewRecordForCategory.push({ MfrModels: modelsForMfr });
+
+               catMfrRecords = [];
+            }
+
+            treeViewDS.push({
+                Category: prodCat,
+                Manufacturer: treeViewRecordForCategory
+            });
+        }
+
+        return treeViewDS;
+    }
+
+    function buildTreeViewDS(treeViewDS) {
+        var datasource = new kendo.data.HierarchicalDataSource({
+            data: treeViewDS,
+            schema: {
+                model: {
+                    children: { // define options for second level
+                        schema: {
+                            data: "Manufacturer"
+                            //model: {
+                            //    children: "cast" // third level is defined by the field "cast"
+                            //}
+                        }
+                    }
+                }
+            }
+        });
+
+        return datasource;
+    }
+
+    function launchCompWindow() {
+        for (var i = 0; i < compRecords.length; i++) {
+            compRecords[i].CreatedDate = kendo.toString(kendo.parseDate(compRecords[i].CreatedDate, 'yyyy-MM-dd'), 'MM/dd/yyyy');
+        }
+        var partCompWindow = $("#compWindow").data("kendoWindow");
+        partCompWindow.refresh({
+            url: "../PartCompatibility/LaunchCompatibilityWindow",
+            //data: JSON.stringify({ cPartCompData: compRecords }),
+            data: JSON.stringify(compRecords),
+            contentType: "application/json",
+            type: "post"
+        });
+        partCompWindow.center();
+        partCompWindow.open();
+    }
+
+    function processDateFields(dataObject) {
+        for (var field in dataObject) {
+            if (dataObject.hasOwnProperty(field)) {
+                var fieldVal = dataObject[field];
+                if (fieldVal != null) {
+                    if (typeof dataObject[field] == "string") {
+                        if (fieldVal.indexOf('Date', 1) > 0) {
+                            var dateString = fieldVal.substr(6);
+                            dataObject[field] = new Date(parseInt(dateString));
+                        }
+                    }
+                    else if (typeof dataObject[field] == "object") {
+                        var subObj = dataObject[field];
+                        for (var l = 0; l < subObj.length; l++) {
+                            processDateFields(subObj[l]);
+                        }
+                    }
+                }
+            }
+        }
+
+        return dataObject;
+    }
+</script>

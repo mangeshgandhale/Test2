@@ -43,9 +43,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AuditControlBO.cs" />
+    <Compile Include="ManufacturerBO.cs" />
+    <Compile Include="ModelBO.cs" />
     <Compile Include="PartBO.cs" />
+    <Compile Include="PartCompatibilityBO.cs" />
+    <Compile Include="PartCompatibilityDDLValuesBO.cs" />
     <Compile Include="PartTransView.cs" />
     <Compile Include="PartTypeBO.cs" />
+    <Compile Include="ProductCategoryBO.cs" />
     <Compile Include="SubTypeBO.cs" />
     <Compile Include="UserBO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

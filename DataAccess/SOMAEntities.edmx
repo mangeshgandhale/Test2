@@ -32,6 +32,22 @@
           <Property Name="ModifiedBy" Type="int" />
           <Property Name="ModifiedDate" Type="datetime" />
         </EntityType>
+        <EntityType Name="M_PartCondition">
+          <Key>
+            <PropertyRef Name="ConditionID" />
+          </Key>
+          <Property Name="ConditionID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ConditionDescription" Type="nvarchar" MaxLength="50" />
+          <Property Name="Abbrevation" Type="nvarchar" MaxLength="10" />
+          <Property Name="Stockable" Type="bit" />
+          <Property Name="Retunable" Type="bit" />
+          <Property Name="PositionID" Type="int" />
+          <Property Name="Active" Type="bit" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="ModifiedBy" Type="int" />
+          <Property Name="ModifiedDate" Type="datetime" />
+        </EntityType>
         <EntityType Name="M_PartType">
           <Key>
             <PropertyRef Name="PartTypeID" />
@@ -56,6 +72,18 @@
           <Property Name="ModifiedBy" Type="int" />
           <Property Name="ModifiedDate" Type="datetime" />
         </EntityType>
+        <EntityType Name="M_Status">
+          <Key>
+            <PropertyRef Name="StatusID" />
+          </Key>
+          <Property Name="StatusID" Type="int" Nullable="false" />
+          <Property Name="Statusname" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Active" Type="bit" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="ModifiedBy" Type="int" />
+          <Property Name="ModifiedDate" Type="datetime" />
+        </EntityType>
         <EntityType Name="M_SubType">
           <Key>
             <PropertyRef Name="SubTypeID" />
@@ -63,6 +91,19 @@
           <Property Name="SubTypeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="SubTypeDescription" Type="nvarchar" MaxLength="500" Nullable="false" />
           <Property Name="PartTypeID" Type="int" Nullable="false" />
+          <Property Name="Active" Type="bit" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="ModifiedBy" Type="int" />
+          <Property Name="ModifiedDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="M_Type">
+          <Key>
+            <PropertyRef Name="TypeID" />
+          </Key>
+          <Property Name="TypeID" Type="int" Nullable="false" />
+          <Property Name="TypeName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ParentTypeID" Type="int" />
           <Property Name="Active" Type="bit" Nullable="false" />
           <Property Name="CreatedBy" Type="int" Nullable="false" />
           <Property Name="CreatedDate" Type="datetime" Nullable="false" />
@@ -80,6 +121,68 @@
           <Property Name="UserName" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="password" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="StatusID" Type="int" Nullable="false" />
+          <Property Name="Active" Type="bit" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="ModifiedBy" Type="int" />
+          <Property Name="ModifiedDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="M_UserType">
+          <Key>
+            <PropertyRef Name="UserTypeID" />
+          </Key>
+          <Property Name="UserTypeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserTypeName" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="StatusID" Type="int" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="ModifiedBy" Type="int" />
+          <Property Name="ModifiedDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="M_Vendor">
+          <Key>
+            <PropertyRef Name="VendorID" />
+          </Key>
+          <Property Name="VendorID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="VendorTypeID" Type="int" Nullable="false" />
+          <Property Name="VendorName" Type="nvarchar" MaxLength="50" />
+          <Property Name="ContactPerson" Type="nvarchar" MaxLength="50" />
+          <Property Name="MobileNo1" Type="nvarchar" MaxLength="50" />
+          <Property Name="MobileNo2" Type="nvarchar" MaxLength="50" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" />
+          <Property Name="Address1" Type="varchar" MaxLength="200" />
+          <Property Name="Address2" Type="varchar" MaxLength="200" />
+          <Property Name="City" Type="varchar" MaxLength="50" />
+          <Property Name="State" Type="varchar" MaxLength="50" />
+          <Property Name="Zip" Type="varchar" MaxLength="50" />
+          <Property Name="CountryId" Type="int" Nullable="false" />
+          <Property Name="Active" Type="bit" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="ModifiedBy" Type="int" />
+          <Property Name="ModifiedDate" Type="datetime" />
+          <Property Name="AccountNo" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="M_VendorType">
+          <Key>
+            <PropertyRef Name="VendorTypeID" />
+          </Key>
+          <Property Name="VendorTypeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="VendorTypeDescription" Type="nvarchar" MaxLength="50" />
+          <Property Name="Abb" Type="nvarchar" MaxLength="50" />
+          <Property Name="Active" Type="bit" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="ModifiedBy" Type="int" />
+          <Property Name="ModifiedDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="T_AlternatePart">
+          <Key>
+            <PropertyRef Name="AlternetPartID" />
+          </Key>
+          <Property Name="AlternetPartID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PartID" Type="int" />
+          <Property Name="AlternatePartNo" Type="varchar" MaxLength="10" />
           <Property Name="Active" Type="bit" Nullable="false" />
           <Property Name="CreatedBy" Type="int" Nullable="false" />
           <Property Name="CreatedDate" Type="datetime" Nullable="false" />
@@ -112,6 +215,151 @@
           <Property Name="ModifiedBy" Type="int" />
           <Property Name="ModifiedDate" Type="datetime" />
         </EntityType>
+        <EntityType Name="T_PartConditionPrice">
+          <Key>
+            <PropertyRef Name="PartConditionPriceID" />
+          </Key>
+          <Property Name="PartConditionPriceID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ConditionID" Type="int" />
+          <Property Name="PartID" Type="int" />
+          <Property Name="Price" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="PriceQty" Type="int" />
+          <Property Name="PriceUnit" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Stockable" Type="int" />
+          <Property Name="Retunable" Type="int" />
+          <Property Name="PositionID" Type="int" />
+          <Property Name="Location" Type="varchar" MaxLength="100" />
+          <Property Name="ValidFrom" Type="datetime" Nullable="false" />
+          <Property Name="ValidTo" Type="datetime" />
+          <Property Name="Active" Type="bit" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="ModifiedBy" Type="int" />
+          <Property Name="ModifiedDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="T_PartImage">
+          <Key>
+            <PropertyRef Name="PartImageID" />
+          </Key>
+          <Property Name="PartImageID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PartImageName" Type="nvarchar" MaxLength="50" />
+          <Property Name="PartID" Type="int" />
+          <Property Name="Active" Type="bit" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="ModifiedBy" Type="int" />
+          <Property Name="ModifiedDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="T_PartLink">
+          <Key>
+            <PropertyRef Name="PartLinkID" />
+          </Key>
+          <Property Name="PartLinkID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PartID" Type="int" />
+          <Property Name="ModelManufacturerId" Type="int" />
+          <Property Name="Active" Type="bit" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="ModifiedBy" Type="int" />
+          <Property Name="ModifiedDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="T_PartLogistics">
+          <Key>
+            <PropertyRef Name="PartLogisticsID" />
+          </Key>
+          <Property Name="PartLogisticsID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PartID" Type="int" />
+          <Property Name="ConditionID" Type="int" />
+          <Property Name="SafetyStock" Type="bit" />
+          <Property Name="MinBuy" Type="int" />
+          <Property Name="Stockable" Type="bit" />
+          <Property Name="Retunable" Type="bit" />
+          <Property Name="Location1" Type="varchar" MaxLength="300" />
+          <Property Name="Location2" Type="varchar" MaxLength="300" />
+          <Property Name="Active" Type="bit" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="ModifiedBy" Type="int" />
+          <Property Name="ModifiedDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="T_PartSuppier">
+          <Key>
+            <PropertyRef Name="PartSuppierID" />
+          </Key>
+          <Property Name="PartSuppierID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PartID" Type="int" />
+          <Property Name="VendorID" Type="int" />
+          <Property Name="VendorPartNo" Type="varchar" MaxLength="20" />
+          <Property Name="VendorPartDescription" Type="varchar" MaxLength="500" />
+          <Property Name="Vendorprice" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Ourprice" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Priority" Type="int" />
+          <Property Name="Note" Type="varchar" MaxLength="500" />
+          <Property Name="Active" Type="bit" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="ModifiedBy" Type="int" />
+          <Property Name="ModifiedDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="T_RelatedPart">
+          <Key>
+            <PropertyRef Name="RelatedPartTransID" />
+          </Key>
+          <Property Name="RelatedPartTransID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PartID" Type="int" />
+          <Property Name="PartId_Related" Type="int" />
+          <Property Name="Active" Type="bit" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="ModifiedBy" Type="int" />
+          <Property Name="ModifiedDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="UserMenuTran">
+          <Key>
+            <PropertyRef Name="UserMenuID" />
+          </Key>
+          <Property Name="UserMenuID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="MenuID" Type="int" Nullable="false" />
+          <Property Name="Active" Type="bit" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="ModifiedBy" Type="int" />
+          <Property Name="ModifiedDate" Type="datetime" />
+          <Property Name="Add" Type="bit" />
+          <Property Name="Edit" Type="bit" />
+          <Property Name="Delete" Type="bit" />
+          <Property Name="View" Type="bit" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'SOMA.soma.v_PartsCompatibility' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="v_PartsCompatibility">
+          <Key>
+            <PropertyRef Name="PartLinkID" />
+            <PropertyRef Name="ProductCategoryID" />
+            <PropertyRef Name="VendorID" />
+            <PropertyRef Name="ModelID" />
+            <PropertyRef Name="Active" />
+            <PropertyRef Name="CreatedBy" />
+            <PropertyRef Name="UserName" />
+            <PropertyRef Name="CreatedDate" />
+          </Key>
+          <Property Name="PartLinkID" Type="int" Nullable="false" />
+          <Property Name="PartID" Type="int" />
+          <Property Name="ProductCategoryID" Type="int" Nullable="false" />
+          <Property Name="ProductCategoryDescription" Type="nvarchar" MaxLength="50" />
+          <Property Name="VendorID" Type="int" Nullable="false" />
+          <Property Name="VendorName" Type="nvarchar" MaxLength="50" />
+          <Property Name="ModelID" Type="int" Nullable="false" />
+          <Property Name="ModelNo" Type="nvarchar" MaxLength="50" />
+          <Property Name="ModelManufacturerId" Type="int" />
+          <Property Name="Active" Type="bit" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="UserName" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="ModifiedBy" Type="int" />
+          <Property Name="ModifiedDate" Type="datetime" />
+        </EntityType>
         <Association Name="FK_M_Model_M_ProductCategory">
           <End Role="M_ProductCategory" Type="Self.M_ProductCategory" Multiplicity="1" />
           <End Role="M_Model" Type="Self.M_Model" Multiplicity="*" />
@@ -136,6 +384,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_M_ModelManufacturer_M_Vendor">
+          <End Role="M_Vendor" Type="Self.M_Vendor" Multiplicity="1" />
+          <End Role="M_ModelManufacturer" Type="Self.M_ModelManufacturer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="M_Vendor">
+              <PropertyRef Name="VendorID" />
+            </Principal>
+            <Dependent Role="M_ModelManufacturer">
+              <PropertyRef Name="VendorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_M_PartCondition_M_PartCondition">
+          <End Role="M_PartCondition" Type="Self.M_PartCondition" Multiplicity="1" />
+          <End Role="M_PartCondition1" Type="Self.M_PartCondition" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="M_PartCondition">
+              <PropertyRef Name="ConditionID" />
+            </Principal>
+            <Dependent Role="M_PartCondition1">
+              <PropertyRef Name="ConditionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_M_SubType_M_PartType">
           <End Role="M_PartType" Type="Self.M_PartType" Multiplicity="1" />
           <End Role="M_SubType" Type="Self.M_SubType" Multiplicity="*" />
@@ -145,6 +417,66 @@
             </Principal>
             <Dependent Role="M_SubType">
               <PropertyRef Name="PartTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_M_User_M_Status1">
+          <End Role="M_Status" Type="Self.M_Status" Multiplicity="1" />
+          <End Role="M_User" Type="Self.M_User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="M_Status">
+              <PropertyRef Name="StatusID" />
+            </Principal>
+            <Dependent Role="M_User">
+              <PropertyRef Name="StatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_M_User_M_UserType">
+          <End Role="M_UserType" Type="Self.M_UserType" Multiplicity="1" />
+          <End Role="M_User" Type="Self.M_User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="M_UserType">
+              <PropertyRef Name="UserTypeID" />
+            </Principal>
+            <Dependent Role="M_User">
+              <PropertyRef Name="UserTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_M_Vendor_M_VendorType">
+          <End Role="M_VendorType" Type="Self.M_VendorType" Multiplicity="1" />
+          <End Role="M_Vendor" Type="Self.M_Vendor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="M_VendorType">
+              <PropertyRef Name="VendorTypeID" />
+            </Principal>
+            <Dependent Role="M_Vendor">
+              <PropertyRef Name="VendorTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_T_AlternatePart_T_Part">
+          <End Role="T_Part" Type="Self.T_Part" Multiplicity="0..1" />
+          <End Role="T_AlternatePart" Type="Self.T_AlternatePart" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="T_Part">
+              <PropertyRef Name="PartID" />
+            </Principal>
+            <Dependent Role="T_AlternatePart">
+              <PropertyRef Name="PartID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_T_Part_M_Status">
+          <End Role="M_Status" Type="Self.M_Status" Multiplicity="0..1" />
+          <End Role="T_Part" Type="Self.T_Part" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="M_Status">
+              <PropertyRef Name="StatusID" />
+            </Principal>
+            <Dependent Role="T_Part">
+              <PropertyRef Name="StatusId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -172,14 +504,167 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_T_PartConditionPrice_M_PartCondition">
+          <End Role="M_PartCondition" Type="Self.M_PartCondition" Multiplicity="0..1" />
+          <End Role="T_PartConditionPrice" Type="Self.T_PartConditionPrice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="M_PartCondition">
+              <PropertyRef Name="ConditionID" />
+            </Principal>
+            <Dependent Role="T_PartConditionPrice">
+              <PropertyRef Name="ConditionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_T_PartConditionPrice_T_Part">
+          <End Role="T_Part" Type="Self.T_Part" Multiplicity="0..1" />
+          <End Role="T_PartConditionPrice" Type="Self.T_PartConditionPrice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="T_Part">
+              <PropertyRef Name="PartID" />
+            </Principal>
+            <Dependent Role="T_PartConditionPrice">
+              <PropertyRef Name="PartID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_T_PartImage_T_Part">
+          <End Role="T_Part" Type="Self.T_Part" Multiplicity="0..1" />
+          <End Role="T_PartImage" Type="Self.T_PartImage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="T_Part">
+              <PropertyRef Name="PartID" />
+            </Principal>
+            <Dependent Role="T_PartImage">
+              <PropertyRef Name="PartID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_T_PartLink_M_ModelManufacturer">
+          <End Role="M_ModelManufacturer" Type="Self.M_ModelManufacturer" Multiplicity="0..1" />
+          <End Role="T_PartLink" Type="Self.T_PartLink" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="M_ModelManufacturer">
+              <PropertyRef Name="ModelManufacturerId" />
+            </Principal>
+            <Dependent Role="T_PartLink">
+              <PropertyRef Name="ModelManufacturerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_T_PartLink_T_Part">
+          <End Role="T_Part" Type="Self.T_Part" Multiplicity="0..1" />
+          <End Role="T_PartLink" Type="Self.T_PartLink" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="T_Part">
+              <PropertyRef Name="PartID" />
+            </Principal>
+            <Dependent Role="T_PartLink">
+              <PropertyRef Name="PartID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_T_PartLogistics_M_PartCondition">
+          <End Role="M_PartCondition" Type="Self.M_PartCondition" Multiplicity="0..1" />
+          <End Role="T_PartLogistics" Type="Self.T_PartLogistics" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="M_PartCondition">
+              <PropertyRef Name="ConditionID" />
+            </Principal>
+            <Dependent Role="T_PartLogistics">
+              <PropertyRef Name="ConditionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_T_PartLogistics_T_Part">
+          <End Role="T_Part" Type="Self.T_Part" Multiplicity="0..1" />
+          <End Role="T_PartLogistics" Type="Self.T_PartLogistics" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="T_Part">
+              <PropertyRef Name="PartID" />
+            </Principal>
+            <Dependent Role="T_PartLogistics">
+              <PropertyRef Name="PartID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_T_PartSuppier_M_Vendor">
+          <End Role="M_Vendor" Type="Self.M_Vendor" Multiplicity="0..1" />
+          <End Role="T_PartSuppier" Type="Self.T_PartSuppier" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="M_Vendor">
+              <PropertyRef Name="VendorID" />
+            </Principal>
+            <Dependent Role="T_PartSuppier">
+              <PropertyRef Name="VendorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_T_PartSuppier_T_Part">
+          <End Role="T_Part" Type="Self.T_Part" Multiplicity="0..1" />
+          <End Role="T_PartSuppier" Type="Self.T_PartSuppier" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="T_Part">
+              <PropertyRef Name="PartID" />
+            </Principal>
+            <Dependent Role="T_PartSuppier">
+              <PropertyRef Name="PartID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_T_RelatedPart_T_Part">
+          <End Role="T_Part" Type="Self.T_Part" Multiplicity="1" />
+          <End Role="T_RelatedPart" Type="Self.T_RelatedPart" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="T_Part">
+              <PropertyRef Name="PartID" />
+            </Principal>
+            <Dependent Role="T_RelatedPart">
+              <PropertyRef Name="RelatedPartTransID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="somaModelStoreContainer">
           <EntitySet Name="M_Model" EntityType="Self.M_Model" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="M_ModelManufacturer" EntityType="Self.M_ModelManufacturer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="M_PartCondition" EntityType="Self.M_PartCondition" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="M_PartType" EntityType="Self.M_PartType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="M_ProductCategory" EntityType="Self.M_ProductCategory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="M_Status" EntityType="Self.M_Status" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="M_SubType" EntityType="Self.M_SubType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="M_Type" EntityType="Self.M_Type" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="M_User" EntityType="Self.M_User" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="M_UserType" EntityType="Self.M_UserType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="M_Vendor" EntityType="Self.M_Vendor" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="M_VendorType" EntityType="Self.M_VendorType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="T_AlternatePart" EntityType="Self.T_AlternatePart" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="T_Part" EntityType="Self.T_Part" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="T_PartConditionPrice" EntityType="Self.T_PartConditionPrice" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="T_PartImage" EntityType="Self.T_PartImage" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="T_PartLink" EntityType="Self.T_PartLink" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="T_PartLogistics" EntityType="Self.T_PartLogistics" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="T_PartSuppier" EntityType="Self.T_PartSuppier" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="T_RelatedPart" EntityType="Self.T_RelatedPart" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserMenuTran" EntityType="Self.UserMenuTran" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="v_PartsCompatibility" EntityType="Self.v_PartsCompatibility" store:Type="Views" store:Schema="soma">
+            <DefiningQuery>SELECT 
+    [v_PartsCompatibility].[PartLinkID] AS [PartLinkID], 
+    [v_PartsCompatibility].[PartID] AS [PartID], 
+    [v_PartsCompatibility].[ProductCategoryID] AS [ProductCategoryID], 
+    [v_PartsCompatibility].[ProductCategoryDescription] AS [ProductCategoryDescription], 
+    [v_PartsCompatibility].[VendorID] AS [VendorID], 
+    [v_PartsCompatibility].[VendorName] AS [VendorName], 
+    [v_PartsCompatibility].[ModelID] AS [ModelID], 
+    [v_PartsCompatibility].[ModelNo] AS [ModelNo], 
+    [v_PartsCompatibility].[ModelManufacturerId] AS [ModelManufacturerId], 
+    [v_PartsCompatibility].[Active] AS [Active], 
+    [v_PartsCompatibility].[CreatedBy] AS [CreatedBy], 
+    [v_PartsCompatibility].[UserName] AS [UserName], 
+    [v_PartsCompatibility].[CreatedDate] AS [CreatedDate], 
+    [v_PartsCompatibility].[ModifiedBy] AS [ModifiedBy], 
+    [v_PartsCompatibility].[ModifiedDate] AS [ModifiedDate]
+    FROM [soma].[v_PartsCompatibility] AS [v_PartsCompatibility]</DefiningQuery>
+          </EntitySet>
           <AssociationSet Name="FK_M_Model_M_ProductCategory" Association="Self.FK_M_Model_M_ProductCategory">
             <End Role="M_ProductCategory" EntitySet="M_ProductCategory" />
             <End Role="M_Model" EntitySet="M_Model" />
@@ -188,9 +673,37 @@
             <End Role="M_Model" EntitySet="M_Model" />
             <End Role="M_ModelManufacturer" EntitySet="M_ModelManufacturer" />
           </AssociationSet>
+          <AssociationSet Name="FK_M_ModelManufacturer_M_Vendor" Association="Self.FK_M_ModelManufacturer_M_Vendor">
+            <End Role="M_Vendor" EntitySet="M_Vendor" />
+            <End Role="M_ModelManufacturer" EntitySet="M_ModelManufacturer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_M_PartCondition_M_PartCondition" Association="Self.FK_M_PartCondition_M_PartCondition">
+            <End Role="M_PartCondition" EntitySet="M_PartCondition" />
+            <End Role="M_PartCondition1" EntitySet="M_PartCondition" />
+          </AssociationSet>
           <AssociationSet Name="FK_M_SubType_M_PartType" Association="Self.FK_M_SubType_M_PartType">
             <End Role="M_PartType" EntitySet="M_PartType" />
             <End Role="M_SubType" EntitySet="M_SubType" />
+          </AssociationSet>
+          <AssociationSet Name="FK_M_User_M_Status1" Association="Self.FK_M_User_M_Status1">
+            <End Role="M_Status" EntitySet="M_Status" />
+            <End Role="M_User" EntitySet="M_User" />
+          </AssociationSet>
+          <AssociationSet Name="FK_M_User_M_UserType" Association="Self.FK_M_User_M_UserType">
+            <End Role="M_UserType" EntitySet="M_UserType" />
+            <End Role="M_User" EntitySet="M_User" />
+          </AssociationSet>
+          <AssociationSet Name="FK_M_Vendor_M_VendorType" Association="Self.FK_M_Vendor_M_VendorType">
+            <End Role="M_VendorType" EntitySet="M_VendorType" />
+            <End Role="M_Vendor" EntitySet="M_Vendor" />
+          </AssociationSet>
+          <AssociationSet Name="FK_T_AlternatePart_T_Part" Association="Self.FK_T_AlternatePart_T_Part">
+            <End Role="T_Part" EntitySet="T_Part" />
+            <End Role="T_AlternatePart" EntitySet="T_AlternatePart" />
+          </AssociationSet>
+          <AssociationSet Name="FK_T_Part_M_Status" Association="Self.FK_T_Part_M_Status">
+            <End Role="M_Status" EntitySet="M_Status" />
+            <End Role="T_Part" EntitySet="T_Part" />
           </AssociationSet>
           <AssociationSet Name="FK_T_Part_M_SubType" Association="Self.FK_T_Part_M_SubType">
             <End Role="M_SubType" EntitySet="M_SubType" />
@@ -199,6 +712,46 @@
           <AssociationSet Name="FK_T_Part_T_Part" Association="Self.FK_T_Part_T_Part">
             <End Role="T_Part" EntitySet="T_Part" />
             <End Role="T_Part1" EntitySet="T_Part" />
+          </AssociationSet>
+          <AssociationSet Name="FK_T_PartConditionPrice_M_PartCondition" Association="Self.FK_T_PartConditionPrice_M_PartCondition">
+            <End Role="M_PartCondition" EntitySet="M_PartCondition" />
+            <End Role="T_PartConditionPrice" EntitySet="T_PartConditionPrice" />
+          </AssociationSet>
+          <AssociationSet Name="FK_T_PartConditionPrice_T_Part" Association="Self.FK_T_PartConditionPrice_T_Part">
+            <End Role="T_Part" EntitySet="T_Part" />
+            <End Role="T_PartConditionPrice" EntitySet="T_PartConditionPrice" />
+          </AssociationSet>
+          <AssociationSet Name="FK_T_PartImage_T_Part" Association="Self.FK_T_PartImage_T_Part">
+            <End Role="T_Part" EntitySet="T_Part" />
+            <End Role="T_PartImage" EntitySet="T_PartImage" />
+          </AssociationSet>
+          <AssociationSet Name="FK_T_PartLink_M_ModelManufacturer" Association="Self.FK_T_PartLink_M_ModelManufacturer">
+            <End Role="M_ModelManufacturer" EntitySet="M_ModelManufacturer" />
+            <End Role="T_PartLink" EntitySet="T_PartLink" />
+          </AssociationSet>
+          <AssociationSet Name="FK_T_PartLink_T_Part" Association="Self.FK_T_PartLink_T_Part">
+            <End Role="T_Part" EntitySet="T_Part" />
+            <End Role="T_PartLink" EntitySet="T_PartLink" />
+          </AssociationSet>
+          <AssociationSet Name="FK_T_PartLogistics_M_PartCondition" Association="Self.FK_T_PartLogistics_M_PartCondition">
+            <End Role="M_PartCondition" EntitySet="M_PartCondition" />
+            <End Role="T_PartLogistics" EntitySet="T_PartLogistics" />
+          </AssociationSet>
+          <AssociationSet Name="FK_T_PartLogistics_T_Part" Association="Self.FK_T_PartLogistics_T_Part">
+            <End Role="T_Part" EntitySet="T_Part" />
+            <End Role="T_PartLogistics" EntitySet="T_PartLogistics" />
+          </AssociationSet>
+          <AssociationSet Name="FK_T_PartSuppier_M_Vendor" Association="Self.FK_T_PartSuppier_M_Vendor">
+            <End Role="M_Vendor" EntitySet="M_Vendor" />
+            <End Role="T_PartSuppier" EntitySet="T_PartSuppier" />
+          </AssociationSet>
+          <AssociationSet Name="FK_T_PartSuppier_T_Part" Association="Self.FK_T_PartSuppier_T_Part">
+            <End Role="T_Part" EntitySet="T_Part" />
+            <End Role="T_PartSuppier" EntitySet="T_PartSuppier" />
+          </AssociationSet>
+          <AssociationSet Name="FK_T_RelatedPart_T_Part" Association="Self.FK_T_RelatedPart_T_Part">
+            <End Role="T_Part" EntitySet="T_Part" />
+            <End Role="T_RelatedPart" EntitySet="T_RelatedPart" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -246,6 +799,89 @@
             <End Role="M_SubType" EntitySet="M_SubType" />
             <End Role="T_Part" EntitySet="T_Part" />
           </AssociationSet>
+          <EntitySet Name="M_PartCondition" EntityType="somaModel.M_PartCondition" />
+          <EntitySet Name="M_Status" EntityType="somaModel.M_Status" />
+          <EntitySet Name="M_Type" EntityType="somaModel.M_Type" />
+          <EntitySet Name="M_UserType" EntityType="somaModel.M_UserType" />
+          <EntitySet Name="M_Vendor" EntityType="somaModel.M_Vendor" />
+          <EntitySet Name="M_VendorType" EntityType="somaModel.M_VendorType" />
+          <EntitySet Name="T_AlternatePart" EntityType="somaModel.T_AlternatePart" />
+          <EntitySet Name="T_PartConditionPrice" EntityType="somaModel.T_PartConditionPrice" />
+          <EntitySet Name="T_PartImage" EntityType="somaModel.T_PartImage" />
+          <EntitySet Name="T_PartLink" EntityType="somaModel.T_PartLink" />
+          <EntitySet Name="T_PartLogistics" EntityType="somaModel.T_PartLogistics" />
+          <EntitySet Name="T_PartSuppier" EntityType="somaModel.T_PartSuppier" />
+          <EntitySet Name="T_RelatedPart" EntityType="somaModel.T_RelatedPart" />
+          <EntitySet Name="UserMenuTrans" EntityType="somaModel.UserMenuTran" />
+          <AssociationSet Name="FK_M_ModelManufacturer_M_Vendor" Association="somaModel.FK_M_ModelManufacturer_M_Vendor">
+            <End Role="M_Vendor" EntitySet="M_Vendor" />
+            <End Role="M_ModelManufacturer" EntitySet="M_ModelManufacturer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_T_PartLink_M_ModelManufacturer" Association="somaModel.FK_T_PartLink_M_ModelManufacturer">
+            <End Role="M_ModelManufacturer" EntitySet="M_ModelManufacturer" />
+            <End Role="T_PartLink" EntitySet="T_PartLink" />
+          </AssociationSet>
+          <AssociationSet Name="FK_M_PartCondition_M_PartCondition" Association="somaModel.FK_M_PartCondition_M_PartCondition">
+            <End Role="M_PartCondition" EntitySet="M_PartCondition" />
+            <End Role="M_PartCondition1" EntitySet="M_PartCondition" />
+          </AssociationSet>
+          <AssociationSet Name="FK_T_PartConditionPrice_M_PartCondition" Association="somaModel.FK_T_PartConditionPrice_M_PartCondition">
+            <End Role="M_PartCondition" EntitySet="M_PartCondition" />
+            <End Role="T_PartConditionPrice" EntitySet="T_PartConditionPrice" />
+          </AssociationSet>
+          <AssociationSet Name="FK_T_PartLogistics_M_PartCondition" Association="somaModel.FK_T_PartLogistics_M_PartCondition">
+            <End Role="M_PartCondition" EntitySet="M_PartCondition" />
+            <End Role="T_PartLogistics" EntitySet="T_PartLogistics" />
+          </AssociationSet>
+          <AssociationSet Name="FK_M_User_M_Status1" Association="somaModel.FK_M_User_M_Status1">
+            <End Role="M_Status" EntitySet="M_Status" />
+            <End Role="M_User" EntitySet="M_User" />
+          </AssociationSet>
+          <AssociationSet Name="FK_T_Part_M_Status" Association="somaModel.FK_T_Part_M_Status">
+            <End Role="M_Status" EntitySet="M_Status" />
+            <End Role="T_Part" EntitySet="T_Part" />
+          </AssociationSet>
+          <AssociationSet Name="FK_M_User_M_UserType" Association="somaModel.FK_M_User_M_UserType">
+            <End Role="M_UserType" EntitySet="M_UserType" />
+            <End Role="M_User" EntitySet="M_User" />
+          </AssociationSet>
+          <AssociationSet Name="FK_M_Vendor_M_VendorType" Association="somaModel.FK_M_Vendor_M_VendorType">
+            <End Role="M_VendorType" EntitySet="M_VendorType" />
+            <End Role="M_Vendor" EntitySet="M_Vendor" />
+          </AssociationSet>
+          <AssociationSet Name="FK_T_PartSuppier_M_Vendor" Association="somaModel.FK_T_PartSuppier_M_Vendor">
+            <End Role="M_Vendor" EntitySet="M_Vendor" />
+            <End Role="T_PartSuppier" EntitySet="T_PartSuppier" />
+          </AssociationSet>
+          <AssociationSet Name="FK_T_AlternatePart_T_Part" Association="somaModel.FK_T_AlternatePart_T_Part">
+            <End Role="T_Part" EntitySet="T_Part" />
+            <End Role="T_AlternatePart" EntitySet="T_AlternatePart" />
+          </AssociationSet>
+          <AssociationSet Name="FK_T_PartConditionPrice_T_Part" Association="somaModel.FK_T_PartConditionPrice_T_Part">
+            <End Role="T_Part" EntitySet="T_Part" />
+            <End Role="T_PartConditionPrice" EntitySet="T_PartConditionPrice" />
+          </AssociationSet>
+          <AssociationSet Name="FK_T_PartImage_T_Part" Association="somaModel.FK_T_PartImage_T_Part">
+            <End Role="T_Part" EntitySet="T_Part" />
+            <End Role="T_PartImage" EntitySet="T_PartImage" />
+          </AssociationSet>
+          <AssociationSet Name="FK_T_PartLink_T_Part" Association="somaModel.FK_T_PartLink_T_Part">
+            <End Role="T_Part" EntitySet="T_Part" />
+            <End Role="T_PartLink" EntitySet="T_PartLink" />
+          </AssociationSet>
+          <AssociationSet Name="FK_T_PartLogistics_T_Part" Association="somaModel.FK_T_PartLogistics_T_Part">
+            <End Role="T_Part" EntitySet="T_Part" />
+            <End Role="T_PartLogistics" EntitySet="T_PartLogistics" />
+          </AssociationSet>
+          <AssociationSet Name="FK_T_PartSuppier_T_Part" Association="somaModel.FK_T_PartSuppier_T_Part">
+            <End Role="T_Part" EntitySet="T_Part" />
+            <End Role="T_PartSuppier" EntitySet="T_PartSuppier" />
+          </AssociationSet>
+          <AssociationSet Name="FK_T_RelatedPart_T_Part" Association="somaModel.FK_T_RelatedPart_T_Part">
+            <End Role="T_Part" EntitySet="T_Part" />
+            <End Role="T_RelatedPart" EntitySet="T_RelatedPart" />
+          </AssociationSet>
+          <EntitySet Name="v_PartsCompatibility" EntityType="somaModel.v_PartsCompatibility" />
         </EntityContainer>
         <EntityType Name="M_User">
           <Key>
@@ -263,6 +899,8 @@
           <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="ModifiedBy" Type="Int32" />
           <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="M_Status" Relationship="somaModel.FK_M_User_M_Status1" FromRole="M_User" ToRole="M_Status" />
+          <NavigationProperty Name="M_UserType" Relationship="somaModel.FK_M_User_M_UserType" FromRole="M_User" ToRole="M_UserType" />
         </EntityType>
         <EntityType Name="T_Part">
           <Key>
@@ -292,6 +930,14 @@
           <NavigationProperty Name="T_Part1" Relationship="somaModel.FK_T_Part_T_Part" FromRole="T_Part" ToRole="T_Part1" />
           <NavigationProperty Name="T_Part2" Relationship="somaModel.FK_T_Part_T_Part" FromRole="T_Part1" ToRole="T_Part" />
           <NavigationProperty Name="M_SubType" Relationship="somaModel.FK_T_Part_M_SubType" FromRole="T_Part" ToRole="M_SubType" />
+          <NavigationProperty Name="M_Status" Relationship="somaModel.FK_T_Part_M_Status" FromRole="T_Part" ToRole="M_Status" />
+          <NavigationProperty Name="T_AlternatePart" Relationship="somaModel.FK_T_AlternatePart_T_Part" FromRole="T_Part" ToRole="T_AlternatePart" />
+          <NavigationProperty Name="T_PartConditionPrice" Relationship="somaModel.FK_T_PartConditionPrice_T_Part" FromRole="T_Part" ToRole="T_PartConditionPrice" />
+          <NavigationProperty Name="T_PartImage" Relationship="somaModel.FK_T_PartImage_T_Part" FromRole="T_Part" ToRole="T_PartImage" />
+          <NavigationProperty Name="T_PartLink" Relationship="somaModel.FK_T_PartLink_T_Part" FromRole="T_Part" ToRole="T_PartLink" />
+          <NavigationProperty Name="T_PartLogistics" Relationship="somaModel.FK_T_PartLogistics_T_Part" FromRole="T_Part" ToRole="T_PartLogistics" />
+          <NavigationProperty Name="T_PartSuppier" Relationship="somaModel.FK_T_PartSuppier_T_Part" FromRole="T_Part" ToRole="T_PartSuppier" />
+          <NavigationProperty Name="T_RelatedPart" Relationship="somaModel.FK_T_RelatedPart_T_Part" FromRole="T_Part" ToRole="T_RelatedPart" />
         </EntityType>
         <Association Name="FK_T_Part_T_Part">
           <End Type="somaModel.T_Part" Role="T_Part" Multiplicity="1" />
@@ -334,6 +980,8 @@
           <Property Name="ModifiedBy" Type="Int32" />
           <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
           <NavigationProperty Name="M_Model" Relationship="somaModel.FK_M_ModelManufacturer_M_Model" FromRole="M_ModelManufacturer" ToRole="M_Model" />
+          <NavigationProperty Name="M_Vendor" Relationship="somaModel.FK_M_ModelManufacturer_M_Vendor" FromRole="M_ModelManufacturer" ToRole="M_Vendor" />
+          <NavigationProperty Name="T_PartLink" Relationship="somaModel.FK_T_PartLink_M_ModelManufacturer" FromRole="M_ModelManufacturer" ToRole="T_PartLink" />
         </EntityType>
         <EntityType Name="M_ProductCategory">
           <Key>
@@ -411,6 +1059,478 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="M_PartCondition">
+          <Key>
+            <PropertyRef Name="ConditionID" />
+          </Key>
+          <Property Name="ConditionID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ConditionDescription" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Abbrevation" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Stockable" Type="Boolean" />
+          <Property Name="Retunable" Type="Boolean" />
+          <Property Name="PositionID" Type="Int32" />
+          <Property Name="Active" Type="Boolean" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="ModifiedBy" Type="Int32" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="M_PartCondition1" Relationship="somaModel.FK_M_PartCondition_M_PartCondition" FromRole="M_PartCondition" ToRole="M_PartCondition1" />
+          <NavigationProperty Name="M_PartCondition2" Relationship="somaModel.FK_M_PartCondition_M_PartCondition" FromRole="M_PartCondition1" ToRole="M_PartCondition" />
+          <NavigationProperty Name="T_PartConditionPrice" Relationship="somaModel.FK_T_PartConditionPrice_M_PartCondition" FromRole="M_PartCondition" ToRole="T_PartConditionPrice" />
+          <NavigationProperty Name="T_PartLogistics" Relationship="somaModel.FK_T_PartLogistics_M_PartCondition" FromRole="M_PartCondition" ToRole="T_PartLogistics" />
+        </EntityType>
+        <EntityType Name="M_Status">
+          <Key>
+            <PropertyRef Name="StatusID" />
+          </Key>
+          <Property Name="StatusID" Type="Int32" Nullable="false" />
+          <Property Name="Statusname" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Active" Type="Boolean" Nullable="false" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifiedBy" Type="Int32" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="M_User" Relationship="somaModel.FK_M_User_M_Status1" FromRole="M_Status" ToRole="M_User" />
+          <NavigationProperty Name="T_Part" Relationship="somaModel.FK_T_Part_M_Status" FromRole="M_Status" ToRole="T_Part" />
+        </EntityType>
+        <EntityType Name="M_Type">
+          <Key>
+            <PropertyRef Name="TypeID" />
+          </Key>
+          <Property Name="TypeID" Type="Int32" Nullable="false" />
+          <Property Name="TypeName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ParentTypeID" Type="Int32" />
+          <Property Name="Active" Type="Boolean" Nullable="false" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifiedBy" Type="Int32" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="M_UserType">
+          <Key>
+            <PropertyRef Name="UserTypeID" />
+          </Key>
+          <Property Name="UserTypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserTypeName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="StatusID" Type="Int32" Nullable="false" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifiedBy" Type="Int32" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="M_User" Relationship="somaModel.FK_M_User_M_UserType" FromRole="M_UserType" ToRole="M_User" />
+        </EntityType>
+        <EntityType Name="M_Vendor">
+          <Key>
+            <PropertyRef Name="VendorID" />
+          </Key>
+          <Property Name="VendorID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="VendorTypeID" Type="Int32" Nullable="false" />
+          <Property Name="VendorName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ContactPerson" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MobileNo1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MobileNo2" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Address1" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Address2" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="State" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Zip" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CountryId" Type="Int32" Nullable="false" />
+          <Property Name="Active" Type="Boolean" Nullable="false" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifiedBy" Type="Int32" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+          <Property Name="AccountNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="M_ModelManufacturer" Relationship="somaModel.FK_M_ModelManufacturer_M_Vendor" FromRole="M_Vendor" ToRole="M_ModelManufacturer" />
+          <NavigationProperty Name="M_VendorType" Relationship="somaModel.FK_M_Vendor_M_VendorType" FromRole="M_Vendor" ToRole="M_VendorType" />
+          <NavigationProperty Name="T_PartSuppier" Relationship="somaModel.FK_T_PartSuppier_M_Vendor" FromRole="M_Vendor" ToRole="T_PartSuppier" />
+        </EntityType>
+        <EntityType Name="M_VendorType">
+          <Key>
+            <PropertyRef Name="VendorTypeID" />
+          </Key>
+          <Property Name="VendorTypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="VendorTypeDescription" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Abb" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Active" Type="Boolean" Nullable="false" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifiedBy" Type="Int32" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="M_Vendor" Relationship="somaModel.FK_M_Vendor_M_VendorType" FromRole="M_VendorType" ToRole="M_Vendor" />
+        </EntityType>
+        <EntityType Name="T_AlternatePart">
+          <Key>
+            <PropertyRef Name="AlternetPartID" />
+          </Key>
+          <Property Name="AlternetPartID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PartID" Type="Int32" />
+          <Property Name="AlternatePartNo" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Active" Type="Boolean" Nullable="false" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifiedBy" Type="Int32" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="T_Part" Relationship="somaModel.FK_T_AlternatePart_T_Part" FromRole="T_AlternatePart" ToRole="T_Part" />
+        </EntityType>
+        <EntityType Name="T_PartConditionPrice">
+          <Key>
+            <PropertyRef Name="PartConditionPriceID" />
+          </Key>
+          <Property Name="PartConditionPriceID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ConditionID" Type="Int32" />
+          <Property Name="PartID" Type="Int32" />
+          <Property Name="Price" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="PriceQty" Type="Int32" />
+          <Property Name="PriceUnit" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Stockable" Type="Int32" />
+          <Property Name="Retunable" Type="Int32" />
+          <Property Name="PositionID" Type="Int32" />
+          <Property Name="Location" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ValidFrom" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ValidTo" Type="DateTime" Precision="3" />
+          <Property Name="Active" Type="Boolean" Nullable="false" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifiedBy" Type="Int32" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="M_PartCondition" Relationship="somaModel.FK_T_PartConditionPrice_M_PartCondition" FromRole="T_PartConditionPrice" ToRole="M_PartCondition" />
+          <NavigationProperty Name="T_Part" Relationship="somaModel.FK_T_PartConditionPrice_T_Part" FromRole="T_PartConditionPrice" ToRole="T_Part" />
+        </EntityType>
+        <EntityType Name="T_PartImage">
+          <Key>
+            <PropertyRef Name="PartImageID" />
+          </Key>
+          <Property Name="PartImageID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PartImageName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PartID" Type="Int32" />
+          <Property Name="Active" Type="Boolean" Nullable="false" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifiedBy" Type="Int32" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="T_Part" Relationship="somaModel.FK_T_PartImage_T_Part" FromRole="T_PartImage" ToRole="T_Part" />
+        </EntityType>
+        <EntityType Name="T_PartLink">
+          <Key>
+            <PropertyRef Name="PartLinkID" />
+          </Key>
+          <Property Name="PartLinkID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PartID" Type="Int32" />
+          <Property Name="ModelManufacturerId" Type="Int32" />
+          <Property Name="Active" Type="Boolean" Nullable="false" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifiedBy" Type="Int32" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="M_ModelManufacturer" Relationship="somaModel.FK_T_PartLink_M_ModelManufacturer" FromRole="T_PartLink" ToRole="M_ModelManufacturer" />
+          <NavigationProperty Name="T_Part" Relationship="somaModel.FK_T_PartLink_T_Part" FromRole="T_PartLink" ToRole="T_Part" />
+        </EntityType>
+        <EntityType Name="T_PartLogistics">
+          <Key>
+            <PropertyRef Name="PartLogisticsID" />
+          </Key>
+          <Property Name="PartLogisticsID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PartID" Type="Int32" />
+          <Property Name="ConditionID" Type="Int32" />
+          <Property Name="SafetyStock" Type="Boolean" />
+          <Property Name="MinBuy" Type="Int32" />
+          <Property Name="Stockable" Type="Boolean" />
+          <Property Name="Retunable" Type="Boolean" />
+          <Property Name="Location1" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="Location2" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="Active" Type="Boolean" Nullable="false" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifiedBy" Type="Int32" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="M_PartCondition" Relationship="somaModel.FK_T_PartLogistics_M_PartCondition" FromRole="T_PartLogistics" ToRole="M_PartCondition" />
+          <NavigationProperty Name="T_Part" Relationship="somaModel.FK_T_PartLogistics_T_Part" FromRole="T_PartLogistics" ToRole="T_Part" />
+        </EntityType>
+        <EntityType Name="T_PartSuppier">
+          <Key>
+            <PropertyRef Name="PartSuppierID" />
+          </Key>
+          <Property Name="PartSuppierID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PartID" Type="Int32" />
+          <Property Name="VendorID" Type="Int32" />
+          <Property Name="VendorPartNo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="VendorPartDescription" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Vendorprice" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Ourprice" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Priority" Type="Int32" />
+          <Property Name="Note" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Active" Type="Boolean" Nullable="false" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifiedBy" Type="Int32" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="M_Vendor" Relationship="somaModel.FK_T_PartSuppier_M_Vendor" FromRole="T_PartSuppier" ToRole="M_Vendor" />
+          <NavigationProperty Name="T_Part" Relationship="somaModel.FK_T_PartSuppier_T_Part" FromRole="T_PartSuppier" ToRole="T_Part" />
+        </EntityType>
+        <EntityType Name="T_RelatedPart">
+          <Key>
+            <PropertyRef Name="RelatedPartTransID" />
+          </Key>
+          <Property Name="RelatedPartTransID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PartID" Type="Int32" />
+          <Property Name="PartId_Related" Type="Int32" />
+          <Property Name="Active" Type="Boolean" Nullable="false" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifiedBy" Type="Int32" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="T_Part" Relationship="somaModel.FK_T_RelatedPart_T_Part" FromRole="T_RelatedPart" ToRole="T_Part" />
+        </EntityType>
+        <EntityType Name="UserMenuTran">
+          <Key>
+            <PropertyRef Name="UserMenuID" />
+          </Key>
+          <Property Name="UserMenuID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="MenuID" Type="Int32" Nullable="false" />
+          <Property Name="Active" Type="Boolean" Nullable="false" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifiedBy" Type="Int32" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+          <Property Name="Add" Type="Boolean" />
+          <Property Name="Edit" Type="Boolean" />
+          <Property Name="Delete" Type="Boolean" />
+          <Property Name="View" Type="Boolean" />
+        </EntityType>
+        <Association Name="FK_M_ModelManufacturer_M_Vendor">
+          <End Type="somaModel.M_Vendor" Role="M_Vendor" Multiplicity="1" />
+          <End Type="somaModel.M_ModelManufacturer" Role="M_ModelManufacturer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="M_Vendor">
+              <PropertyRef Name="VendorID" />
+            </Principal>
+            <Dependent Role="M_ModelManufacturer">
+              <PropertyRef Name="VendorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_T_PartLink_M_ModelManufacturer">
+          <End Type="somaModel.M_ModelManufacturer" Role="M_ModelManufacturer" Multiplicity="0..1" />
+          <End Type="somaModel.T_PartLink" Role="T_PartLink" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="M_ModelManufacturer">
+              <PropertyRef Name="ModelManufacturerId" />
+            </Principal>
+            <Dependent Role="T_PartLink">
+              <PropertyRef Name="ModelManufacturerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_M_PartCondition_M_PartCondition">
+          <End Type="somaModel.M_PartCondition" Role="M_PartCondition" Multiplicity="1" />
+          <End Type="somaModel.M_PartCondition" Role="M_PartCondition1" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="M_PartCondition">
+              <PropertyRef Name="ConditionID" />
+            </Principal>
+            <Dependent Role="M_PartCondition1">
+              <PropertyRef Name="ConditionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_T_PartConditionPrice_M_PartCondition">
+          <End Type="somaModel.M_PartCondition" Role="M_PartCondition" Multiplicity="0..1" />
+          <End Type="somaModel.T_PartConditionPrice" Role="T_PartConditionPrice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="M_PartCondition">
+              <PropertyRef Name="ConditionID" />
+            </Principal>
+            <Dependent Role="T_PartConditionPrice">
+              <PropertyRef Name="ConditionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_T_PartLogistics_M_PartCondition">
+          <End Type="somaModel.M_PartCondition" Role="M_PartCondition" Multiplicity="0..1" />
+          <End Type="somaModel.T_PartLogistics" Role="T_PartLogistics" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="M_PartCondition">
+              <PropertyRef Name="ConditionID" />
+            </Principal>
+            <Dependent Role="T_PartLogistics">
+              <PropertyRef Name="ConditionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_M_User_M_Status1">
+          <End Type="somaModel.M_Status" Role="M_Status" Multiplicity="1" />
+          <End Type="somaModel.M_User" Role="M_User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="M_Status">
+              <PropertyRef Name="StatusID" />
+            </Principal>
+            <Dependent Role="M_User">
+              <PropertyRef Name="StatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_T_Part_M_Status">
+          <End Type="somaModel.M_Status" Role="M_Status" Multiplicity="0..1" />
+          <End Type="somaModel.T_Part" Role="T_Part" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="M_Status">
+              <PropertyRef Name="StatusID" />
+            </Principal>
+            <Dependent Role="T_Part">
+              <PropertyRef Name="StatusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_M_User_M_UserType">
+          <End Type="somaModel.M_UserType" Role="M_UserType" Multiplicity="1" />
+          <End Type="somaModel.M_User" Role="M_User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="M_UserType">
+              <PropertyRef Name="UserTypeID" />
+            </Principal>
+            <Dependent Role="M_User">
+              <PropertyRef Name="UserTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_M_Vendor_M_VendorType">
+          <End Type="somaModel.M_VendorType" Role="M_VendorType" Multiplicity="1" />
+          <End Type="somaModel.M_Vendor" Role="M_Vendor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="M_VendorType">
+              <PropertyRef Name="VendorTypeID" />
+            </Principal>
+            <Dependent Role="M_Vendor">
+              <PropertyRef Name="VendorTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_T_PartSuppier_M_Vendor">
+          <End Type="somaModel.M_Vendor" Role="M_Vendor" Multiplicity="0..1" />
+          <End Type="somaModel.T_PartSuppier" Role="T_PartSuppier" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="M_Vendor">
+              <PropertyRef Name="VendorID" />
+            </Principal>
+            <Dependent Role="T_PartSuppier">
+              <PropertyRef Name="VendorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_T_AlternatePart_T_Part">
+          <End Type="somaModel.T_Part" Role="T_Part" Multiplicity="0..1" />
+          <End Type="somaModel.T_AlternatePart" Role="T_AlternatePart" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="T_Part">
+              <PropertyRef Name="PartID" />
+            </Principal>
+            <Dependent Role="T_AlternatePart">
+              <PropertyRef Name="PartID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_T_PartConditionPrice_T_Part">
+          <End Type="somaModel.T_Part" Role="T_Part" Multiplicity="0..1" />
+          <End Type="somaModel.T_PartConditionPrice" Role="T_PartConditionPrice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="T_Part">
+              <PropertyRef Name="PartID" />
+            </Principal>
+            <Dependent Role="T_PartConditionPrice">
+              <PropertyRef Name="PartID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_T_PartImage_T_Part">
+          <End Type="somaModel.T_Part" Role="T_Part" Multiplicity="0..1" />
+          <End Type="somaModel.T_PartImage" Role="T_PartImage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="T_Part">
+              <PropertyRef Name="PartID" />
+            </Principal>
+            <Dependent Role="T_PartImage">
+              <PropertyRef Name="PartID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_T_PartLink_T_Part">
+          <End Type="somaModel.T_Part" Role="T_Part" Multiplicity="0..1" />
+          <End Type="somaModel.T_PartLink" Role="T_PartLink" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="T_Part">
+              <PropertyRef Name="PartID" />
+            </Principal>
+            <Dependent Role="T_PartLink">
+              <PropertyRef Name="PartID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_T_PartLogistics_T_Part">
+          <End Type="somaModel.T_Part" Role="T_Part" Multiplicity="0..1" />
+          <End Type="somaModel.T_PartLogistics" Role="T_PartLogistics" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="T_Part">
+              <PropertyRef Name="PartID" />
+            </Principal>
+            <Dependent Role="T_PartLogistics">
+              <PropertyRef Name="PartID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_T_PartSuppier_T_Part">
+          <End Type="somaModel.T_Part" Role="T_Part" Multiplicity="0..1" />
+          <End Type="somaModel.T_PartSuppier" Role="T_PartSuppier" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="T_Part">
+              <PropertyRef Name="PartID" />
+            </Principal>
+            <Dependent Role="T_PartSuppier">
+              <PropertyRef Name="PartID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_T_RelatedPart_T_Part">
+          <End Type="somaModel.T_Part" Role="T_Part" Multiplicity="1" />
+          <End Type="somaModel.T_RelatedPart" Role="T_RelatedPart" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="T_Part">
+              <PropertyRef Name="PartID" />
+            </Principal>
+            <Dependent Role="T_RelatedPart">
+              <PropertyRef Name="RelatedPartTransID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="v_PartsCompatibility">
+          <Key>
+            <PropertyRef Name="PartLinkID" />
+            <PropertyRef Name="ProductCategoryID" />
+            <PropertyRef Name="VendorID" />
+            <PropertyRef Name="ModelID" />
+            <PropertyRef Name="Active" />
+            <PropertyRef Name="CreatedBy" />
+            <PropertyRef Name="UserName" />
+            <PropertyRef Name="CreatedDate" />
+          </Key>
+          <Property Name="PartLinkID" Type="Int32" Nullable="false" />
+          <Property Name="PartID" Type="Int32" />
+          <Property Name="ProductCategoryID" Type="Int32" Nullable="false" />
+          <Property Name="ProductCategoryDescription" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="VendorID" Type="Int32" Nullable="false" />
+          <Property Name="VendorName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ModelID" Type="Int32" Nullable="false" />
+          <Property Name="ModelNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ModelManufacturerId" Type="Int32" />
+          <Property Name="Active" Type="Boolean" Nullable="false" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifiedBy" Type="Int32" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -528,6 +1648,260 @@
                 <ScalarProperty Name="PartTypeID" ColumnName="PartTypeID" />
                 <ScalarProperty Name="SubTypeDescription" ColumnName="SubTypeDescription" />
                 <ScalarProperty Name="SubTypeID" ColumnName="SubTypeID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="M_PartCondition">
+            <EntityTypeMapping TypeName="somaModel.M_PartCondition">
+              <MappingFragment StoreEntitySet="M_PartCondition">
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="PositionID" ColumnName="PositionID" />
+                <ScalarProperty Name="Retunable" ColumnName="Retunable" />
+                <ScalarProperty Name="Stockable" ColumnName="Stockable" />
+                <ScalarProperty Name="Abbrevation" ColumnName="Abbrevation" />
+                <ScalarProperty Name="ConditionDescription" ColumnName="ConditionDescription" />
+                <ScalarProperty Name="ConditionID" ColumnName="ConditionID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="M_Status">
+            <EntityTypeMapping TypeName="somaModel.M_Status">
+              <MappingFragment StoreEntitySet="M_Status">
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="Statusname" ColumnName="Statusname" />
+                <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="M_Type">
+            <EntityTypeMapping TypeName="somaModel.M_Type">
+              <MappingFragment StoreEntitySet="M_Type">
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="ParentTypeID" ColumnName="ParentTypeID" />
+                <ScalarProperty Name="TypeName" ColumnName="TypeName" />
+                <ScalarProperty Name="TypeID" ColumnName="TypeID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="M_UserType">
+            <EntityTypeMapping TypeName="somaModel.M_UserType">
+              <MappingFragment StoreEntitySet="M_UserType">
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+                <ScalarProperty Name="UserTypeName" ColumnName="UserTypeName" />
+                <ScalarProperty Name="UserTypeID" ColumnName="UserTypeID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="M_Vendor">
+            <EntityTypeMapping TypeName="somaModel.M_Vendor">
+              <MappingFragment StoreEntitySet="M_Vendor">
+                <ScalarProperty Name="AccountNo" ColumnName="AccountNo" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="CountryId" ColumnName="CountryId" />
+                <ScalarProperty Name="Zip" ColumnName="Zip" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Address2" ColumnName="Address2" />
+                <ScalarProperty Name="Address1" ColumnName="Address1" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="MobileNo2" ColumnName="MobileNo2" />
+                <ScalarProperty Name="MobileNo1" ColumnName="MobileNo1" />
+                <ScalarProperty Name="ContactPerson" ColumnName="ContactPerson" />
+                <ScalarProperty Name="VendorName" ColumnName="VendorName" />
+                <ScalarProperty Name="VendorTypeID" ColumnName="VendorTypeID" />
+                <ScalarProperty Name="VendorID" ColumnName="VendorID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="M_VendorType">
+            <EntityTypeMapping TypeName="somaModel.M_VendorType">
+              <MappingFragment StoreEntitySet="M_VendorType">
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="Abb" ColumnName="Abb" />
+                <ScalarProperty Name="VendorTypeDescription" ColumnName="VendorTypeDescription" />
+                <ScalarProperty Name="VendorTypeID" ColumnName="VendorTypeID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="T_AlternatePart">
+            <EntityTypeMapping TypeName="somaModel.T_AlternatePart">
+              <MappingFragment StoreEntitySet="T_AlternatePart">
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="AlternatePartNo" ColumnName="AlternatePartNo" />
+                <ScalarProperty Name="PartID" ColumnName="PartID" />
+                <ScalarProperty Name="AlternetPartID" ColumnName="AlternetPartID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="T_PartConditionPrice">
+            <EntityTypeMapping TypeName="somaModel.T_PartConditionPrice">
+              <MappingFragment StoreEntitySet="T_PartConditionPrice">
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="ValidTo" ColumnName="ValidTo" />
+                <ScalarProperty Name="ValidFrom" ColumnName="ValidFrom" />
+                <ScalarProperty Name="Location" ColumnName="Location" />
+                <ScalarProperty Name="PositionID" ColumnName="PositionID" />
+                <ScalarProperty Name="Retunable" ColumnName="Retunable" />
+                <ScalarProperty Name="Stockable" ColumnName="Stockable" />
+                <ScalarProperty Name="PriceUnit" ColumnName="PriceUnit" />
+                <ScalarProperty Name="PriceQty" ColumnName="PriceQty" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="PartID" ColumnName="PartID" />
+                <ScalarProperty Name="ConditionID" ColumnName="ConditionID" />
+                <ScalarProperty Name="PartConditionPriceID" ColumnName="PartConditionPriceID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="T_PartImage">
+            <EntityTypeMapping TypeName="somaModel.T_PartImage">
+              <MappingFragment StoreEntitySet="T_PartImage">
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="PartID" ColumnName="PartID" />
+                <ScalarProperty Name="PartImageName" ColumnName="PartImageName" />
+                <ScalarProperty Name="PartImageID" ColumnName="PartImageID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="T_PartLink">
+            <EntityTypeMapping TypeName="somaModel.T_PartLink">
+              <MappingFragment StoreEntitySet="T_PartLink">
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="ModelManufacturerId" ColumnName="ModelManufacturerId" />
+                <ScalarProperty Name="PartID" ColumnName="PartID" />
+                <ScalarProperty Name="PartLinkID" ColumnName="PartLinkID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="T_PartLogistics">
+            <EntityTypeMapping TypeName="somaModel.T_PartLogistics">
+              <MappingFragment StoreEntitySet="T_PartLogistics">
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="Location2" ColumnName="Location2" />
+                <ScalarProperty Name="Location1" ColumnName="Location1" />
+                <ScalarProperty Name="Retunable" ColumnName="Retunable" />
+                <ScalarProperty Name="Stockable" ColumnName="Stockable" />
+                <ScalarProperty Name="MinBuy" ColumnName="MinBuy" />
+                <ScalarProperty Name="SafetyStock" ColumnName="SafetyStock" />
+                <ScalarProperty Name="ConditionID" ColumnName="ConditionID" />
+                <ScalarProperty Name="PartID" ColumnName="PartID" />
+                <ScalarProperty Name="PartLogisticsID" ColumnName="PartLogisticsID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="T_PartSuppier">
+            <EntityTypeMapping TypeName="somaModel.T_PartSuppier">
+              <MappingFragment StoreEntitySet="T_PartSuppier">
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="Note" ColumnName="Note" />
+                <ScalarProperty Name="Priority" ColumnName="Priority" />
+                <ScalarProperty Name="Ourprice" ColumnName="Ourprice" />
+                <ScalarProperty Name="Vendorprice" ColumnName="Vendorprice" />
+                <ScalarProperty Name="VendorPartDescription" ColumnName="VendorPartDescription" />
+                <ScalarProperty Name="VendorPartNo" ColumnName="VendorPartNo" />
+                <ScalarProperty Name="VendorID" ColumnName="VendorID" />
+                <ScalarProperty Name="PartID" ColumnName="PartID" />
+                <ScalarProperty Name="PartSuppierID" ColumnName="PartSuppierID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="T_RelatedPart">
+            <EntityTypeMapping TypeName="somaModel.T_RelatedPart">
+              <MappingFragment StoreEntitySet="T_RelatedPart">
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="PartId_Related" ColumnName="PartId_Related" />
+                <ScalarProperty Name="PartID" ColumnName="PartID" />
+                <ScalarProperty Name="RelatedPartTransID" ColumnName="RelatedPartTransID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserMenuTrans">
+            <EntityTypeMapping TypeName="somaModel.UserMenuTran">
+              <MappingFragment StoreEntitySet="UserMenuTran">
+                <ScalarProperty Name="View" ColumnName="View" />
+                <ScalarProperty Name="Delete" ColumnName="Delete" />
+                <ScalarProperty Name="Edit" ColumnName="Edit" />
+                <ScalarProperty Name="Add" ColumnName="Add" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="MenuID" ColumnName="MenuID" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="UserMenuID" ColumnName="UserMenuID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="v_PartsCompatibility">
+            <EntityTypeMapping TypeName="somaModel.v_PartsCompatibility">
+              <MappingFragment StoreEntitySet="v_PartsCompatibility">
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="ModelManufacturerId" ColumnName="ModelManufacturerId" />
+                <ScalarProperty Name="ModelNo" ColumnName="ModelNo" />
+                <ScalarProperty Name="ModelID" ColumnName="ModelID" />
+                <ScalarProperty Name="VendorName" ColumnName="VendorName" />
+                <ScalarProperty Name="VendorID" ColumnName="VendorID" />
+                <ScalarProperty Name="ProductCategoryDescription" ColumnName="ProductCategoryDescription" />
+                <ScalarProperty Name="ProductCategoryID" ColumnName="ProductCategoryID" />
+                <ScalarProperty Name="PartID" ColumnName="PartID" />
+                <ScalarProperty Name="PartLinkID" ColumnName="PartLinkID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

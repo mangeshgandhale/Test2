@@ -39,8 +39,8 @@ namespace BusinessObject
         public List<SupplierTrans> SupplierTrans { get; set; }
         public List<ConditionPriceTrans> ConditionPriceTrans { get; set; }
          
-        public List<PartBO> PartGridData { get; set; }
-
+        public List<PartBO> DDLPartTypes { get; set; }
+        public List<PartBO> PartGridData { get; set; } 
     }
     public class CompatibilityTrans
 

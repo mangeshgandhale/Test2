@@ -2,7 +2,7 @@
 
 @{
     ViewBag.Title = "Index";
-    Layout = "";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <link rel="stylesheet" href="~/Content/kendo/kendo.common.min.css" />
@@ -15,6 +15,10 @@
 <script src="~/Scripts/commonUtil/commonUtil.js"></script>
 
 <style type="text/css">
+
+    .btnplus {
+        padding: 0px 2px;
+    }
     .container {
         width: 100%;
         height: auto;
@@ -240,8 +244,16 @@
                         </td>
                         <td style="width: 40%; vertical-align: top">
 
-                            Compatibility
-                            <div id="CompabilityTransGrid" style="width: 80%;height:300px"></div>
+                            Compatibility  
+                            <a style="min-width: 30px;" id="cmdAddComp" href="#" onclick="launchCompWindow()" runat="server" id="plusAlternetPN" class="btnplus btn btn-outline-primary">
+                                +<i class="la la-plus"></i>
+                            </a>
+                            <div id="partComppageBody">
+                                <div id="treeview" style="width:50%;"></div>
+                                <div id="compWindow"></div>
+                            </div>
+
+                            <div id="CompabilityTransGrid" style="width: 80%;height:300px;display:none"></div>
 
                             Supplier
 
@@ -285,11 +297,11 @@
                     }
 
                     /* image preview*/
-               
+
 
 
                 function onRemove(e) {
-                       
+
                         $("#displayPhoto").attr("src", "/images/profile_default.png");
                     }
 
@@ -362,18 +374,18 @@
                         dataSource: dataSource,
 
                         columns: [
-                            
+
                             {
                                 field: "PartLinkID",
-                                title: "PartLinkID",                                
+                                title: "PartLinkID",
                                 hidden: true
                             },
                             {
                                 field: "ModelManufacturerId",
-                                title: "ModelManufacturerId",                                 
+                                title: "ModelManufacturerId",
                                 hidden: true
                             },
-                            
+
                             {
                                 field: "Active",
                                 title: "Status",
@@ -382,7 +394,7 @@
                                 template: '<input type="checkbox" #= Active ? "checked=checked" : "" # class="SelFlagChkBox" ></input>',
                                 width: 30
                             },
-                             
+
                         {
                             field: "ProductCategoryDescription",
                             title: "Product Category Description",
@@ -477,11 +489,11 @@
 
                 $("#SupplierTransGrid").kendoGrid({
                         dataSource: dataSource,
-                    
+
 
                         columns: [
                             {
-                               field: "VendorID",                                
+                               field: "VendorID",
                                name: "VendorID",
                                hidden:true
                             },
@@ -564,7 +576,7 @@
                                     var input = $('<input id="Priority" name="Priority" class="k-input numbers">');
                                     input.appendTo(container);
                                     input.kendoNumericTextBox({
-                                       
+
                                         decimals: 0,
                                         min: 0,
                                         max: 100,
@@ -584,7 +596,7 @@
                                     var input = $('<input id="Note" name="Note" class="k-input numbers">');
                                     input.appendTo(container);
                                     input.kendoTextBox({
- 
+
                                     });
 
                                 },
@@ -597,7 +609,7 @@
                                 headerAttributes: { "class": "table-header-cell", style: "font-size: 12px;" },
                                 attributes: { style: "font-size: 12px;" },
 
-                            }, 
+                            },
                         ],
                        editable: true,
                         height: 400,
@@ -772,11 +784,11 @@
 
                             },
 
-                            
+
 
 
                         ],
-                        editable:true,                         
+                        editable:true,
                         height: 300,
                         groupable: false,
                         sortable: true,
@@ -913,7 +925,7 @@
                         dataSource: dataSource,
                     columns: [
 
-                        
+
                         {
                             field: "ConditionID",
                             title: "ConditionID",
@@ -979,14 +991,14 @@
                             editor: function (container) {
                                 var input = $('<input id="Location1" name="Location1" class="k-input numbers">');
                                 input.appendTo(container);
-                                input.kendoTextBox({                                     
+                                input.kendoTextBox({
                                     min: 0,
                                     max: 100,
                                     spinners: false
                                 });
 
                             },
-                            width: 50 
+                            width: 50
                         },
                         {
                             field: "Location2",
@@ -1069,7 +1081,7 @@
             $(this).append(_CompabilityTransGridKeyValues);
 
             var _SupplierTransGrid = $("#SupplierTransGrid").data("kendoGrid");
-            var  _SupplierTransGridKeyValues = buildSubmitValuesforGrid(_SupplierTransGrid, "SupplierTransData");
+            var _SupplierTransGridKeyValues = buildSubmitValuesforGrid(_SupplierTransGrid, "SupplierTransData");
             $(this).append(_SupplierTransGridKeyValues);
 
 
@@ -1109,6 +1121,160 @@
         }
 
 
+    </script>
+
+
+    <script type="text/javascript">
+    var compRecords = [];
+
+    $(document).ready(function () {
+        $.ajax({
+            url: "@Url.Action("GetPartCompatibilities", "PartCompatibility")",
+            data: { cPartID : 8 },
+            type: "post",
+            success: function (data) {
+                compRecords = data;
+            },
+            async: false
+        });
+
+        $("#compWindow").kendoWindow({
+            animation: {
+                open: { effects: "fade:in" },
+                close: { effects: "fade:out" }
+            },
+            width: "800",
+            height: "460",
+            title: "Manage Compatibility",
+            actions: ["Close"],
+            modal: true,
+            resizable: false,
+            visible: false,
+            draggable: false,
+            close: function (e) {
+                var treeViewDS = buildTreeViewData(compRecords);
+                var datasource = buildTreeViewDS(treeViewDS);
+                datasource.read();
+                var compTree = $("#treeview").data("kendoTreeView");
+                compTree.setDataSource(datasource);
+                compTree.expand(".k-item");
+            }
+        });
+
+        var treeViewDS = buildTreeViewData(compRecords);
+        var datasource = buildTreeViewDS(treeViewDS);
+        datasource.read();
+
+        $("#treeview").kendoTreeView({
+            dataSource: datasource,
+            dataTextField: ["Category", "MfrModels"]
+        });
+        var compTree = $("#treeview").data("kendoTreeView");
+        compTree.expand(".k-item");
+    })
+
+    function buildTreeViewData(compRecords) {
+        var catMfrRecords = [];
+        var modelsForMfr;
+        var mergedRecords = [];
+        var treeViewDS = [];
+
+        const uniqueCategories = new Set();
+        for (var i = 0; i < compRecords.length; i++) {
+            uniqueCategories.add(compRecords[i].ProductCategoryDescription);
+        }
+
+        for (let prodCat of uniqueCategories) {
+            var categoryRecords = [];
+            for (var r = 0; r < compRecords.length; r++) {
+                if (compRecords[r].ProductCategoryDescription === prodCat) { categoryRecords.push(compRecords[r]); }
+            }
+
+            const uniqueMfrInCategory = new Set();
+            for (var m = 0; m < categoryRecords.length; m++) { uniqueMfrInCategory.add(categoryRecords[m].VendorName) }
+
+            var treeViewRecordForCategory = [];
+            for (let mfr of uniqueMfrInCategory) {
+                for (var r = 0; r < categoryRecords.length; r++) {
+                    if (categoryRecords[r].VendorName === mfr) { catMfrRecords.push(categoryRecords[r]); }
+                }
+
+                modelsForMfr = mfr + ": "
+                for (mfr = 0; mfr < catMfrRecords.length; mfr++) { modelsForMfr = modelsForMfr + catMfrRecords[mfr].ModelNo + ";" }
+
+                treeViewRecordForCategory.push({ MfrModels: modelsForMfr });
+
+               catMfrRecords = [];
+            }
+
+            treeViewDS.push({
+                Category: prodCat,
+                Manufacturer: treeViewRecordForCategory
+            });
+        }
+
+        return treeViewDS;
+    }
+
+    function buildTreeViewDS(treeViewDS) {
+        var datasource = new kendo.data.HierarchicalDataSource({
+            data: treeViewDS,
+            schema: {
+                model: {
+                    children: { // define options for second level
+                        schema: {
+                            data: "Manufacturer"
+                            //model: {
+                            //    children: "cast" // third level is defined by the field "cast"
+                            //}
+                        }
+                    }
+                }
+            }
+        });
+
+        return datasource;
+    }
+
+    function launchCompWindow() {
+        for (var i = 0; i < compRecords.length; i++) {
+            compRecords[i].CreatedDate = kendo.toString(kendo.parseDate(compRecords[i].CreatedDate, 'yyyy-MM-dd'), 'MM/dd/yyyy');
+        }
+        var partCompWindow = $("#compWindow").data("kendoWindow");
+        partCompWindow.refresh({
+            url: "../PartCompatibility/LaunchCompatibilityWindow",
+            //data: JSON.stringify({ cPartCompData: compRecords }),
+            data: JSON.stringify(compRecords),
+            contentType: "application/json",
+            type: "post"
+        });
+        partCompWindow.center();
+        partCompWindow.open();
+    }
+
+    function processDateFields(dataObject) {
+        for (var field in dataObject) {
+            if (dataObject.hasOwnProperty(field)) {
+                var fieldVal = dataObject[field];
+                if (fieldVal != null) {
+                    if (typeof dataObject[field] == "string") {
+                        if (fieldVal.indexOf('Date', 1) > 0) {
+                            var dateString = fieldVal.substr(6);
+                            dataObject[field] = new Date(parseInt(dateString));
+                        }
+                    }
+                    else if (typeof dataObject[field] == "object") {
+                        var subObj = dataObject[field];
+                        for (var l = 0; l < subObj.length; l++) {
+                            processDateFields(subObj[l]);
+                        }
+                    }
+                }
+            }
+        }
+
+        return dataObject;
+    }
     </script>
 </body>
 

@@ -12,22 +12,24 @@ namespace DataAccess
     using System;
     using System.Collections.Generic;
     
-    public partial class M_User
+    public partial class M_VendorType
     {
-        public int UserID { get; set; }
-        public int UserTypeID { get; set; }
-        public string FirstName { get; set; }
-        public string lastName { get; set; }
-        public string UserName { get; set; }
-        public string password { get; set; }
-        public int StatusID { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public M_VendorType()
+        {
+            this.M_Vendor = new HashSet<M_Vendor>();
+        }
+    
+        public int VendorTypeID { get; set; }
+        public string VendorTypeDescription { get; set; }
+        public string Abb { get; set; }
         public bool Active { get; set; }
         public int CreatedBy { get; set; }
         public System.DateTime CreatedDate { get; set; }
         public Nullable<int> ModifiedBy { get; set; }
         public Nullable<System.DateTime> ModifiedDate { get; set; }
     
-        public virtual M_Status M_Status { get; set; }
-        public virtual M_UserType M_UserType { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<M_Vendor> M_Vendor { get; set; }
     }
 }

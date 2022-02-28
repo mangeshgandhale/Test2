@@ -14,6 +14,17 @@ namespace DataAccess
     
     public partial class T_Part
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public T_Part()
+        {
+            this.T_AlternatePart = new HashSet<T_AlternatePart>();
+            this.T_PartConditionPrice = new HashSet<T_PartConditionPrice>();
+            this.T_PartImage = new HashSet<T_PartImage>();
+            this.T_PartLink = new HashSet<T_PartLink>();
+            this.T_PartLogistics = new HashSet<T_PartLogistics>();
+            this.T_PartSuppier = new HashSet<T_PartSuppier>();
+        }
+    
         public int PartID { get; set; }
         public int SubTypeID { get; set; }
         public Nullable<int> ReplacementPartID { get; set; }
@@ -39,5 +50,19 @@ namespace DataAccess
         public virtual T_Part T_Part1 { get; set; }
         public virtual T_Part T_Part2 { get; set; }
         public virtual M_SubType M_SubType { get; set; }
+        public virtual M_Status M_Status { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<T_AlternatePart> T_AlternatePart { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<T_PartConditionPrice> T_PartConditionPrice { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<T_PartImage> T_PartImage { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<T_PartLink> T_PartLink { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<T_PartLogistics> T_PartLogistics { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<T_PartSuppier> T_PartSuppier { get; set; }
+        public virtual T_RelatedPart T_RelatedPart { get; set; }
     }
 }

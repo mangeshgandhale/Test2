@@ -12,22 +12,19 @@ namespace DataAccess
     using System;
     using System.Collections.Generic;
     
-    public partial class M_User
+    public partial class UserMenuTran
     {
-        public int UserID { get; set; }
-        public int UserTypeID { get; set; }
-        public string FirstName { get; set; }
-        public string lastName { get; set; }
-        public string UserName { get; set; }
-        public string password { get; set; }
-        public int StatusID { get; set; }
+        public int UserMenuID { get; set; }
+        public int UserId { get; set; }
+        public int MenuID { get; set; }
         public bool Active { get; set; }
         public int CreatedBy { get; set; }
         public System.DateTime CreatedDate { get; set; }
         public Nullable<int> ModifiedBy { get; set; }
         public Nullable<System.DateTime> ModifiedDate { get; set; }
-    
-        public virtual M_Status M_Status { get; set; }
-        public virtual M_UserType M_UserType { get; set; }
+        public Nullable<bool> Add { get; set; }
+        public Nullable<bool> Edit { get; set; }
+        public Nullable<bool> Delete { get; set; }
+        public Nullable<bool> View { get; set; }
     }
 }

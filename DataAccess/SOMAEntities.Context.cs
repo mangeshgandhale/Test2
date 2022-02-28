@@ -32,5 +32,20 @@ namespace DataAccess
         public virtual DbSet<M_ModelManufacturer> M_ModelManufacturer { get; set; }
         public virtual DbSet<M_ProductCategory> M_ProductCategory { get; set; }
         public virtual DbSet<M_SubType> M_SubType { get; set; }
+        public virtual DbSet<M_PartCondition> M_PartCondition { get; set; }
+        public virtual DbSet<M_Status> M_Status { get; set; }
+        public virtual DbSet<M_Type> M_Type { get; set; }
+        public virtual DbSet<M_UserType> M_UserType { get; set; }
+        public virtual DbSet<M_Vendor> M_Vendor { get; set; }
+        public virtual DbSet<M_VendorType> M_VendorType { get; set; }
+        public virtual DbSet<T_AlternatePart> T_AlternatePart { get; set; }
+        public virtual DbSet<T_PartConditionPrice> T_PartConditionPrice { get; set; }
+        public virtual DbSet<T_PartImage> T_PartImage { get; set; }
+        public virtual DbSet<T_PartLink> T_PartLink { get; set; }
+        public virtual DbSet<T_PartLogistics> T_PartLogistics { get; set; }
+        public virtual DbSet<T_PartSuppier> T_PartSuppier { get; set; }
+        public virtual DbSet<T_RelatedPart> T_RelatedPart { get; set; }
+        public virtual DbSet<UserMenuTran> UserMenuTrans { get; set; }
+        public virtual DbSet<v_PartsCompatibility> v_PartsCompatibility { get; set; }
     }
 }

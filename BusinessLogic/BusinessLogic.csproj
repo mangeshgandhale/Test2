@@ -43,6 +43,7 @@
     <Compile Include="CommonMasterBL.cs" />
     <Compile Include="CommonUtil\CommonUtil.cs" />
     <Compile Include="PartBL.cs" />
+    <Compile Include="PartCompatibilityBL.cs" />
     <Compile Include="PartTypeBL.cs" />
     <Compile Include="UserBL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
