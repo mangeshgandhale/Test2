@@ -226,35 +226,6 @@
                             Condition Price
                             <div id="ConditionPriceGrid" style="width: 100%;height:300px"></div>
 
-
-                            Related Parts
-                            <div id="RelatedPartTransGrid" style="width: 100%;height:300px"></div>
-
-                            Logistick Parts
-                            <div id="LogistickTransGrid" style="width: 100%;height:300px"></div>
-
-
-
-                            @*@(Html.Kendo().Button()
-                                .Name("primaryTextButton")
-                                .ThemeColor(ThemeColor.Primary)
-                                .Content("Primary Button"))*@
-                            <input type="submit" value="Save" CssClass="btn btn-primary btn-sm" />
-
-                        </td>
-                        <td style="width: 40%; vertical-align: top">
-
-                            Compatibility  
-                            <a style="min-width: 30px;" id="cmdAddComp" href="#" onclick="launchCompWindow()" runat="server" id="plusAlternetPN" class="btnplus btn btn-outline-primary">
-                                +<i class="la la-plus"></i>
-                            </a>
-                            <div id="partComppageBody">
-                                <div id="treeview" style="width:50%;"></div>
-                                <div id="compWindow"></div>
-                            </div>
-
-                            <div id="CompabilityTransGrid" style="width: 80%;height:300px;display:none"></div>
-
                             Supplier
 
                             <div class="form-group d-flex align-items-center">
@@ -274,7 +245,37 @@
                             .BindTo(new SelectList((List<BusinessObject.VendorBO>)ViewBag.lstSupplier, "VendorID", "VendorName"))
                                 )
                             </div>
-                            <div id="SupplierTransGrid" style="width: 80%;height:300px"></div>
+                            <div id="SupplierTransGrid" style="height:230px"></div>
+
+                            Related Parts
+                            <div id="RelatedPartTransGrid" style="width: 100%;height:300px"></div>
+
+                            Logistick Parts
+                            <div id="LogistickTransGrid" style="width: 100%;height:300px"></div>
+
+
+
+                            @*@(Html.Kendo().Button()
+        .Name("primaryTextButton")
+        .ThemeColor(ThemeColor.Primary)
+        .Content("Primary Button"))*@
+                            <input type="submit" value="Save" CssClass="btn btn-primary btn-sm" />
+
+                        </td>
+                        <td style="width: 40%; vertical-align: top">
+
+                            Compatibility  
+                            <a style="min-width: 30px;" id="cmdAddComp" href="#" onclick="launchCompWindow()" runat="server" id="plusAlternetPN" class="btnplus btn btn-outline-primary">
+                                +<i class="la la-plus"></i>
+                            </a>
+                            <div id="partComppageBody">
+                                <div id="treeview" style="padding-bottom: 20pt;" ></div>
+                                <div id="compWindow"></div>
+                            </div>  
+
+                            <div id="CompabilityTransGrid" style="width: 80%;height:300px;display:none"></div>
+
+                            
 
 
 
