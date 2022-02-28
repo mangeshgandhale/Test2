@@ -185,6 +185,7 @@
     <Compile Include="Controllers\PartCompatibilityController.cs" />
     <Compile Include="Controllers\PartController.cs" />
     <Compile Include="Controllers\PartTypeController.cs" />
+    <Compile Include="Controllers\SupplierTransController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\UserTypeController.cs" />
     <Compile Include="Global.asax.cs">
@@ -1981,6 +1982,8 @@
     <Content Include="Views\UserType\Index.cshtml" />
     <Content Include="Views\PartCompatibility\Index.cshtml" />
     <Content Include="Views\Shared\_PartCompatibility.cshtml" />
+    <Content Include="Views\Shared\_PartSupplier.cshtml" />
+    <Content Include="Views\SupplierTrans\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

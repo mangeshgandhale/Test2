@@ -1,0 +1,228 @@
+﻿
+@{
+    Layout = null;
+}
+
+<link href="~/Content/Kendo/kendo.common.min.css" rel="stylesheet" />
+<link href="~/Content/Kendo/kendo.default.min.css" rel="stylesheet" />
+<link href="~/Content/Kendo/kendo.default.mobile.min.css" rel="stylesheet" />
+
+<script src="~/Scripts/jquery-3.6.0.js"></script>
+<script src="~/Scripts/jquery-3.6.0.min.js"></script>
+<script src="~/Scripts/Kendo/kendo.all.min.js"></script>
+<script src="~/Scripts/Kendo/kendo.aspnetmvc.min.js"></script>
+
+<div id="partComppageBody">
+    <div id="treeview" style="width:50%;"></div>
+    <div id="compWindow"></div>
+    <button class="k-button k-primary" type="button" id="cmdAddComp" style="width: 300px; margin-right: 5px;" onclick="LaunchSupplierWindow()">SUpplier</button>
+</div>
+ <script type="text/javascript">
+    var ddlProductCategories = [];
+    var ddlManufacturers = [];
+    var ddlModels = [];
+
+    $(document).ready(function () {
+
+        $.ajax({
+            url: "@Url.Action("PopulateDDLTables", "PartCompatibility")",
+            type: "post",
+            success: function (data) {
+                ddlProductCategories = data.ProductCategories;
+                if (ddlProductCategories.length > 0) {
+                    var ProdCatDDL = $("#ddlProdCategory").data("kendoDropDownList");
+                    ProdCatDDL.setDataSource(ddlProductCategories);
+                }
+
+                ddlManufacturers = data.Manufacturers;
+                if (ddlManufacturers.length > 0) {
+                    var ManDDL = $("#ddlManufacturer").data("kendoDropDownList");
+                    ManDDL.setDataSource(ddlManufacturers);
+                }
+
+                ddlModels = data.Models;
+                if (ddlModels.length > 0) {
+                    var ModelDDL = $("#ddlModel").data("kendoDropDownList");
+                    ModelDDL.setDataSource(ddlModels);
+                }
+            },
+            async: false
+        });
+
+        var gridDS = @Html.Raw(Json.Encode(Model));
+
+        var dataSource = new kendo.data.DataSource({
+            schema: {
+                model: {
+                    id: "PartLinkID",
+                    fields: {
+                        PartLinkID: { type: "number" },
+                        PartID: { type: "number" },
+                        ProductCategoryID: { type: "number" },
+                        ProductCategoryDescription: { type: "string" },
+                        VendorID: { type: "number" },
+                        VendorName: { type: "string" },
+                        ModelID: { type: "number" },
+                        ModelNo: { type: "string" },
+                        ModelManufacturerId: { type: "number" },
+                        Active: { type: "boolean" },
+                        CreatedBy: { type: "string" },
+                        UserName: { type: "string" },
+                        CreatedDate: { type: "date" },
+                        ModifiedBy: { type: "string" },
+                        ModifiedDate: { type: "date" }
+                    }
+                }
+            },
+            transport: {
+                read: function(options) { options.success(gridDS); }
+            }
+        });
+
+        $("#compGridDiv").kendoGrid({
+            dataSource: dataSource,
+            columns: [
+                { field: "PartLinkID", hidden: true },
+                { field: "PartID", hidden: true },
+                { field: "ProductCategoryID", hidden: true },
+                {
+                    field: "ProductCategoryDescription",
+                    title: "Category",
+                    headerAttributes: { "class": "table-header-cell", style: "font-size: 12px;" },
+                    attributes: { style: "font-size: 12px;" },
+                    width: 50
+                },
+                { field: "VendorID", hidden: true },
+                {
+                    field: "VendorName",
+                    title: "Manufacturer",
+                    headerAttributes: { "class": "table-header-cell", style: "font-size: 12px;" },
+                    attributes: { style: "font-size: 12px;" },
+                    width: 50
+                },
+                { field: "ModelID", hidden: true },
+                {
+                    field: "ModelNo",
+                    title: "Model",
+                    headerAttributes: { "class": "table-header-cell", style: "font-size: 12px;" },
+                    attributes: { style: "font-size: 12px;" },
+                    width: 50
+                },
+                { field: "ModelManufacturerId", hidden: true },
+                { field: "Active", hidden: true },
+                { field: "CreatedBy", hidden: true },
+                {
+                    field: "UserName",
+                    title: "Created By",
+                    headerAttributes: { "class": "table-header-cell", style: "font-size: 12px;" },
+                    attributes: { style: "font-size: 12px;" },
+                    width: 50
+                },
+                {
+                    field: "CreatedDate",
+                    title: "Created On",
+                    headerAttributes: { "class": "table-header-cell", style: "font-size: 12px;" },
+                    attributes: {
+                        style: "text-align: left; white-space: nowrap; text-overflow: ellipsis;",
+                        title: "#= CreatedDate #"
+                    },
+                    template: function (dataItem) {
+                        if (dataItem.CreatedDate != null) {
+                            return kendo.toString(kendo.parseDate(dataItem.CreatedDate, 'yyyy-MM-dd'), 'MM/dd/yyyy');
+                        }
+                        else {
+                            return "";
+                        }
+                    },
+                    width: 50
+                },
+                { field: "ModifiedBy", hidden: true },
+                { field: "ModifiedDate", hidden: true },
+            ],
+            editable: false,
+            selectable: "row",
+            height: 200,
+            groupable: false,
+            sortable: true,
+            pageable: false,
+            scrollable: true
+        });
+    });
+
+    function createRecord() {
+        var ProdCatDDL = $("#ddlProdCategory").data("kendoDropDownList");
+        var ManDDL = $("#ddlManufacturer").data("kendoDropDownList");
+        var ModelDDL = $("#ddlModel").data("kendoDropDownList");
+
+        var ProdCatID = Number(ProdCatDDL.value());
+        var ManufacturerID = Number(ManDDL.value());
+        var ModelID = Number(ModelDDL.value());
+
+        if (ProdCatID === "" || ProdCatID == 0 || ManufacturerID === "" || ManufacturerID == 0 || ModelID === "" || ModelID == 0) {
+            kendo.alert("Compatibility must have all 3 values selected !!!");
+            return;
+        }
+
+        var found = false;
+        var compGrid = $("#compGridDiv").data("kendoGrid");
+        var compGridData = compGrid.dataSource.view()
+        if (compGridData.length > 0) {
+            for(var i = 0; i < compGridData.length; i++) {
+                if (compGridData[i].ProductCategoryID === ProdCatID && compGridData[i].VendorID === ManufacturerID && compGridData[i].ModelID === ModelID) {
+                    found = true;
+                    break;
+                }
+            }
+        }
+
+        if (found === true) {
+            kendo.alert("Compatibility already exists !!!");
+            return true;
+        }
+        else {
+            var newReord = [];
+            newReord.push({
+                PartLinkID: 0,
+                PartID: 42,
+                ProductCategoryID: ProdCatDDL.value(),
+                ProductCategoryDescription: ProdCatDDL.text(),
+                VendorID: ManDDL.value(),
+                VendorName: ManDDL.text(),
+                ModelID: ModelDDL.value(),
+                ModelNo: ModelDDL.text(),
+                ModelManufacturerId: "",
+                Active: "",
+                UserName: "",
+                CreatedBy: 3,
+                CreatedDate: new Date(),
+                ModifiedBy: null,
+                ModifiedDate: null
+            });
+
+            var compGrid = $("#compGridDiv").data("kendoGrid");
+            if (compGrid) {
+                var dataSource = compGrid.dataSource;
+                dataSource.insert(newReord[0]);
+            }
+        }
+
+        ProdCatDDL.text("");
+        ManDDL.text("");
+        ModelDDL.text("");
+    }
+
+    function saveRecords() {
+
+        var compGrid = $("#compGridDiv").data("kendoGrid");
+        var compGridData = compGrid.dataSource.view()
+        if (compGridData.length > 0) {
+            for(var i = 0; i < compGridData.length; i++) {
+                if (compGridData[i].PartLinkID == 0) {
+                    compRecords.push(compGridData[i]);
+                }
+            }
+        }
+
+        parent.$("#compWindow").data("kendoWindow").close();
+    }
+</script>

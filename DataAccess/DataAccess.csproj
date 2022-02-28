@@ -101,6 +101,7 @@
     </Compile>
     <Compile Include="PartCompatibilityDB.cs" />
     <Compile Include="PartDB.cs" />
+    <Compile Include="PartSupplierTransDB.cs" />
     <Compile Include="PartTypeDB.cs" />
     <Compile Include="Properties\CommonFunction.cs" />
     <Compile Include="SOMAEntities.Context.cs">

@@ -48,11 +48,13 @@
     <Compile Include="ModelBO.cs" />
     <Compile Include="PartBO.cs" />
     <Compile Include="PartCompatibilityBO.cs" />
+    <Compile Include="PartSupplierDDLValuesBO.cs" />
     <Compile Include="PartCompatibilityDDLValuesBO.cs" />
     <Compile Include="PartTransView.cs" />
     <Compile Include="PartTypeBO.cs" />
     <Compile Include="ProductCategoryBO.cs" />
     <Compile Include="SubTypeBO.cs" />
+    <Compile Include="SupplierTransBO.cs" />
     <Compile Include="UserBO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="VendorBO.cs" />

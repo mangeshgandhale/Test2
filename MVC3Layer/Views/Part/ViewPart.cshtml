@@ -1,144 +1,145 @@
-﻿@model  BusinessObject.PartBO
-
-  
-
-<link rel="stylesheet" href="~/Content/kendo/kendo.common.min.css" />
-<link rel="stylesheet" href="~/Content/kendo/kendo.default.min.css" />
-<link rel="stylesheet" href="~/Content/kendo/kendo.default.mobile.min.css" />
-<body>
-    <div>
-
- 
-        <div id="PartGrid" style="width: 90%"></div>
- 
-    </div>
+﻿ @model List<BusinessObject.PartTransView>
 
 
+    <link rel="stylesheet" href="~/Content/kendo/kendo.common.min.css" />
+    <link rel="stylesheet" href="~/Content/kendo/kendo.default.min.css" />
+    <link rel="stylesheet" href="~/Content/kendo/kendo.default.mobile.min.css" />
+    <body>
+        <div>
 
 
-    <script src="~/Scripts/jquery.min.js"></script>
-    <script src="~/Scripts/kendo/kendo.all.min.js"></script>
-    <script src="~/Scripts/kendo/kendo.aspnetmvc.min.js"></script>
+            <div id="PartGrid" style="width: 90%"></div>
 
-    <script src="~/Scripts/commonUtil/commonUtil.js"></script>
-    <Script type="text/javascript">
-        $(document).ready(function() {
-            $("#ddlPartType").kendoDropDownList({
-                optionLabel: "Select Part Type...",
-                dataTextField: "PartTypeDescription",
-                dataValueField: "PartTypeID"
-            });
+        </div>
 
 
 
 
-          var gridDS = @Html.Raw(Json.Encode(Model.PartGridData));
+        <script src="~/Scripts/jquery.min.js"></script>
+        <script src="~/Scripts/kendo/kendo.all.min.js"></script>
+        <script src="~/Scripts/kendo/kendo.aspnetmvc.min.js"></script>
 
-            var dataSource = new kendo.data.DataSource({
-                schema: {
-                    model: {
-                        id: "PartTypeID",
-                        fields: {
-                            PartID: { type: "number" },
-                            PartNo: { type: "string" },
-                            PartDescription: { type: "string" },
-                            GrossWeight: { type: "number" },
-                            Dim_L: { type: "number" },
-                            Dim_W: { type: "number" },
-                            Dim_H: { type: "number" },
-                            Stockable: { type: "number" },
-                            OnlineMsg: { type: "string" },
-                            Note: { type: "string" },
-                            OnlineMsg: { type: "string" }
+        <script src="~/Scripts/commonUtil/commonUtil.js"></script>
+        <Script type="text/javascript">
+            $(document).ready(function() {
+                $("#ddlPartType").kendoDropDownList({
+                    optionLabel: "Select Part Type...",
+                    dataTextField: "PartTypeDescription",
+                    dataValueField: "PartTypeID"
+                });
+
+
+
+
+                var gridDS = @Html.Raw(Json.Encode(Model));
+
+                var dataSource = new kendo.data.DataSource({
+                    schema: {
+                        model: {
+                            id: "PartTypeID",
+                            fields: {
+                                PartID: { type: "number" },
+                                PartNo: { type: "string" },
+                                PartDescription: { type: "string" },
+                                GrossWeight: { type: "number" },
+                                Dim_L: { type: "number" },
+                                Dim_W: { type: "number" },
+                                Dim_H: { type: "number" },
+                                Stockable: { type: "number" },
+                                OnlineMsg: { type: "string" },
+                                Note: { type: "string" },
+                                OnlineMsg: { type: "string" }
                             },
 
                         }
                     },
 
-                transport: {
-                    read: function(options) { options.success(gridDS); },
-                    update: function(options) { options.success(); },
-                    create: function(options) {
-                        gridDS.push(options.data);
-                        options.success(options.data);
-                    },
-                    destroy: function(options) {
-                        gridDS.splice(options.data.RowID - 1, 1);
-                        options.success(options.data);
+                    transport: {
+                        read: function(options) { options.success(gridDS); },
+                        update: function(options) { options.success(); },
+                        create: function(options) {
+                            gridDS.push(options.data);
+                            options.success(options.data);
+                        },
+                        destroy: function(options) {
+                            gridDS.splice(options.data.RowID - 1, 1);
+                            options.success(options.data);
+                        }
                     }
-                }
-            });
+                });
 
 
-            $("#PartGrid").kendoGrid({
-                dataSource: dataSource ,
-                columns: [
+                $("#PartGrid").kendoGrid({
+                    dataSource: dataSource ,
+                    columns: [
 
-                {
-                   field: "PartNo",
-                    headerAttributes: { "class": "table-header-cell", style: "font-size: 12px;" },
-                    attributes: { style: "font-size: 12px;" },
-                    width: 30
-                    },
                     {
-                        field: "PartDescription",
+                        field: "PartNo",
                         headerAttributes: { "class": "table-header-cell", style: "font-size: 12px;" },
                         attributes: { style: "font-size: 12px;" },
-                        width: 30
+                        width: 30,
+                        template: '<a href="part\PartAdd">#=PartNo#</a>' 
+                       
                     },
-                    {
-                        field: "GrossWeight",
-                        headerAttributes: { "class": "table-header-cell", style: "font-size: 12px;" },
-                        attributes: { style: "font-size: 12px;" },
-                        width: 30
-                    },
-                    {
-                        field: "Dim_L",
-                        headerAttributes: { "class": "table-header-cell", style: "font-size: 12px;" },
-                        attributes: { style: "font-size: 12px;" },
-                        width: 30
-                    }, {
-                        field: "Dim_W",
-                        headerAttributes: { "class": "table-header-cell", style: "font-size: 12px;" },
-                        attributes: { style: "font-size: 12px;" },
-                        width: 30
-                    },
-                    {
-                        field: "Dim_H",
-                        headerAttributes: { "class": "table-header-cell", style: "font-size: 12px;" },
-                        attributes: { style: "font-size: 12px;" },
-                        width: 30
-                    },
-                    {
-                        field: "Stockable",
-                        headerAttributes: { "class": "table-header-cell", style: "font-size: 12px;" },
-                        attributes: { style: "font-size: 12px;" },
-                        width: 30
-                    },
-                    {
-                        field: "OnlineMsg",
-                        headerAttributes: { "class": "table-header-cell", style: "font-size: 12px;" },
-                        attributes: { style: "font-size: 12px;" },
-                        width: 30
-                    },
-                    {
-                        field: "Note",
-                        headerAttributes: { "class": "table-header-cell", style: "font-size: 12px;" },
-                        attributes: { style: "font-size: 12px;" },
-                        width: 30
-                    }
-                ],
-                height: 450,
-                groupable: false,
-                sortable: true,
-                pageable: false,
-                scrollable: true
-            });
+                        {
+                            field: "PartDescription",
+                            headerAttributes: { "class": "table-header-cell", style: "font-size: 12px;" },
+                            attributes: { style: "font-size: 12px;" },
+                            width: 30
+                        },
+                        {
+                            field: "GrossWeight",
+                            headerAttributes: { "class": "table-header-cell", style: "font-size: 12px;" },
+                            attributes: { style: "font-size: 12px;" },
+                            width: 30
+                        },
+                        {
+                            field: "Dim_L",
+                            headerAttributes: { "class": "table-header-cell", style: "font-size: 12px;" },
+                            attributes: { style: "font-size: 12px;" },
+                            width: 30
+                        }, {
+                            field: "Dim_W",
+                            headerAttributes: { "class": "table-header-cell", style: "font-size: 12px;" },
+                            attributes: { style: "font-size: 12px;" },
+                            width: 30
+                        },
+                        {
+                            field: "Dim_H",
+                            headerAttributes: { "class": "table-header-cell", style: "font-size: 12px;" },
+                            attributes: { style: "font-size: 12px;" },
+                            width: 30
+                        },
+                        {
+                            field: "Stockable",
+                            headerAttributes: { "class": "table-header-cell", style: "font-size: 12px;" },
+                            attributes: { style: "font-size: 12px;" },
+                            width: 30
+                        },
+                        {
+                            field: "OnlineMsg",
+                            headerAttributes: { "class": "table-header-cell", style: "font-size: 12px;" },
+                            attributes: { style: "font-size: 12px;" },
+                            width: 30
+                        },
+                        {
+                            field: "Note",
+                            headerAttributes: { "class": "table-header-cell", style: "font-size: 12px;" },
+                            attributes: { style: "font-size: 12px;" },
+                            width: 30
+                        }
+                    ],
+                    height: 450,
+                    groupable: false,
+                    sortable: true,
+                    pageable: false,
+                    scrollable: true
+                });
 
-        })
+            })
 
 
 
-    </Script>
+        </Script>
 
-</body>
+    </body>
