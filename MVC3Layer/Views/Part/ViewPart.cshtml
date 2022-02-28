@@ -73,13 +73,15 @@
                     dataSource: dataSource ,
                     columns: [
 
-                     {
+                    {
                         field: "PartNo",
                         headerAttributes: { "class": "table-header-cell", style: "font-size: 12px;" },
                         attributes: { style: "font-size: 12px;" },
                         width: 30, 
-                            template: '<a href="PartAdd?id=">#=PartNo#</a>'
-                        },
+                            template: '<a href="PartAdd">#=PartNo#</a>'
+
+
+                    },
                         {
                             field: "PartDescription",
                             headerAttributes: { "class": "table-header-cell", style: "font-size: 12px;" },

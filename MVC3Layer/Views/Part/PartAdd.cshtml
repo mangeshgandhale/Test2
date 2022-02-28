@@ -549,7 +549,7 @@
                             name: "Supplier Name",
                             headerAttributes: { "class": "table-header-cell", style: "font-size: 12px;" },
                             attributes: { style: "font-size: 12px;" },
-                                width: 50
+
                             },
                             {
                                 field: "VendorPartNo",
@@ -557,7 +557,7 @@
                                 name: "VendorPartNo",
                                 headerAttributes: { "class": "table-header-cell", style: "font-size: 12px;" },
                                 attributes: { style: "font-size: 12px;" },
-                                width:50
+
                             },
                             {
                                 field: "VendorPartDescription",
@@ -565,7 +565,7 @@
                                 name: "VendorPartDescription",
                                 headerAttributes: { "class": "table-header-cell", style: "font-size: 12px;" },
                                 attributes: { style: "font-size: 12px;" },
-                                width: 50
+
                             },
                             {
                                 field: "Vendorprice",
@@ -1104,26 +1104,26 @@
             //    }
             //}
 
-            //var _ConditionPriceGrid = $("#ConditionPriceGrid").data("kendoGrid");
-            //var _ConditionPriceGridKeyValues = buildSubmitValuesforGrid(_ConditionPriceGrid, "ConditionPriceTransData");
-            //$(this).append(_ConditionPriceGridKeyValues);
+            var _ConditionPriceGrid = $("#ConditionPriceGrid").data("kendoGrid");
+            var _ConditionPriceGridKeyValues = buildSubmitValuesforGrid(_ConditionPriceGrid, "ConditionPriceTransData");
+            $(this).append(_ConditionPriceGridKeyValues);
 
 
-            //var _RelatedPartTransGrid = $("#RelatedPartTransGrid").data("kendoGrid");
-            //var _RelatedPartTransGridKeyValues = buildSubmitValuesforGrid(_RelatedPartTransGrid, "RelatedPartTransData");
-            //$(this).append(_RelatedPartTransGridKeyValues);
+            var _RelatedPartTransGrid = $("#RelatedPartTransGrid").data("kendoGrid");
+            var _RelatedPartTransGridKeyValues = buildSubmitValuesforGrid(_RelatedPartTransGrid, "RelatedPartTransData");
+            $(this).append(_RelatedPartTransGridKeyValues);
 
-            //var _LogistickTransGrid = $("#LogistickTransGrid").data("kendoGrid");
-            //var _LogistickTransGridKeyValues = buildSubmitValuesforGrid(_LogistickTransGrid, "LogistickTransData");
-            //$(this).append(_LogistickTransGridKeyValues);
+            var _LogistickTransGrid = $("#LogistickTransGrid").data("kendoGrid");
+            var _LogistickTransGridKeyValues = buildSubmitValuesforGrid(_LogistickTransGrid, "LogistickTransData");
+            $(this).append(_LogistickTransGridKeyValues);
 
-            //var _CompabilityTransGrid = $("#CompabilityTransGrid").data("kendoGrid");
-            //var _CompabilityTransGridKeyValues = buildSubmitValuesforGrid(_CompabilityTransGrid, "CompabilityTransData");
-            //$(this).append(_CompabilityTransGridKeyValues);
+            var _CompabilityTransGrid = $("#CompabilityTransGrid").data("kendoGrid");
+            var _CompabilityTransGridKeyValues = buildSubmitValuesforGrid(_CompabilityTransGrid, "CompabilityTransData");
+            $(this).append(_CompabilityTransGridKeyValues);
 
-            //var _SupplierTransGrid = $("#SupplierTransGrid").data("kendoGrid");
-            //var _SupplierTransGridKeyValues = buildSubmitValuesforGrid(_SupplierTransGrid, "SupplierTransData");
-            //$(this).append(_SupplierTransGridKeyValues);
+            var _SupplierTransGrid = $("#SupplierTransGrid").data("kendoGrid");
+            var _SupplierTransGridKeyValues = buildSubmitValuesforGrid(_SupplierTransGrid, "SupplierTransData");
+            $(this).append(_SupplierTransGridKeyValues);
 
 
             $.post(this.action, $(this).serialize(), function (response) {
@@ -1366,25 +1366,22 @@
     })
          
 
+    
 
         function launchSupplierWindow() {
-            for (var i = 0; i < compRecords.length; i++) {
-                compRecords[i].CreatedDate = kendo.toString(kendo.parseDate(compRecords[i].CreatedDate, 'yyyy-MM-dd'), 'MM/dd/yyyy');
-            }
-            var partSuppWindow = $("#SupplierWindow").data("kendoWindow");
-            partSuppWindow.refresh({
-                url: "../SupplierTrans/LaunchSupplierWindow",
-                 
-                data: JSON.stringify(compRecords),
-                contentType: "application/json",
-                type: "post"
-            });
-            partSuppWindow.center();
-            partSuppWindow.open();
+        for (var i = 0; i < compRecords.length; i++) {
+            compRecords[i].CreatedDate = kendo.toString(kendo.parseDate(compRecords[i].CreatedDate, 'yyyy-MM-dd'), 'MM/dd/yyyy');
         }
-
-
-         
+        var partSupplierWindow = $("#SupplierWindow").data("kendoWindow");
+        partSupplierWindow.refresh({
+            url: "../SupplierTrans/LaunchSupplierWindow",
+            data: JSON.stringify(partSupplierWindow),
+            contentType: "application/json",
+            type: "post"
+        });
+        partCompWindow.center();
+        partCompWindow.open();
+    }
 
     function processDateFields(dataObject) {
         for (var field in dataObject) {
