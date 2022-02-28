@@ -1125,7 +1125,7 @@
             var _SupplierTransGridKeyValues = buildSubmitValuesforGrid(_SupplierTransGrid, "SupplierTransData");
             $(this).append(_SupplierTransGridKeyValues);
 
-
+            //a
             $.post(this.action, $(this).serialize(), function (response) {
 
                 if (response.saveStatus == "Success") {
