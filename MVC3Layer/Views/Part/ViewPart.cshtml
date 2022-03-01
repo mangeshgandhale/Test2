@@ -36,7 +36,7 @@
                 var dataSource = new kendo.data.DataSource({
                     schema: {
                         model: {
-                            id: "PartTypeID",
+                            id: "PartID",
                             fields: {
                                 PartID: { type: "number" },
                                 PartNo: { type: "string" },
@@ -77,9 +77,10 @@
                         field: "PartNo",
                         headerAttributes: { "class": "table-header-cell", style: "font-size: 12px;" },
                         attributes: { style: "font-size: 12px;" },
-                        width: 30,
-                        template: '<a href="part\PartAdd">#=PartNo#</a>' 
-                       
+                        width: 30, 
+                            template: '<a href="PartAdd">#=PartNo#</a>'
+
+
                     },
                         {
                             field: "PartDescription",

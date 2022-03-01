@@ -186,6 +186,7 @@
     <Compile Include="Controllers\PartController.cs" />
     <Compile Include="Controllers\PartTypeController.cs" />
     <Compile Include="Controllers\SupplierTransController.cs" />
+    <Compile Include="Controllers\teController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\UserTypeController.cs" />
     <Compile Include="Global.asax.cs">
@@ -2029,6 +2030,7 @@
     <Folder Include="Scripts\kendo\cultures\" />
     <Folder Include="Scripts\kendo\messages\" />
     <Folder Include="Scripts\messages\" />
+    <Folder Include="Views\te\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
