@@ -41,6 +41,7 @@ namespace MVC3Layer.Controllers
         }
         public ActionResult PartAdd()
         {
+            //hi
             System.Web.HttpContext.Current.Session["UserID"] = 14;
             //  List<CompatibilityTrans> _CompatibilityTrans = new List<CompatibilityTrans>();
             List<PartTypeBO> _PartTypeBO = new List<PartTypeBO>();
