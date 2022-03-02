@@ -41,7 +41,18 @@ namespace MVC3Layer.Controllers
         }
         public ActionResult PartAdd()
         {
-            //hi
+            Int32 PartID = Convert.ToInt32( Request.QueryString["PartID"]);
+
+
+            PartBL _PartBL = new PartBL();
+            PartTransView _PartTransView = new PartTransView();
+            _PartTransView = _PartBL.BindPart(PartID).FirstOrDefault();
+            PartBO B = new PartBO();
+            B.Dim_H = _PartTransView.Dim_H;
+            B.Dim_L = _PartTransView.Dim_L;
+            //B.Dim_W = _PartTransView.Dim_W;
+            B.PartNo = _PartTransView.PartNo;
+
             System.Web.HttpContext.Current.Session["UserID"] = 14;
             //  List<CompatibilityTrans> _CompatibilityTrans = new List<CompatibilityTrans>();
             List<PartTypeBO> _PartTypeBO = new List<PartTypeBO>();
@@ -50,13 +61,13 @@ namespace MVC3Layer.Controllers
             ViewBag.lstPartType = _PartTypeBO;
             ViewBag.Photo = System.IO.File.Exists(photoPath) ? "/images/profile_photo.png" : "/images/profile_default.png";
 
-            PartBL _PartBL = new PartBL();
+          //  PartBL _PartBL = new PartBL();
             CommonMasterBL _CommonMasterBL = new CommonMasterBL();
-            ViewBag.lstCompatibilityPart = _PartBL.CompatibilityTransPart(0);            
-            ViewBag.lstRelatedPartTrans = _PartBL.RelatedPartTrans(0);
-            ViewBag.lstSupplierTrans = _PartBL.SupplierTrans(70);
-            ViewBag.lstConditionPriceTrans = _PartBL.ConditionPriceTrans(0);
-            ViewBag.lstlogisticksTrans = _PartBL.LogistickTrans(0);
+            ViewBag.lstCompatibilityPart = _PartBL.CompatibilityTransPart(PartID);            
+            ViewBag.lstRelatedPartTrans = _PartBL.RelatedPartTrans(PartID);
+            ViewBag.lstSupplierTrans = _PartBL.SupplierTrans(PartID);
+            ViewBag.lstConditionPriceTrans = _PartBL.ConditionPriceTrans(PartID);
+            ViewBag.lstlogisticksTrans = _PartBL.LogistickTrans(PartID);
           //  ViewBag.lstAbbrevation = _CommonMasterBL.GetAllAbbrevation();
           //  ViewBag.lstSupplier = _CommonMasterBL.GetAllSupplier("");
 
@@ -131,6 +142,8 @@ namespace MVC3Layer.Controllers
                     //PartBL.AddSupplierTrans(_PartBO.PartID, viewSupplierTrans);
                  
                     ViewBag.Message = "Data Save Sucessfully !";
+
+                    return View("ViewPart");
                 }
 
 

@@ -36,8 +36,11 @@ namespace MVC3Layer.Controllers
             //}
         }
 
-        
-        public ActionResult Create(List<PartTypeBO> newPartTypes)
+        public ActionResult delete()
+        {
+            return View();
+        }
+            public ActionResult Create(List<PartTypeBO> newPartTypes)
         {
             PartTypeBL partTypeBL = new PartTypeBL();
 

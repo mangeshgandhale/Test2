@@ -78,7 +78,7 @@
                         headerAttributes: { "class": "table-header-cell", style: "font-size: 12px;" },
                         attributes: { style: "font-size: 12px;" },
                         width: 30, 
-                            template: '<a href="PartAdd?id=">#=PartNo#</a>'
+                            template: '<a href="PartAdd?id=" class="Partlistner">#=PartNo#</a>'
                         },
                         {
                             field: "PartDescription",
@@ -134,7 +134,14 @@
                     pageable: false,
                     scrollable: true
                 });
-
+                $("#PartGrid").on("click", "tbody > tr > td .Partlistner", function (e) {
+                    e.preventDefault();
+                    var docGrid = $("#PartGrid").data("kendoGrid");
+                    var dataItem = docGrid.dataItem($(e.currentTarget).closest("tr"));
+                    if (dataItem != null) {
+                        window.location.href = "/Part/PartAdd/Index?PartID=" + dataItem.PartID;
+                    }
+                });
             })
 
 

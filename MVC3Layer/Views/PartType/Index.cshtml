@@ -102,7 +102,13 @@
                 },
                 transport: {
                     read: function(options) { options.success(gridDS); },
-                    update: function(options) { options.success(); },
+                   /* update: function (options) { options.success(); },*/
+                    delete: function (options) {
+
+                        var duplicationFlag = Delete();
+
+                    },
+
                     create: function(options) {
                         gridDS.push(options.data);
                         options.success(options.data);
@@ -115,6 +121,7 @@
                 requestEnd: function (e) {
                     if (e.type == "create" || e.type == "update" || e.type == "delete") {
                         this.read();
+                        Delete();
                     }
                     else if (e.type == "read") {
                     }
@@ -197,7 +204,30 @@
             });
             return isValid;
         }
-
+        function Delete() {
+            var isValid = "Blank";
+            $.ajax({
+                url: "@Url.Action("delete", "PartType")",
+               // data: { cPartTypeID: gridPartTypeID, cPartTypeDesc: gridPartTypeDesc },
+                type: "post",
+                success: function (data) {
+                    switch (data)
+                    {
+                        case "Unique":
+                            isValid = "NotFound";
+                            break;
+                        case "Duplicate":
+                            isValid = "Duplicate";
+                            break;
+                        case "Exception":
+                            isValid = "Error";
+                            break;
+                    }
+                },
+                async: false
+            });
+            return isValid;
+        }
         $("form").submit(function (event) {
             event.preventDefault();
             //var input;
@@ -209,7 +239,7 @@
             //        $(this).append($(input));
             //        input = $("<input>", { type: 'hidden', name: 'PartTypeGridData(' + i + ').PartTypeDescription', value: gridData[i].PartTypeDescription })
             //        $(this).append($(input));
-                    
+
             //    }
             //}
 
