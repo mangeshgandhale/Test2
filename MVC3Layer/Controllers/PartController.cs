@@ -42,15 +42,34 @@ namespace MVC3Layer.Controllers
         public ActionResult PartAdd()
         {
             //hi
+            Int32 PartID = Convert.ToInt32(Request.QueryString["PartID"]);
+
+
+            PartBL _PartBL = new PartBL();
+            PartTransView _PartTransView = new PartTransView();
+            _PartTransView = _PartBL.BindPart(PartID).First();
+            PartBO _OPL = new PartBO();
+            _OPL.PartNo = _PartTransView.PartNo;
+            _OPL.PartDescription = _PartTransView.PartDescription;
+            _OPL.Dim_H = _PartTransView.Dim_H;
+            _OPL.Dim_W = _PartTransView.Dim_W;
+            _OPL.Dim_L = _PartTransView.Dim_L;
+            _OPL.OnlineMsg = _PartTransView.OnlineMsg;
+            _OPL.Note = _PartTransView.Note;
+
+
+
             System.Web.HttpContext.Current.Session["UserID"] = 14;
             //  List<CompatibilityTrans> _CompatibilityTrans = new List<CompatibilityTrans>();
             List<PartTypeBO> _PartTypeBO = new List<PartTypeBO>();
             PartTypeBL _PartTypeBL = new PartTypeBL();
             _PartTypeBO = _PartTypeBL.GetAllPartType();
+
+
+
             ViewBag.lstPartType = _PartTypeBO;
             ViewBag.Photo = System.IO.File.Exists(photoPath) ? "/images/profile_photo.png" : "/images/profile_default.png";
-
-            PartBL _PartBL = new PartBL();
+             
             CommonMasterBL _CommonMasterBL = new CommonMasterBL();
             ViewBag.lstCompatibilityPart = _PartBL.CompatibilityTransPart(0);            
             ViewBag.lstRelatedPartTrans = _PartBL.RelatedPartTrans(0);
@@ -61,7 +80,7 @@ namespace MVC3Layer.Controllers
             ViewBag.lstSupplier = _CommonMasterBL.GetAllSupplier("");
 
 
-            return View();
+            return View(_OPL);
         }
 
         [HttpPost]

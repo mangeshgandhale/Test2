@@ -22,6 +22,9 @@ namespace BusinessObject
         public Int32 GrossWeight { get; set; }
         public Int32 Dim_L { get; set; }
         public Int32 Dim_H { get; set; }
+        public Int32 Dim_W { get; set; }
+
+        
         public bool Stockable { get; set; }
         public string OnlineMsg { get; set; }
         public string Note { get; set; }
