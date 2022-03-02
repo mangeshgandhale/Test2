@@ -41,18 +41,7 @@ namespace MVC3Layer.Controllers
         }
         public ActionResult PartAdd()
         {
-            Int32 PartID = Convert.ToInt32( Request.QueryString["PartID"]);
-
-
-            PartBL _PartBL = new PartBL();
-            PartTransView _PartTransView = new PartTransView();
-            _PartTransView = _PartBL.BindPart(PartID).FirstOrDefault();
-            PartBO B = new PartBO();
-            B.Dim_H = _PartTransView.Dim_H;
-            B.Dim_L = _PartTransView.Dim_L;
-            //B.Dim_W = _PartTransView.Dim_W;
-            B.PartNo = _PartTransView.PartNo;
-
+            //hi
             System.Web.HttpContext.Current.Session["UserID"] = 14;
             //  List<CompatibilityTrans> _CompatibilityTrans = new List<CompatibilityTrans>();
             List<PartTypeBO> _PartTypeBO = new List<PartTypeBO>();
@@ -61,15 +50,15 @@ namespace MVC3Layer.Controllers
             ViewBag.lstPartType = _PartTypeBO;
             ViewBag.Photo = System.IO.File.Exists(photoPath) ? "/images/profile_photo.png" : "/images/profile_default.png";
 
-          //  PartBL _PartBL = new PartBL();
+            PartBL _PartBL = new PartBL();
             CommonMasterBL _CommonMasterBL = new CommonMasterBL();
-            ViewBag.lstCompatibilityPart = _PartBL.CompatibilityTransPart(PartID);            
-            ViewBag.lstRelatedPartTrans = _PartBL.RelatedPartTrans(PartID);
-            ViewBag.lstSupplierTrans = _PartBL.SupplierTrans(PartID);
-            ViewBag.lstConditionPriceTrans = _PartBL.ConditionPriceTrans(PartID);
-            ViewBag.lstlogisticksTrans = _PartBL.LogistickTrans(PartID);
-          //  ViewBag.lstAbbrevation = _CommonMasterBL.GetAllAbbrevation();
-          //  ViewBag.lstSupplier = _CommonMasterBL.GetAllSupplier("");
+            ViewBag.lstCompatibilityPart = _PartBL.CompatibilityTransPart(0);            
+            ViewBag.lstRelatedPartTrans = _PartBL.RelatedPartTrans(0);
+            ViewBag.lstSupplierTrans = _PartBL.SupplierTrans(70);
+            ViewBag.lstConditionPriceTrans = _PartBL.ConditionPriceTrans(0);
+            ViewBag.lstlogisticksTrans = _PartBL.LogistickTrans(0);
+            ViewBag.lstAbbrevation = _CommonMasterBL.GetAllAbbrevation();
+            ViewBag.lstSupplier = _CommonMasterBL.GetAllSupplier("");
 
 
             return View();
@@ -115,35 +104,33 @@ namespace MVC3Layer.Controllers
                     StringBuilder _ViewDataErrorLog = new StringBuilder();
                     CommonUtil _CommonUtil = new CommonUtil();
                    
-                    //var viewConditionPriceTrans = new List<ConditionPriceTrans>();                   
-                    //var ConditionPriceDataKeys = collection.AllKeys.Where(k => k.StartsWith("ConditionPriceTransData")).ToDictionary(k => k, k => collection[k]).ToList();
-                    //viewConditionPriceTrans = _CommonUtil.GetObjectsFromGridFormCollection<ConditionPriceTrans>("ConditionPriceTransData", ConditionPriceDataKeys, _ViewDataErrorLog);
-                    //PartBL.AddConditonPriceTrans(_PartBO.PartID, viewConditionPriceTrans);
+                    var viewConditionPriceTrans = new List<ConditionPriceTrans>();                   
+                    var ConditionPriceDataKeys = collection.AllKeys.Where(k => k.StartsWith("ConditionPriceTransData")).ToDictionary(k => k, k => collection[k]).ToList();
+                    viewConditionPriceTrans = _CommonUtil.GetObjectsFromGridFormCollection<ConditionPriceTrans>("ConditionPriceTransData", ConditionPriceDataKeys, _ViewDataErrorLog);
+                    PartBL.AddConditonPriceTrans(_PartBO.PartID, viewConditionPriceTrans);
 
-                    //var viewRelatedPartTrans = new List<RelatedPartTrans>();
-                    //var RelatedPartTransDataKeys = collection.AllKeys.Where(k => k.StartsWith("RelatedPartTransData")).ToDictionary(k => k, k => collection[k]).ToList();
-                    //viewRelatedPartTrans = _CommonUtil.GetObjectsFromGridFormCollection<RelatedPartTrans>("RelatedPartTransData", RelatedPartTransDataKeys, _ViewDataErrorLog);
-                    //PartBL.AddRelatedPartTrans(_PartBO.PartID, viewRelatedPartTrans);
+                    var viewRelatedPartTrans = new List<RelatedPartTrans>();
+                    var RelatedPartTransDataKeys = collection.AllKeys.Where(k => k.StartsWith("RelatedPartTransData")).ToDictionary(k => k, k => collection[k]).ToList();
+                    viewRelatedPartTrans = _CommonUtil.GetObjectsFromGridFormCollection<RelatedPartTrans>("RelatedPartTransData", RelatedPartTransDataKeys, _ViewDataErrorLog);
+                    PartBL.AddRelatedPartTrans(_PartBO.PartID, viewRelatedPartTrans);
 
-                    //var viewLogistickTrans = new List<LogistickTrans>();
-                    //var LogistickTransDataKeys = collection.AllKeys.Where(k => k.StartsWith("LogistickTransData")).ToDictionary(k => k, k => collection[k]).ToList();
-                    //viewLogistickTrans = _CommonUtil.GetObjectsFromGridFormCollection<LogistickTrans>("LogistickTransData", LogistickTransDataKeys, _ViewDataErrorLog);
-                    //PartBL.AddLogistickTrans(_PartBO.PartID, viewLogistickTrans);
+                    var viewLogistickTrans = new List<LogistickTrans>();
+                    var LogistickTransDataKeys = collection.AllKeys.Where(k => k.StartsWith("LogistickTransData")).ToDictionary(k => k, k => collection[k]).ToList();
+                    viewLogistickTrans = _CommonUtil.GetObjectsFromGridFormCollection<LogistickTrans>("LogistickTransData", LogistickTransDataKeys, _ViewDataErrorLog);
+                    PartBL.AddLogistickTrans(_PartBO.PartID, viewLogistickTrans);
 
 
-                    //var viewCompabilityTrans = new List<CompatibilityTrans>();
-                    //var CompabilityTransDataKeys = collection.AllKeys.Where(k => k.StartsWith("CompabilityTransData")).ToDictionary(k => k, k => collection[k]).ToList();
-                    //viewCompabilityTrans = _CommonUtil.GetObjectsFromGridFormCollection<CompatibilityTrans>("CompabilityTransData", CompabilityTransDataKeys, _ViewDataErrorLog);
-                    //PartBL.AddCompatibilityTrans(_PartBO.PartID, viewCompabilityTrans);
+                    var viewCompabilityTrans = new List<CompatibilityTrans>();
+                    var CompabilityTransDataKeys = collection.AllKeys.Where(k => k.StartsWith("CompabilityTransData")).ToDictionary(k => k, k => collection[k]).ToList();
+                    viewCompabilityTrans = _CommonUtil.GetObjectsFromGridFormCollection<CompatibilityTrans>("CompabilityTransData", CompabilityTransDataKeys, _ViewDataErrorLog);
+                    PartBL.AddCompatibilityTrans(_PartBO.PartID, viewCompabilityTrans);
 
-                    //var viewSupplierTrans = new List<SupplierTrans>();
-                    //var SupplierTransDataKeys = collection.AllKeys.Where(k => k.StartsWith("SupplierTransData")).ToDictionary(k => k, k => collection[k]).ToList();
-                    //viewSupplierTrans = _CommonUtil.GetObjectsFromGridFormCollection<SupplierTrans>("SupplierTransData", SupplierTransDataKeys, _ViewDataErrorLog);
-                    //PartBL.AddSupplierTrans(_PartBO.PartID, viewSupplierTrans);
+                    var viewSupplierTrans = new List<SupplierTrans>();
+                    var SupplierTransDataKeys = collection.AllKeys.Where(k => k.StartsWith("SupplierTransData")).ToDictionary(k => k, k => collection[k]).ToList();
+                    viewSupplierTrans = _CommonUtil.GetObjectsFromGridFormCollection<SupplierTrans>("SupplierTransData", SupplierTransDataKeys, _ViewDataErrorLog);
+                    PartBL.AddSupplierTrans(_PartBO.PartID, viewSupplierTrans);
                  
                     ViewBag.Message = "Data Save Sucessfully !";
-
-                    return View("ViewPart");
                 }
 
 
